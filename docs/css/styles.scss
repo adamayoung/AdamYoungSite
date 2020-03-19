@@ -3,7 +3,7 @@
 # only Main files contain this front matter, not partials.
 ---
 
-@import "main";
-@import "header";
+@import "../_sass/main";
+@import "../_sass/header";
 
-@import "index";
+@import "../_sass/index";
