@@ -41,4 +41,12 @@ Temporary Items
 # Ignore all local history of files
 .history
 
+### Jeykll
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+
+
 # End of https://www.gitignore.io/api/macos,visualstudiocode
