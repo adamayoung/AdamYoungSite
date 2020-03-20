@@ -1,3 +1,7 @@
+.profile {
+  overflow: hidden;
+}
+
 .profile,
 .profile-background,
 .profile-foreground {
@@ -30,16 +34,27 @@
 
 .profile-image {
   box-sizing: border-box;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 10px 0px;
   height: 147px;
   width: 147px;
 }
 
 .profile-title {
+  color: rgb(29, 29, 31);
   margin-top: 10px;
   margin-bottom: 3px;
   font-size: 34px;
   line-height: 1.20596;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: .018em;
+}
+
+.profile-twitter {
+  margin-top: 2em;
+  a {
+    display: block;
+
+    img {
+      height: 40px;
+    }
+  }
 }

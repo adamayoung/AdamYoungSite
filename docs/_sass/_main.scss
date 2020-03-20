@@ -4,6 +4,10 @@ main {
   height: 100%;
 }
 
+html {
+  min-height: 400px;
+}
+
 body {
   background-color: rgb(245, 245, 247);
 }
