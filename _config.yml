@@ -21,16 +21,9 @@
 title: Adam's Web Site
 description: Adam's personal web site.
 email: me@adam-young.co.uk
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: adamayoung
 google_tracking_id: UA-161387385-1
 
-
-# Build settings
-# theme: minima
-# plugins:
-#   - jekyll-feed
 
 sass:
   style: compressed

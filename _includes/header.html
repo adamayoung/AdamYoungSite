@@ -17,7 +17,7 @@
   <title>{% if page.title %}{{ page.title }} :: {{ site.title }}{% elsif post.title %}{{ post.title }} ::
     {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{ '/css/styles.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/css/styles.css' | relative_url }}?v={{ site.time | date:'%s' }}">
 
   <meta property="og:title" content="{% if page.title %}{{ page.title }} :: {{ site.title }}{% elsif post.title %}{{ post.title }} ::
   {{ site.title }}{% else %}{{ site.title }}{% endif %}">
