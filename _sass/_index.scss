@@ -42,19 +42,44 @@
   color: rgb(29, 29, 31);
   margin-top: 10px;
   margin-bottom: 3px;
-  font-size: 34px;
-  line-height: 1.20596;
+  font-size: 2em;
+  line-height: 1.0625;
   font-weight: 600;
-  letter-spacing: .018em;
+  letter-spacing: -.009em;
 }
 
-.profile-twitter {
+.profile-links {
   margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+
   a {
     display: block;
 
     img {
       height: 40px;
+      margin: 0 1em;
     }
   }
+}
+
+.app-links {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+
+  a {
+    display: block;
+
+    img {
+      margin: 0 1em;
+    }
+  }
+}
+
+.app-icon {
+  border-radius: 17.544%;
+  box-sizing: border-box;
+  height: 40px;
+  width: 40px;
 }
