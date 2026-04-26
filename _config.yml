@@ -1,30 +1,62 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+title: Adam Young
+tagline: iOS Engineer
+description: iOS Engineer based in Oakham, UK. Personal site, projects, and writing.
+url: https://adam-young.co.uk
+lang: en_GB
 
-title: Adam's Web Site
-description: Adam's personal web site.
+author:
+  name: Adam Young
+  email: me@adam-young.co.uk
+  url: https://adam-young.co.uk
+  twitter: adamayoung
+
 email: me@adam-young.co.uk
-twitter_username: adamayoung
-github_username: adamayoung
-google_tracking_id: UA-161387385-1
 
+github_username: adamayoung
+linkedin_username: adamayoung
+
+twitter:
+  username: adamayoung
+  card: summary_large_image
+
+social:
+  name: Adam Young
+  links:
+    - https://github.com/adamayoung
+    - https://www.linkedin.com/in/adamayoung
+
+logo: /assets/images/me.jpg
+
+google_analytics_id: G-ETGHS44KVE
+
+permalink: /blog/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image:
+        path: /assets/images/me.jpg
+        width: 1752
+        height: 1763
+        alt: Adam Young
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
 
 sass:
   style: compressed
