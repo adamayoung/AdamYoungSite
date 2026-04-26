@@ -213,7 +213,8 @@ h1 .grad {
 .section-head h2 {
   font-size: 22px; font-weight: 600; letter-spacing: -0.015em;
 }
-.section-head .hint { font-size: 13px; color: var(--muted); }
+.section-head .hint { font-size: 13px; color: var(--muted); transition: color 0.2s ease; }
+.section-head a.hint:hover { color: var(--accent); }
 
 /* Card grid */
 .cards {
@@ -322,7 +323,8 @@ h1 .grad {
   color: var(--muted);
   margin-bottom: 8px;
 }
-.post-link h2 {
+.post-link h2,
+.post-link h3 {
   font-size: 22px; font-weight: 600; letter-spacing: -0.018em;
   margin-bottom: 6px;
 }

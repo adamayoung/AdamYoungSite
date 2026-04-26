@@ -1,6 +1,6 @@
 ---
 title: "Map, Filter and Reduce"
-date: 2022-01-19 22:39:00 +0000
+date: 2026-04-26 12:00:00 +0100
 description: "Map, filter and reduce allow you to manipulate sequences. You iterate over a list of items and perform an action on each of those items."
 tags: [swift]
 ---
