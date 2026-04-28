@@ -1,8 +1,9 @@
 ---
-title: "When AI Forgets Wonder: How We Lose Ourselves by Thinking Less"
-date: 2026-04-25 12:00:00 +0100
-description: "AI is a really fast librarian, but with no imagination. Some thoughts on what we lose when we let machines do our thinking for us."
-tags: [ai, thoughts]
+title: When AI Forgets Wonder: How We Lose Ourselves by Thinking Less
+date: 2026-04-25 12:00
+description: AI is a really fast librarian, but with no imagination. Some thoughts on what we lose when we let machines do our thinking for us.
+tags: ai, thoughts
+image: /assets/images/posts/when-ai-forgets-wonder.svg
 ---
 
 ![Stylised starfield with a graceful arc representing a human leap of imagination](/assets/images/posts/when-ai-forgets-wonder.svg)

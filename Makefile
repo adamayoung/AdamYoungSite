@@ -1,20 +1,27 @@
-.PHONY: help install update build serve
+.PHONY: help build serve clean update release
+
+PORT ?= 8080
 
 help:
 	@echo "Available targets:"
-	@echo "  install   Install gems (bundle install)"
-	@echo "  update    Update gems within Gemfile constraints (bundle update)"
-	@echo "  build     Build the site into _site/"
-	@echo "  serve     Run the local dev server at http://127.0.0.1:4000"
-
-install:
-	bundle install
-
-update:
-	bundle update
+	@echo "  make build    - Build the site to Output/"
+	@echo "  make serve    - Build and serve at http://localhost:$(PORT)/"
+	@echo "  make release  - Build the site in release mode"
+	@echo "  make update   - Update Swift package dependencies"
+	@echo "  make clean    - Remove Output/ and .publish/ caches"
 
 build:
-	bundle exec jekyll build
+	swift run AdamYoungSite
 
-serve:
-	bundle exec jekyll serve
+release:
+	swift run -c release AdamYoungSite
+
+serve: build
+	@echo "Serving Output/ at http://localhost:$(PORT)/"
+	python3 -m http.server -d Output $(PORT)
+
+update:
+	swift package update
+
+clean:
+	rm -rf Output .publish .build

@@ -1,8 +1,9 @@
 ---
-title: "Map, Filter and Reduce"
-date: 2026-04-26 12:00:00 +0100
-description: "Map, filter and reduce allow you to manipulate sequences. You iterate over a list of items and perform an action on each of those items."
-tags: [swift]
+title: Map, Filter and Reduce
+date: 2026-04-26 12:00
+description: Map, filter and reduce allow you to manipulate sequences. You iterate over a list of items and perform an action on each of those items.
+tags: swift
+image: /assets/images/posts/map-filter-reduce.svg
 ---
 
 ![Diagram showing map, filter and reduce operating on a list of numbers](/assets/images/posts/map-filter-reduce.svg)

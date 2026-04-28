@@ -1,12 +1,12 @@
 
-# Created by https://www.gitignore.io/api/macos,jekyll,firebase,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=macos,jekyll,firebase,visualstudiocode
+# Created by https://www.gitignore.io/api/macos,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=macos,visualstudiocode
 
-### Jekyll ###
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
+### Swift / Publish ###
+.build/
+.swiftpm/
+.publish/
+Output/
 
 ### macOS ###
 # General
@@ -47,18 +47,4 @@ Temporary Items
 # Ignore all local history of files
 .history
 
-## Environment normalization:
-/.bundle/
-/vendor/bundle
-/lib/bundler/man/
-
-# for a library or gem, you might want to ignore these files since the code is
-# intended to run in multiple environments; otherwise, check them in:
-# Gemfile.lock
-# .ruby-version
-# .ruby-gemset
-
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-.rvmrc
-
-# End of https://www.gitignore.io/api/macos,jekyll,firebase,visualstudiocode
+# End of https://www.gitignore.io/api/macos,visualstudiocode

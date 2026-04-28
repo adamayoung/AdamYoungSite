@@ -16,23 +16,28 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
 
-      - uses: ruby/setup-ruby@v1
+      - name: Cache SwiftPM build
+        uses: actions/cache@v4
         with:
-          ruby-version: "3.1.6"
-          bundler-cache: true
+          path: |
+            .build
+            .swiftpm
+          key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
 
       - uses: actions/configure-pages@v6
 
       - name: Build site
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
-        env:
-          JEKYLL_ENV: production
+        run: swift run -c release AdamYoungSite
 
       - uses: actions/upload-pages-artifact@v5
+        with:
+          path: Output
 
   deploy:
     needs: build

@@ -2,24 +2,30 @@
 
 My personal web site.
 
-[https://adam-young.co.uk]([Adam](https://adam-young.co.uk))
+[https://adam-young.co.uk](https://adam-young.co.uk)
+
+Built with [Publish](https://github.com/JohnSundell/Publish), John Sundell's Swift static site generator. Hosted on GitHub Pages.
 
 ## Development
 
-### Install gems
+### Build the site
 
 ```bash
-bundle install
+swift run AdamYoungSite
 ```
 
-### Update gems
+The generated site is written to `Output/`.
+
+### Preview locally
 
 ```bash
-bundle update
+swift run AdamYoungSite && python3 -m http.server -d Output 8080
 ```
 
-### Serve site
+Then open <http://localhost:8080/>.
+
+### Update dependencies
 
 ```bash
-bundle exec jekyll serve
+swift package update
 ```
