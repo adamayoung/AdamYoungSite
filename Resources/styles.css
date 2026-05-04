@@ -153,15 +153,17 @@ input { font: inherit; color: inherit; }
   padding: 4px 8px 22px;
   margin-bottom: 4px;
 }
-.monogram {
+.rail-brand-avatar {
   width: 36px; height: 36px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: white;
-  display: grid; place-items: center;
-  font-weight: 600; font-size: 13px;
-  letter-spacing: 0.02em;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 4px 12px rgba(10, 132, 255, 0.25);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  display: block;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.rail-brand:hover .rail-brand-avatar {
+  transform: scale(1.04);
+  border-color: var(--border-strong);
 }
 .brand-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .brand-name {
@@ -239,16 +241,16 @@ input { font: inherit; color: inherit; }
    Top bar
    ============================================================ */
 .topbar {
-  display: grid;
-  grid-template-columns: 1fr minmax(0, 580px) 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 16px;
   padding: 8px 0 22px;
   border-bottom: 1px solid var(--border);
   margin-bottom: 32px;
 }
 .search {
-  grid-column: 2;
+  width: 100%;
+  max-width: 580px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -272,19 +274,6 @@ input { font: inherit; color: inherit; }
   min-width: 0;
 }
 .search input::placeholder { color: var(--muted); }
-
-.me-avatar {
-  grid-column: 3;
-  justify-self: end;
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  display: block;
-  transition: transform 0.15s ease, border-color 0.15s ease;
-}
-.me-avatar:hover { transform: scale(1.04); border-color: var(--border-strong); }
-.me-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ============================================================
    Page header
@@ -672,59 +661,8 @@ input { font: inherit; color: inherit; }
 }
 
 /* ============================================================
-   Contact cards
-   ============================================================ */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-}
-.contact-card {
-  display: grid;
-  grid-template-columns: 44px 1fr;
-  grid-template-rows: auto auto;
-  column-gap: 14px;
-  row-gap: 2px;
-  align-items: center;
-  padding: 16px 18px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-.contact-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--border-strong);
-}
-.contact-icon {
-  grid-row: span 2;
-  width: 44px; height: 44px;
-  border-radius: 11px;
-  display: grid;
-  place-items: center;
-  color: white;
-}
-.contact-icon svg { width: 22px; height: 22px; }
-.contact-icon.gh { background: linear-gradient(135deg, #1f2937, #4b5563); }
-.contact-icon.li { background: linear-gradient(135deg, #0a66c2, #1e40af); }
-.contact-icon.mail { background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
-.contact-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ink);
-}
-.contact-handle {
-  font-size: 13px;
-  color: var(--muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ============================================================
    Stack chips
    ============================================================ */
-.stack .section-head { margin-bottom: 14px; }
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -936,12 +874,9 @@ input { font: inherit; color: inherit; }
   font-size: 13px;
   color: var(--muted);
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-.site-footer .dot-sep { color: var(--border-strong); }
-.site-footer a:hover { color: var(--ink); }
 
 /* ============================================================
    Responsive — tablet & mobile
@@ -980,13 +915,9 @@ input { font: inherit; color: inherit; }
 
 @media (max-width: 720px) {
   .topbar {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 12px;
     padding-bottom: 18px;
     margin-bottom: 24px;
   }
-  .search { grid-column: 1; }
-  .me-avatar { grid-column: 2; width: 36px; height: 36px; }
   .hero-card {
     padding: 28px;
     margin-bottom: 40px;
@@ -1071,11 +1002,21 @@ input { font: inherit; color: inherit; }
   margin-bottom: 14px;
   max-width: 36ch;
 }
+.about-hero-highlight {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
 .about-hero p:not(.about-hero-lead) {
   font-size: 16px;
   line-height: 1.65;
   color: var(--muted);
   max-width: 68ch;
+}
+.about-hero-chips {
+  margin-top: 22px;
 }
 
 /* Section headings with subtle gradient accent */
@@ -1166,6 +1107,12 @@ input { font: inherit; color: inherit; }
   margin: 0;
   letter-spacing: -0.005em;
 }
+.company-description {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 2px 0 6px;
+  line-height: 1.45;
+}
 .secondary-line {
   font-size: 14px;
   color: var(--ink);
@@ -1230,6 +1177,107 @@ input { font: inherit; color: inherit; }
   .secondary-line { font-size: 13px; }
   .sub-role-list { padding-left: 18px; }
   .sub-role::before { left: -18px; }
+}
+
+/* ============================================================
+   Books page
+   ============================================================ */
+.book-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.book-group-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.book-group-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 56px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.2s ease;
+}
+.book-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+}
+
+.book-cover {
+  aspect-ratio: 3 / 4;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.book-body {
+  padding: 16px 18px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.book-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.book-subtitle {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 2px;
+  flex: 1;
+}
+.book-authors {
+  font-size: 13px;
+  color: var(--muted-strong);
+  margin-top: 6px;
+}
+.book-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.book-card:hover .book-link {
+  color: var(--accent);
 }
 
 /* ============================================================

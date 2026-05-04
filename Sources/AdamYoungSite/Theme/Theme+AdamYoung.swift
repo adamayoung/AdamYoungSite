@@ -27,12 +27,9 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
                     for: site,
                     options: ShellOptions(activePath: "/", allTags: tags),
                     content: [
-                        .pageHeader(title: "Home"),
                         .heroCard(),
                         .latestBlogSection(items: latestPosts),
-                        .projectsSection(),
-                        .elsewhereSection(site: site),
-                        .stackSection()
+                        .projectsSection()
                     ]
                 )
             )
@@ -53,7 +50,8 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
                     options: ShellOptions(
                         activePath: "/blog/",
                         allTags: tags,
-                        loadBlogFilter: section.id == .blog
+                        loadBlogFilter: section.id == .blog,
+                        showSearch: section.id == .blog
                     ),
                     content: [
                         .pageHeader(title: section.title, subtitle: section.description),
@@ -87,7 +85,7 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
             .body(
                 .siteShell(
                     for: site,
-                    options: ShellOptions(activePath: "/blog/", allTags: tags),
+                    options: ShellOptions(activePath: "/blog/", allTags: tags, showSearch: true),
                     content: [.postArticle(for: item)]
                 )
             )
@@ -114,6 +112,8 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
             ]
         case "about":
             pageContent = aboutPageContent(title: page.title, subtitle: page.description)
+        case "books":
+            pageContent = booksPageContent(title: page.title, subtitle: page.description)
         default:
             pageContent = [
                 .pageHeader(title: page.title, subtitle: page.description),
@@ -169,23 +169,23 @@ private extension Node where Context == HTML.BodyContext {
             ),
             .p(
                 .class("hero-tagline"),
-                .text("Sixteen years on Apple platforms — Swift, SwiftUI, clean architecture, TDD and CI/CD.")
+                .text("iOS engineer working in Swift — focused on architecture, technical strategy, and engineering craft.")
             ),
             .p(
                 .class("hero-sub"),
-                .text("Happy deep in a complex codebase or leading technical strategy, and a fan of growing engineering culture through mentoring and tech talks.")
+                .text("A fan of growing engineering culture through mentoring and tech talks.")
             ),
             .div(
                 .class("hero-actions"),
                 .a(
                     .class("btn-primary"),
                     .href("/blog/"),
-                    .text("Read the blog"),
+                    .text("Read my blog"),
                     .span(.class("btn-arrow"), .raw(Icons.arrowRight))
                 ),
                 .a(
                     .class("btn-secondary"),
-                    .href("/#projects"),
+                    .href("/projects/"),
                     .text("See projects")
                 )
             )
@@ -270,57 +270,6 @@ private extension Node where Context == HTML.BodyContext {
                     .text(project.linkLabel),
                     .span(.class("section-link-arrow"), .raw(Icons.arrowRight))
                 )
-            )
-        )
-    }
-
-    static func elsewhereSection(site: AdamYoungSite) -> Node {
-        .section(
-            .class("section"),
-            .attribute(named: "id", value: "contact"),
-            .sectionHead(title: "Get in touch"),
-            .div(
-                .class("contact-grid"),
-                .a(
-                    .class("contact-card"),
-                    .href("https://github.com/\(site.githubUsername)"),
-                    .attribute(named: "rel", value: "noopener"),
-                    .span(.class("contact-icon gh"), .raw(Icons.github)),
-                    .span(.class("contact-label"), .text("GitHub")),
-                    .span(.class("contact-handle"), .text("@\(site.githubUsername)"))
-                ),
-                .a(
-                    .class("contact-card"),
-                    .href("https://www.linkedin.com/in/\(site.linkedinUsername)"),
-                    .attribute(named: "rel", value: "noopener"),
-                    .span(.class("contact-icon li"), .raw(Icons.linkedin)),
-                    .span(.class("contact-label"), .text("LinkedIn")),
-                    .span(.class("contact-handle"), .text("in/\(site.linkedinUsername)"))
-                ),
-                .a(
-                    .class("contact-card"),
-                    .href("mailto:\(site.authorEmail)"),
-                    .span(.class("contact-icon mail"), .raw(Icons.mail)),
-                    .span(.class("contact-label"), .text("Email")),
-                    .span(.class("contact-handle"), .text(site.authorEmail))
-                )
-            )
-        )
-    }
-
-    static func stackSection() -> Node {
-        let chips = [
-            "Swift 6", "SwiftUI", "UIKit", "Swift Concurrency", "Swift Testing",
-            "TCA", "SPM", "Tuist", "CoreML", "Vapor"
-        ]
-        return .section(
-            .class("section stack"),
-            .sectionHead(title: "Working with"),
-            .div(
-                .class("chips"),
-                .forEach(chips) { chip in
-                    .span(.class("chip"), .text(chip))
-                }
             )
         )
     }
@@ -477,6 +426,7 @@ private func careerRow(for entry: CareerEntry) -> Node<HTML.ListContext> {
         .div(
             .class("career-body"),
             .h3(.class("primary-line"), .text(entry.company)),
+            .p(.class("company-description"), .text(entry.companyDescription)),
             .span(.class("secondary-line"), .text("\(entry.workMode) · \(totalDuration)")),
             .span(.class("location-line"), .text(entry.location)),
             .ul(.class(listClass), .group(roleNodes))
@@ -577,6 +527,7 @@ struct CareerRole {
 
 struct CareerEntry {
     let company: String
+    let companyDescription: String
     let logoPath: String
     let location: String
     let workMode: String
@@ -633,7 +584,8 @@ private func formatDuration(from start: Date, to end: Date) -> String {
 
 let careerHistory: [CareerEntry] = [
     CareerEntry(
-        company: "Monzo",
+        company: "Monzo Bank",
+        companyDescription: "UK digital bank built mobile-first, with over 12 million customers.",
         logoPath: "/assets/images/companies/monzo.svg",
         location: "London / Remote",
         workMode: "Full-time",
@@ -642,7 +594,8 @@ let careerHistory: [CareerEntry] = [
         ]
     ),
     CareerEntry(
-        company: "Bumble",
+        company: "Bumble Inc.",
+        companyDescription: "Owner of Bumble and Badoo — connection apps where women make the first move.",
         logoPath: "/assets/images/companies/bumble.svg",
         location: "London / Hybrid",
         workMode: "Full-time",
@@ -652,6 +605,7 @@ let careerHistory: [CareerEntry] = [
     ),
     CareerEntry(
         company: "Flutter Entertainment / PokerStars",
+        companyDescription: "Global online sports betting and iGaming group; PokerStars is its market-leading poker brand.",
         logoPath: "/assets/images/companies/flutter-entertainment.svg",
         location: "Leeds / Remote",
         workMode: "Full-time",
@@ -663,6 +617,7 @@ let careerHistory: [CareerEntry] = [
     ),
     CareerEntry(
         company: "MHR",
+        companyDescription: "UK provider of HR, payroll and finance software and services.",
         logoPath: "/assets/images/companies/mhr.svg",
         location: "Nottingham",
         workMode: "Full-time",
@@ -689,6 +644,153 @@ let education: [EducationEntry] = [
     )
 ]
 
+// MARK: - Books data
+
+struct Book {
+    let title: String
+    let subtitle: String?
+    let authors: [String]
+    let coverPath: String
+    let amazonURL: String
+}
+
+struct BookGroup {
+    let title: String
+    let books: [Book]
+}
+
+let allBookGroups: [BookGroup] = [
+    BookGroup(
+        title: "Mobile & Swift",
+        books: [
+            Book(
+                title: "AI Driven Swift Architecture",
+                subtitle: "Build modern iOS SwiftUI apps with Foundation Models, MCP agents, Clean Architecture, and TDD",
+                authors: ["Walid SASSI", "Dave Poirier"],
+                coverPath: "/assets/images/books/ai-driven-swift-architecture.png",
+                amazonURL: "https://www.amazon.com/AI-Driven-Swift-Architecture-Foundation/dp/B0GTV7PLCV"
+            ),
+            Book(
+                title: "Mobile System Design Interview",
+                subtitle: "An Insider's Guide",
+                authors: ["Manuel Vicente Vivo"],
+                coverPath: "/assets/images/books/mobile-system-design-interview.webp",
+                amazonURL: "https://www.amazon.co.uk/Mobile-System-Design-Interview-Insiders/dp/1736049151"
+            )
+        ]
+    ),
+    BookGroup(
+        title: "Software craftsmanship",
+        books: [
+            Book(
+                title: "Tidy First?",
+                subtitle: "A Personal Exercise in Empirical Software Design",
+                authors: ["Kent Beck"],
+                coverPath: "/assets/images/books/tidy-first.jpg",
+                amazonURL: "https://www.amazon.co.uk/Tidy-First-Personal-Exercise-Empirical/dp/1098151240"
+            ),
+            Book(
+                title: "Clean Code",
+                subtitle: "A Handbook of Agile Software Craftsmanship",
+                authors: ["Robert C. Martin"],
+                coverPath: "/assets/images/books/clean-code.jpg",
+                amazonURL: "https://www.amazon.co.uk/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"
+            ),
+            Book(
+                title: "Clean Architecture",
+                subtitle: "A Craftsman's Guide to Software Structure and Design",
+                authors: ["Robert C. Martin"],
+                coverPath: "/assets/images/books/clean-architecture.jpg",
+                amazonURL: "https://www.amazon.co.uk/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164"
+            ),
+            Book(
+                title: "The Clean Coder",
+                subtitle: "A Code of Conduct for Professional Programmers",
+                authors: ["Robert C. Martin"],
+                coverPath: "/assets/images/books/the-clean-coder.jpg",
+                amazonURL: "https://www.amazon.co.uk/Clean-Coder-Conduct-Professional-Programmers/dp/0137081073"
+            )
+        ]
+    ),
+    BookGroup(
+        title: "DevOps",
+        books: [
+            Book(
+                title: "The Phoenix Project",
+                subtitle: "A Novel about IT, DevOps, and Helping Your Business Win",
+                authors: ["Gene Kim", "Kevin Behr", "George Spafford"],
+                coverPath: "/assets/images/books/the-phoenix-project.jpg",
+                amazonURL: "https://www.amazon.co.uk/Phoenix-Project-Devops-Helping-Business/dp/1942788290"
+            ),
+            Book(
+                title: "The DevOps Handbook",
+                subtitle: "How to Create World-Class Agility, Reliability, and Security in Technology Organizations",
+                authors: ["Gene Kim", "Jez Humble", "Patrick Debois", "John Willis"],
+                coverPath: "/assets/images/books/the-devops-handbook.jpg",
+                amazonURL: "https://www.amazon.co.uk/Devops-Handbook-World-Class-Reliability-Organizations/dp/1942788002"
+            ),
+            Book(
+                title: "The Unicorn Project",
+                subtitle: "A Novel about Developers, Digital Disruption, and Thriving in the Age of Data",
+                authors: ["Gene Kim"],
+                coverPath: "/assets/images/books/the-unicorn-project.jpg",
+                amazonURL: "https://www.amazon.co.uk/Unicorn-Project-Disruption-Redshirts-Overthrowing/dp/1942788762"
+            )
+        ]
+    )
+]
+
+private func bookCard(for book: Book) -> Node<HTML.BodyContext> {
+    .a(
+        .class("book-card"),
+        .href(book.amazonURL),
+        .attribute(named: "rel", value: "noopener"),
+        .attribute(named: "target", value: "_blank"),
+        .div(
+            .class("book-cover"),
+            .img(
+                .src(book.coverPath),
+                .alt("\(book.title) book cover"),
+                .attribute(named: "loading", value: "lazy")
+            )
+        ),
+        .div(
+            .class("book-body"),
+            .h3(.class("book-title"), .text(book.title)),
+            .if(book.subtitle != nil,
+                .p(.class("book-subtitle"), .text(book.subtitle ?? ""))
+            ),
+            .p(.class("book-authors"), .text(book.authors.joined(separator: ", "))),
+            .span(
+                .class("book-link"),
+                .text("View on Amazon"),
+                .span(.class("section-link-arrow"), .raw(Icons.arrowRight))
+            )
+        )
+    )
+}
+
+private func bookGroupSection(for group: BookGroup) -> Node<HTML.BodyContext> {
+    .section(
+        .class("book-group"),
+        .h2(.class("book-group-title"), .text(group.title)),
+        .div(
+            .class("book-grid"),
+            .group(group.books.map { bookCard(for: $0) })
+        )
+    )
+}
+
+func booksPageContent(title: String, subtitle: String) -> [Node<HTML.BodyContext>] {
+    [
+        .pageHeader(title: title, subtitle: subtitle),
+        .div(
+            .class("book-groups"),
+            .group(allBookGroups.map { bookGroupSection(for: $0) })
+        )
+    ]
+}
+
 // MARK: - About page rendering
 
 func aboutPageContent(title: String, subtitle: String) -> [Node<HTML.BodyContext>] {
@@ -701,8 +803,22 @@ func aboutPageContent(title: String, subtitle: String) -> [Node<HTML.BodyContext
                 .span(.class("eyebrow-dot")),
                 .text("Senior iOS Engineer · Oakham, UK")
             ),
-            .p(.class("about-hero-lead"), .text("Hi, I'm Adam. I've been writing software for over two decades, and the last sixteen of those have been on Apple platforms.")),
-            .p(.text("Most of my career has been spent in mobile, but I'm equally at home in a server-side codebase, a CI pipeline, or a meeting room making the case for an architecture change. The bit I enjoy most is helping engineering teams ship work they're proud of, through mentoring, tech talks, and quietly rebuilding the bits of a codebase nobody else has time to."))
+            .p(
+                .class("about-hero-lead"),
+                .text("Hi, I'm Adam. I've been writing software for over two decades, and the last sixteen of those have been on "),
+                .span(.class("about-hero-highlight"), .text("Apple platforms")),
+                .text(".")
+            ),
+            .p(.text("What pulls me in is engineering craft: clean architecture, well-designed APIs, the kind of code that's a pleasure to come back to six months later. Most of that's played out in mobile, but I'm equally at home in a server-side codebase, a CI pipeline, or a meeting room making the case for an architecture change.")),
+            .p(.text("The bit I enjoy most is helping engineering teams ship work they're proud of, through mentoring, tech talks, and championing the practices that compound, from TDD to thoughtful AI-assisted development. Outside of work I maintain an open source Swift package, build personal projects for the joy of it, and write here. The thread running through all of it: build things properly, and build things people actually use.")),
+            .div(
+                .class("about-hero-chips chips"),
+                .span(.class("chip"), .text("Swift")),
+                .span(.class("chip"), .text("Architecture")),
+                .span(.class("chip"), .text("Engineering craft")),
+                .span(.class("chip"), .text("AI-assisted development")),
+                .span(.class("chip"), .text("Mentoring & tech talks"))
+            )
         ),
         .section(
             .class("about-section"),

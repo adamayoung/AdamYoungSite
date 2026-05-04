@@ -82,8 +82,6 @@ extension Node where Context == HTML.DocumentContext {
             .title(info.fullTitle),
             .meta(.name("description"), .content(info.description)),
 
-            .link(.rel(.icon), .type("image/jpeg"), .href("/assets/images/me.jpg")),
-            .link(.rel(.appleTouchIcon), .href("/assets/images/me.jpg")),
             .meta(.name("apple-mobile-web-app-title"), .content(site.name)),
             .meta(.name("apple-mobile-web-app-capable"), .content("yes")),
             .meta(.name("apple-mobile-web-app-status-bar-style"), .content("black-translucent")),
@@ -170,7 +168,6 @@ enum Icons {
     static let home = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9.5"/></svg>"#
     static let blog = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v5a1 1 0 0 0 1 1h5"/><path d="M8 13h8"/><path d="M8 17h6"/></svg>"#
     static let projects = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>"#
-    static let contact = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>"#
     static let github = #"<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.5-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>"#
     static let linkedin = #"<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.4 20.4h-3.5v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.6H9.5V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.1zM5.5 7.4c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm1.8 13H3.7V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.5C0 23.2.8 24 1.8 24h20.4c1 0 1.8-.8 1.8-1.8V1.7C24 .8 23.2 0 22.2 0z"/></svg>"#
     static let mail = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>"#
@@ -178,6 +175,7 @@ enum Icons {
     static let search = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>"#
     static let arrowRight = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>"#
     static let about = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>"#
+    static let books = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H10v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H14v15h4.5a1.5 1.5 0 0 1 1.5 1.5"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H10"/><path d="M14 21h4.5a1.5 1.5 0 0 0 1.5-1.5"/></svg>"#
 }
 
 // MARK: - Shell
@@ -186,11 +184,18 @@ struct ShellOptions {
     var activePath: String
     var allTags: [Tag]
     var loadBlogFilter: Bool
+    var showSearch: Bool
 
-    init(activePath: String, allTags: [Tag] = [], loadBlogFilter: Bool = false) {
+    init(
+        activePath: String,
+        allTags: [Tag] = [],
+        loadBlogFilter: Bool = false,
+        showSearch: Bool = false
+    ) {
         self.activePath = activePath
         self.allTags = allTags
         self.loadBlogFilter = loadBlogFilter
+        self.showSearch = showSearch
     }
 }
 
@@ -207,7 +212,7 @@ extension Node where Context == HTML.BodyContext {
                 .sidebarRail(for: site, activePath: options.activePath, allTags: options.allTags),
                 .div(
                     .class("main-area"),
-                    .topBar(),
+                    .if(options.showSearch, .topBar()),
                     .main(
                         .id("main"),
                         .class("content"),
@@ -231,7 +236,11 @@ extension Node where Context == HTML.BodyContext {
                 .a(
                     .class("rail-brand"),
                     .href("/"),
-                    .div(.class("monogram"), .text("AY")),
+                    .img(
+                        .class("rail-brand-avatar"),
+                        .src("/assets/images/me.jpg"),
+                        .alt("")
+                    ),
                     .div(
                         .class("brand-text"),
                         .span(.class("brand-name"), .text(site.name)),
@@ -245,7 +254,7 @@ extension Node where Context == HTML.BodyContext {
                     railLink(href: "/about/", icon: Icons.about, label: "About", activePath: activePath),
                     railLink(href: "/blog/", icon: Icons.blog, label: "Blog", activePath: activePath),
                     railLink(href: "/projects/", icon: Icons.projects, label: "Projects", activePath: activePath),
-                    railLink(href: "/#contact", icon: Icons.contact, label: "Contact", activePath: activePath)
+                    railLink(href: "/books/", icon: Icons.books, label: "Books", activePath: activePath)
                 ),
                 .div(.class("rail-divider"), .attribute(named: "aria-hidden", value: "true")),
                 .nav(
@@ -298,12 +307,6 @@ extension Node where Context == HTML.BodyContext {
                     .attribute(named: "autocomplete", value: "off"),
                     .placeholder("Search posts, topics…")
                 )
-            ),
-            .a(
-                .class("me-avatar"),
-                .href("/"),
-                .attribute(named: "aria-label", value: "Adam Young, home"),
-                .img(.src("/assets/images/me.jpg"), .alt(""))
             )
         )
     }
@@ -312,11 +315,7 @@ extension Node where Context == HTML.BodyContext {
         let year = Calendar.current.component(.year, from: Date())
         return .footer(
             .class("site-footer"),
-            .span(.text("© \(year) \(site.name)")),
-            .span(.class("dot-sep"), .attribute(named: "aria-hidden", value: "true"), .text("·")),
-            .a(.href("/feed.rss"), .text("RSS")),
-            .span(.class("dot-sep"), .attribute(named: "aria-hidden", value: "true"), .text("·")),
-            .a(.href("mailto:\(site.authorEmail)"), .text(site.authorEmail))
+            .span(.text("© \(year) \(site.name)"))
         )
     }
 }
