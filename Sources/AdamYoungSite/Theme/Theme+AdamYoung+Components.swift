@@ -76,8 +76,8 @@ extension Node where Context == HTML.DocumentContext {
         return .head(
             .meta(.charset(.utf8)),
             .meta(.name("viewport"), .content("width=device-width, initial-scale=1, viewport-fit=cover")),
-            .raw(##"<meta name="theme-color" content="#eef3f8" media="(prefers-color-scheme: light)">"##),
-            .raw(##"<meta name="theme-color" content="#050810" media="(prefers-color-scheme: dark)">"##),
+            .raw(##"<meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">"##),
+            .raw(##"<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">"##),
             .meta(.name("format-detection"), .content("telephone=no")),
             .title(info.fullTitle),
             .meta(.name("description"), .content(info.description)),
@@ -164,40 +164,180 @@ private func jsonLDPerson(for site: AdamYoungSite) -> String {
     """
 }
 
-extension Node where Context == HTML.BodyContext {
-    static func ambientBlobs() -> Node {
-        .div(
-            .class("ambient"),
-            .attribute(named: "aria-hidden", value: "true"),
-            .div(.class("blob b1")),
-            .div(.class("blob b2")),
-            .div(.class("blob b3"))
-        )
-    }
+// MARK: - Icons
 
-    static func topNav() -> Node {
-        .nav(
-            .class("nav"),
+enum Icons {
+    static let home = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9.5"/></svg>"#
+    static let blog = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v5a1 1 0 0 0 1 1h5"/><path d="M8 13h8"/><path d="M8 17h6"/></svg>"#
+    static let projects = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>"#
+    static let contact = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>"#
+    static let github = #"<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.5-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>"#
+    static let linkedin = #"<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.4 20.4h-3.5v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.6H9.5V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.1zM5.5 7.4c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm1.8 13H3.7V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.5C0 23.2.8 24 1.8 24h20.4c1 0 1.8-.8 1.8-1.8V1.7C24 .8 23.2 0 22.2 0z"/></svg>"#
+    static let mail = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>"#
+    static let rss = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a14 14 0 0 1 14 14"/><path d="M5 11a8 8 0 0 1 8 8"/><circle cx="6" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg>"#
+    static let search = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>"#
+    static let arrowRight = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>"#
+}
+
+// MARK: - Shell
+
+struct ShellOptions {
+    var activePath: String
+    var allTags: [Tag]
+    var loadBlogFilter: Bool
+
+    init(activePath: String, allTags: [Tag] = [], loadBlogFilter: Bool = false) {
+        self.activePath = activePath
+        self.allTags = allTags
+        self.loadBlogFilter = loadBlogFilter
+    }
+}
+
+extension Node where Context == HTML.BodyContext {
+    static func siteShell(
+        for site: AdamYoungSite,
+        options: ShellOptions,
+        content: [Node<HTML.BodyContext>]
+    ) -> Node {
+        .group(
+            .a(.class("skip-link"), .href("#main"), .text("Skip to content")),
             .div(
-                .class("nav-inner glass"),
-                .a(.class("name"), .href("/"), .text("Adam Young")),
+                .class("shell"),
+                .sidebarRail(for: site, activePath: options.activePath, allTags: options.allTags),
                 .div(
-                    .class("links"),
-                    .a(.href("/blog/"), .text("Blog")),
-                    .a(.href("/#projects"), .text("Projects")),
-                    .a(.href("/#contact"), .text("Contact"))
+                    .class("main-area"),
+                    .topBar(),
+                    .main(
+                        .id("main"),
+                        .class("content"),
+                        .group(content)
+                    ),
+                    .siteFooter(for: site)
                 )
+            ),
+            .if(options.loadBlogFilter,
+                .raw(#"<script src="/blog-filter.js" defer></script>"#)
             )
         )
     }
 
-    static func siteFooter() -> Node {
+    static func sidebarRail(for site: AdamYoungSite, activePath: String, allTags: [Tag]) -> Node {
+        .element(
+            named: "aside",
+            nodes: [
+                .attribute(named: "class", value: "rail"),
+                .attribute(named: "aria-label", value: "Site navigation"),
+                .a(
+                    .class("rail-brand"),
+                    .href("/"),
+                    .div(.class("monogram"), .text("AY")),
+                    .div(
+                        .class("brand-text"),
+                        .span(.class("brand-name"), .text(site.name)),
+                        .span(.class("brand-pill"), .text(site.tagline))
+                    )
+                ),
+                .nav(
+                    .class("rail-nav rail-nav-primary"),
+                    .attribute(named: "aria-label", value: "Primary"),
+                    railLink(href: "/", icon: Icons.home, label: "Home", activePath: activePath),
+                    railLink(href: "/blog/", icon: Icons.blog, label: "Blog", activePath: activePath),
+                    railLink(href: "/projects/", icon: Icons.projects, label: "Projects", activePath: activePath),
+                    railLink(href: "/#contact", icon: Icons.contact, label: "Contact", activePath: activePath)
+                ),
+                .div(.class("rail-divider"), .attribute(named: "aria-hidden", value: "true")),
+                .nav(
+                    .class("rail-nav rail-nav-secondary"),
+                    .attribute(named: "aria-label", value: "Elsewhere"),
+                    railLink(href: "https://github.com/\(site.githubUsername)", icon: Icons.github, label: "GitHub", activePath: activePath, external: true),
+                    railLink(href: "https://www.linkedin.com/in/\(site.linkedinUsername)", icon: Icons.linkedin, label: "LinkedIn", activePath: activePath, external: true),
+                    railLink(href: "mailto:\(site.authorEmail)", icon: Icons.mail, label: "Email", activePath: activePath, external: true),
+                    railLink(href: "/feed.rss", icon: Icons.rss, label: "RSS", activePath: activePath)
+                ),
+                .if(!allTags.isEmpty, .group([
+                    .div(.class("rail-divider"), .attribute(named: "aria-hidden", value: "true")),
+                    .div(
+                        .class("rail-topics"),
+                        .span(.class("rail-section-label"), .text("Topics")),
+                        .ul(
+                            .class("rail-tag-list"),
+                            .forEach(allTags) { tag in
+                                .li(.a(
+                                    .class("rail-tag"),
+                                    .href("/blog/?tag=\(slugify(tag.string))"),
+                                    .text(tag.string)
+                                ))
+                            }
+                        )
+                    )
+                ]))
+            ]
+        )
+    }
+
+    static func topBar() -> Node {
+        .header(
+            .class("topbar"),
+            .form(
+                .class("search"),
+                .action("/blog/"),
+                .attribute(named: "method", value: "get"),
+                .attribute(named: "role", value: "search"),
+                .label(
+                    .class("visually-hidden"),
+                    .for("topbar-search"),
+                    .text("Search posts")
+                ),
+                .span(.class("search-icon"), .raw(Icons.search)),
+                .input(
+                    .id("topbar-search"),
+                    .name("q"),
+                    .type(.search),
+                    .attribute(named: "autocomplete", value: "off"),
+                    .placeholder("Search posts, topics…")
+                )
+            ),
+            .a(
+                .class("me-avatar"),
+                .href("/"),
+                .attribute(named: "aria-label", value: "Adam Young, home"),
+                .img(.src("/assets/images/me.jpg"), .alt(""))
+            )
+        )
+    }
+
+    static func siteFooter(for site: AdamYoungSite) -> Node {
         let year = Calendar.current.component(.year, from: Date())
         return .footer(
             .class("site-footer"),
-            .text("© \(year) Adam Young")
+            .span(.text("© \(year) \(site.name)")),
+            .span(.class("dot-sep"), .attribute(named: "aria-hidden", value: "true"), .text("·")),
+            .a(.href("/feed.rss"), .text("RSS")),
+            .span(.class("dot-sep"), .attribute(named: "aria-hidden", value: "true"), .text("·")),
+            .a(.href("mailto:\(site.authorEmail)"), .text(site.authorEmail))
         )
     }
+}
+
+private func railLink(href: String, icon: String, label: String, activePath: String, external: Bool = false) -> Node<HTML.BodyContext> {
+    let isActive = !external && href == activePath
+    var attrs: [Node<HTML.AnchorContext>] = [
+        .class(isActive ? "rail-link active" : "rail-link"),
+        .href(href),
+        .span(.class("rail-link-icon"), .raw(icon)),
+        .span(.class("rail-link-label"), .text(label))
+    ]
+    if isActive { attrs.append(.attribute(named: "aria-current", value: "page")) }
+    if external {
+        attrs.append(.attribute(named: "rel", value: "noopener"))
+    }
+    return .a(.group(attrs))
+}
+
+private func slugify(_ s: String) -> String {
+    s.lowercased()
+        .replacingOccurrences(of: " ", with: "-")
+        .filter { $0.isLetter || $0.isNumber || $0 == "-" }
 }
 
 enum DateRendering {
