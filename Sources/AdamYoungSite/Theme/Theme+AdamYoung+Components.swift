@@ -87,12 +87,6 @@ extension Node where Context == HTML.DocumentContext {
             .meta(.name("apple-mobile-web-app-status-bar-style"), .content("black-translucent")),
 
             .link(.rel(.stylesheet), .href("/styles.css")),
-            .link(
-                .rel(.alternate),
-                .type("application/rss+xml"),
-                .href("/feed.rss"),
-                .attribute(named: "title", value: site.name)
-            ),
 
             // Open Graph (Plot's `.title(...)` already emits og:title and twitter:title.)
             .raw(#"<meta property="og:type" content="\#(info.kind == .article ? "article" : "website")">"#),
@@ -171,7 +165,6 @@ enum Icons {
     static let github = #"<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.5-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>"#
     static let linkedin = #"<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.4 20.4h-3.5v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.6H9.5V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.1zM5.5 7.4c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm1.8 13H3.7V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.5C0 23.2.8 24 1.8 24h20.4c1 0 1.8-.8 1.8-1.8V1.7C24 .8 23.2 0 22.2 0z"/></svg>"#
     static let mail = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>"#
-    static let rss = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a14 14 0 0 1 14 14"/><path d="M5 11a8 8 0 0 1 8 8"/><circle cx="6" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg>"#
     static let search = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>"#
     static let arrowRight = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>"#
     static let about = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>"#
@@ -253,7 +246,12 @@ extension Node where Context == HTML.BodyContext {
                     railLink(href: "/", icon: Icons.home, label: "Home", activePath: activePath),
                     railLink(href: "/about/", icon: Icons.about, label: "About", activePath: activePath),
                     railLink(href: "/blog/", icon: Icons.blog, label: "Blog", activePath: activePath),
-                    railLink(href: "/projects/", icon: Icons.projects, label: "Projects", activePath: activePath),
+                    railLink(href: "/projects/", icon: Icons.projects, label: "Projects", activePath: activePath)
+                ),
+                .div(.class("rail-divider"), .attribute(named: "aria-hidden", value: "true")),
+                .nav(
+                    .class("rail-nav rail-nav-tertiary"),
+                    .attribute(named: "aria-label", value: "Reading"),
                     railLink(href: "/books/", icon: Icons.books, label: "Books", activePath: activePath)
                 ),
                 .div(.class("rail-divider"), .attribute(named: "aria-hidden", value: "true")),
@@ -262,8 +260,7 @@ extension Node where Context == HTML.BodyContext {
                     .attribute(named: "aria-label", value: "Elsewhere"),
                     railLink(href: "https://github.com/\(site.githubUsername)", icon: Icons.github, label: "GitHub", activePath: activePath, external: true),
                     railLink(href: "https://www.linkedin.com/in/\(site.linkedinUsername)", icon: Icons.linkedin, label: "LinkedIn", activePath: activePath, external: true),
-                    railLink(href: "mailto:\(site.authorEmail)", icon: Icons.mail, label: "Email", activePath: activePath, external: true),
-                    railLink(href: "/feed.rss", icon: Icons.rss, label: "RSS", activePath: activePath)
+                    railLink(href: "mailto:\(site.authorEmail)", icon: Icons.mail, label: "Email", activePath: activePath, external: true)
                 ),
                 .if(!allTags.isEmpty, .group([
                     .div(.class("rail-divider"), .attribute(named: "aria-hidden", value: "true")),
