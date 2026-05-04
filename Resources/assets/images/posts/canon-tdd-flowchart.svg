@@ -1,0 +1,170 @@
+<svg viewBox="0 0 1400 1180" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Canon TDD flowchart: Start, write a test list, turn one list item into a runnable test, change the code to pass, optionally refactor, ask if the list is empty (Yes ends; No loops back to step 2). Common mistakes are annotated at each step.">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1626"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="15%" cy="12%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="85%" cy="88%" r="55%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#9aa6b8"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#22c55e"/>
+    </marker>
+    <style>
+      .step-label   { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 1.5px; fill: #9aa6b8; }
+      .step-text    { font-family: -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 600; fill: #e8edf5; }
+      .node-text    { font-family: -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 700; fill: #e8edf5; }
+      .yn-text      { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; fill: #cbd2dc; }
+      .mistake-text { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 500; fill: #fcd34d; }
+      .tip-text     { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 500; fill: #86efac; }
+      .loop-text    { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 500; fill: #9aa6b8; font-style: italic; }
+      .title        { font-family: -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 30px; font-weight: 700; fill: #e8edf5; letter-spacing: -0.5px; }
+      .subtitle     { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 500; fill: #9aa6b8; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="1180" fill="url(#bg)"/>
+  <rect width="1400" height="1180" fill="url(#glow1)"/>
+  <rect width="1400" height="1180" fill="url(#glow2)"/>
+
+  <!-- Title -->
+  <text x="60" y="60" class="title">Canon TDD — the workflow &amp; its pitfalls</text>
+  <text x="60" y="90" class="subtitle">Five steps, the loop back, and the mistakes that lurk at each one.</text>
+
+  <!-- ============== Spine: Start → 1 → 2 → 3 → 4 → ◇ → End ============== -->
+
+  <!-- Start -->
+  <ellipse cx="700" cy="155" rx="80" ry="34" fill="#0f1a2e" stroke="#818cf8" stroke-width="2"/>
+  <text x="700" y="164" text-anchor="middle" class="node-text">Start</text>
+  <line x1="700" y1="190" x2="700" y2="245" stroke="#9aa6b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 1 -->
+  <rect x="580" y="245" width="240" height="110" rx="14" fill="#0f1a2e" stroke="#818cf8" stroke-width="2"/>
+  <text text-anchor="middle">
+    <tspan x="700" y="278" class="step-label">STEP 1</tspan>
+    <tspan x="700" y="306" class="step-text">Write a list of the</tspan>
+    <tspan x="700" y="328" class="step-text">test scenarios you</tspan>
+    <tspan x="700" y="350" class="step-text">want to cover</tspan>
+  </text>
+  <line x1="700" y1="358" x2="700" y2="445" stroke="#9aa6b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2 -->
+  <rect x="580" y="445" width="240" height="130" rx="14" fill="#2c0a12" stroke="#ef4444" stroke-width="2"/>
+  <text text-anchor="middle">
+    <tspan x="700" y="478" class="step-label">STEP 2</tspan>
+    <tspan x="700" y="506" class="step-text">Turn exactly one</tspan>
+    <tspan x="700" y="528" class="step-text">item on the list into</tspan>
+    <tspan x="700" y="550" class="step-text">an actual, concrete,</tspan>
+    <tspan x="700" y="572" class="step-text">runnable test</tspan>
+  </text>
+  <line x1="700" y1="578" x2="700" y2="660" stroke="#9aa6b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3 -->
+  <rect x="580" y="660" width="240" height="120" rx="14" fill="#0a2218" stroke="#22c55e" stroke-width="2"/>
+  <text text-anchor="middle">
+    <tspan x="700" y="693" class="step-label">STEP 3</tspan>
+    <tspan x="700" y="721" class="step-text">Change the code to</tspan>
+    <tspan x="700" y="743" class="step-text">make the test (&amp; all</tspan>
+    <tspan x="700" y="765" class="step-text">previous tests) pass</tspan>
+  </text>
+  <line x1="700" y1="783" x2="700" y2="865" stroke="#9aa6b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4 (dashed border to convey "optional") -->
+  <rect x="580" y="865" width="240" height="120" rx="14" fill="#0e1a2e" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 4"/>
+  <text text-anchor="middle">
+    <tspan x="700" y="898" class="step-label">STEP 4</tspan>
+    <tspan x="700" y="926" class="step-text">Optionally refactor</tspan>
+    <tspan x="700" y="948" class="step-text">to improve the</tspan>
+    <tspan x="700" y="970" class="step-text">implementation design</tspan>
+  </text>
+  <line x1="700" y1="988" x2="700" y2="1050" stroke="#9aa6b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Decision diamond -->
+  <polygon points="700,1050 820,1110 700,1170 580,1110" fill="#1a1f2c" stroke="#9aa6b8" stroke-width="2"/>
+  <text x="700" y="1106" text-anchor="middle" class="step-text">The list</text>
+  <text x="700" y="1128" text-anchor="middle" class="step-text">is empty?</text>
+
+  <!-- Yes → End (left) -->
+  <line x1="580" y1="1110" x2="430" y2="1110" stroke="#9aa6b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="500" y="1100" text-anchor="middle" class="yn-text">Yes</text>
+  <ellipse cx="370" cy="1110" rx="60" ry="32" fill="#0f1a2e" stroke="#818cf8" stroke-width="2"/>
+  <text x="370" y="1119" text-anchor="middle" class="node-text">End</text>
+
+  <!-- No → loop back up to Step 2 (right side) -->
+  <path d="M 820 1110 L 920 1110 L 920 510 L 820 510" fill="none" stroke="#9aa6b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="855" y="1100" text-anchor="start" class="yn-text">No</text>
+
+  <!-- Dashed loop: "discover the need for a new test" from Step 3 back to Step 1 -->
+  <path d="M 580 720 C 380 720 380 300 580 300" fill="none" stroke="#9aa6b8" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+  <text x="395" y="500" text-anchor="middle" class="loop-text">discover the need</text>
+  <text x="395" y="520" text-anchor="middle" class="loop-text">for a new test</text>
+
+  <!-- ============== Mistake callouts ============== -->
+
+  <!-- Step 1: mixing in implementation design -->
+  <rect x="60" y="200" width="280" height="60" rx="10" fill="#3a2210" stroke="#f59e0b" stroke-opacity="0.55"/>
+  <text x="200" y="226" text-anchor="middle" class="mistake-text">Mistake: mixing in</text>
+  <text x="200" y="246" text-anchor="middle" class="mistake-text">implementation design decisions</text>
+  <line x1="340" y1="265" x2="580" y2="295" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Pro tip pointing at Step 2 -->
+  <rect x="1060" y="370" width="290" height="60" rx="10" fill="#0a2218" stroke="#22c55e" stroke-opacity="0.55"/>
+  <text x="1205" y="395" text-anchor="middle" class="tip-text">Picking the next test is a skill</text>
+  <text x="1205" y="415" text-anchor="middle" class="tip-text">that only comes with experience</text>
+  <line x1="1060" y1="430" x2="820" y2="475" stroke="#22c55e" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- Step 2: write tests without assertions -->
+  <rect x="1060" y="450" width="290" height="60" rx="10" fill="#3a2210" stroke="#f59e0b" stroke-opacity="0.55"/>
+  <text x="1205" y="475" text-anchor="middle" class="mistake-text">Mistake: writing tests without</text>
+  <text x="1205" y="495" text-anchor="middle" class="mistake-text">assertions just for code coverage</text>
+  <line x1="1060" y1="480" x2="820" y2="492" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Step 2: convert all into concrete tests up front -->
+  <rect x="1060" y="525" width="290" height="80" rx="10" fill="#3a2210" stroke="#f59e0b" stroke-opacity="0.55"/>
+  <text x="1205" y="550" text-anchor="middle" class="mistake-text">Mistake: converting the entire list</text>
+  <text x="1205" y="570" text-anchor="middle" class="mistake-text">into concrete tests, then making</text>
+  <text x="1205" y="590" text-anchor="middle" class="mistake-text">them pass one at a time</text>
+  <line x1="1060" y1="555" x2="820" y2="540" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Step 3: deleting assertions to fake a pass -->
+  <rect x="60" y="620" width="290" height="60" rx="10" fill="#3a2210" stroke="#f59e0b" stroke-opacity="0.55"/>
+  <text x="205" y="645" text-anchor="middle" class="mistake-text">Mistake: deleting assertions so</text>
+  <text x="205" y="665" text-anchor="middle" class="mistake-text">the test pretends to pass</text>
+  <line x1="350" y1="650" x2="580" y2="700" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Step 3: copying actual values into expected -->
+  <rect x="60" y="700" width="290" height="80" rx="10" fill="#3a2210" stroke="#f59e0b" stroke-opacity="0.55"/>
+  <text x="205" y="725" text-anchor="middle" class="mistake-text">Mistake: copying actual computed</text>
+  <text x="205" y="745" text-anchor="middle" class="mistake-text">values and pasting them in as</text>
+  <text x="205" y="765" text-anchor="middle" class="mistake-text">the expected values of the test</text>
+  <line x1="350" y1="740" x2="580" y2="730" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Step 3: mixing refactoring into make-it-pass -->
+  <rect x="60" y="800" width="290" height="60" rx="10" fill="#3a2210" stroke="#f59e0b" stroke-opacity="0.55"/>
+  <text x="205" y="825" text-anchor="middle" class="mistake-text">Mistake: mixing refactoring</text>
+  <text x="205" y="845" text-anchor="middle" class="mistake-text">into making the test pass</text>
+  <line x1="350" y1="830" x2="580" y2="760" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Step 4: refactoring further than necessary -->
+  <rect x="1060" y="850" width="290" height="60" rx="10" fill="#3a2210" stroke="#f59e0b" stroke-opacity="0.55"/>
+  <text x="1205" y="875" text-anchor="middle" class="mistake-text">Mistake: refactoring further</text>
+  <text x="1205" y="895" text-anchor="middle" class="mistake-text">than necessary for this session</text>
+  <line x1="1060" y1="880" x2="820" y2="900" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Step 4: abstracting too soon -->
+  <rect x="1060" y="930" width="290" height="50" rx="10" fill="#3a2210" stroke="#f59e0b" stroke-opacity="0.55"/>
+  <text x="1205" y="960" text-anchor="middle" class="mistake-text">Mistake: abstracting too soon</text>
+  <line x1="1060" y1="955" x2="820" y2="950" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
+</svg>

@@ -1,0 +1,171 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Existential and Opaque Types in Swift — any is a closed pizza box that could hold any kind of pizza; some is a specific pizza whose flavour is hidden from the caller but known to the compiler.">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1626"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="20%" cy="25%" r="55%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="80%" cy="80%" r="55%">
+      <stop offset="0%" stop-color="#d946ef" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#d946ef" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="55%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+    <linearGradient id="any-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="some-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#facc15"/>
+    </linearGradient>
+    <radialGradient id="pizza" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Title -->
+  <text x="600" y="80" text-anchor="middle"
+        font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
+        font-size="44" font-weight="700" fill="url(#title)" letter-spacing="-1.2">Existential &amp; Opaque Types</text>
+  <text x="600" y="115" text-anchor="middle"
+        font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="18" font-weight="500" fill="#9aa6b8" letter-spacing="0.5">any vs some — in Swift</text>
+
+  <!-- ============== LEFT: any (closed box) ============== -->
+  <g transform="translate(80, 180)">
+    <text x="220" y="40" text-anchor="middle"
+          font-family="-apple-system, SF Mono, Menlo, monospace"
+          font-size="64" font-weight="700" fill="url(#any-grad)">any</text>
+    <text x="220" y="70" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="14" font-weight="500" fill="#9aa6b8" letter-spacing="1.5">EXISTENTIAL TYPE</text>
+
+    <!-- Pizza box (closed, isometric) -->
+    <g transform="translate(110, 100)">
+      <!-- Right side face (depth) -->
+      <path d="M 200 28 L 215 22 L 215 142 L 200 148 Z" fill="#7a4a1f"/>
+      <!-- Front face (depth, lid edge) -->
+      <path d="M 0 148 L 200 148 L 215 142 L 15 142 Z" fill="#8c5a2c"/>
+      <!-- Top face (cardboard) -->
+      <rect x="0" y="22" width="200" height="120" rx="4" fill="#d4a373"/>
+      <!-- Inner scored border on the lid -->
+      <rect x="8" y="30" width="184" height="104" rx="3" fill="none" stroke="#a47148" stroke-width="1.2" opacity="0.55"/>
+      <!-- Pizzeria badge circle -->
+      <circle cx="100" cy="82" r="34" fill="none" stroke="#a47148" stroke-width="1.5" opacity="0.7"/>
+      <!-- Brand text -->
+      <text x="100" y="78" text-anchor="middle"
+            font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
+            font-size="20" font-weight="800" fill="#7c4a1e" letter-spacing="3">PIZZA</text>
+      <text x="100" y="94" text-anchor="middle"
+            font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+            font-size="9" font-weight="600" fill="#7c4a1e" letter-spacing="2.5" opacity="0.85">FRESH · HOT</text>
+      <!-- Front grip tab -->
+      <path d="M 78 148 L 122 148 L 117 158 L 83 158 Z" fill="#7a4a1f"/>
+      <!-- Subtle highlight strip on top edge -->
+      <rect x="2" y="22" width="196" height="3" rx="2" fill="#e8c190" opacity="0.7"/>
+      <!-- Question mark badge in corner -->
+      <circle cx="186" cy="40" r="16" fill="#0d1626" stroke="#22d3ee" stroke-width="2.2"/>
+      <text x="186" y="47" text-anchor="middle"
+            font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
+            font-size="22" font-weight="700" fill="#22d3ee">?</text>
+    </g>
+
+    <text x="220" y="305" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="16" fill="#cbd2dc">A box that could hold</text>
+    <text x="220" y="328" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="16" fill="#cbd2dc"><tspan font-weight="600" fill="#22d3ee">any</tspan> kind of pizza.</text>
+    <text x="220" y="358" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="14" fill="#9aa6b8">Compiler must open it</text>
+    <text x="220" y="378" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="14" fill="#9aa6b8">at runtime.</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="600" y1="200" x2="600" y2="560" stroke="#2a3550" stroke-width="1" stroke-dasharray="3 6"/>
+
+  <!-- ============== RIGHT: some (pizza with ?) ============== -->
+  <g transform="translate(680, 180)">
+    <text x="220" y="40" text-anchor="middle"
+          font-family="-apple-system, SF Mono, Menlo, monospace"
+          font-size="64" font-weight="700" fill="url(#some-grad)">some</text>
+    <text x="220" y="70" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="14" font-weight="500" fill="#9aa6b8" letter-spacing="1.5">OPAQUE TYPE</text>
+
+    <!-- Pizza (single concrete, top-down) -->
+    <g transform="translate(110, 100)">
+      <!-- Crust shadow -->
+      <ellipse cx="100" cy="84" rx="80" ry="78" fill="#000" opacity="0.25"/>
+      <!-- Crust outer rim -->
+      <circle cx="100" cy="80" r="78" fill="#a0612a"/>
+      <!-- Crust inner edge highlight -->
+      <circle cx="100" cy="80" r="73" fill="#dca066"/>
+      <!-- Sauce / cheese base -->
+      <circle cx="100" cy="80" r="62" fill="#c14a26"/>
+      <!-- Cheese patches (melted, irregular) -->
+      <ellipse cx="78" cy="58" rx="22" ry="15" fill="#fef3c7" opacity="0.95"/>
+      <ellipse cx="125" cy="55" rx="20" ry="13" fill="#fde68a" opacity="0.95"/>
+      <ellipse cx="135" cy="98" rx="18" ry="12" fill="#fef3c7" opacity="0.95"/>
+      <ellipse cx="68" cy="105" rx="20" ry="14" fill="#fde68a" opacity="0.95"/>
+      <ellipse cx="105" cy="118" rx="15" ry="10" fill="#fef3c7" opacity="0.9"/>
+      <!-- Pepperoni slices -->
+      <circle cx="78" cy="64" r="11" fill="#9b2a1c"/>
+      <circle cx="78" cy="64" r="11" fill="#c0392b" opacity="0.55"/>
+      <circle cx="75" cy="62" r="1.6" fill="#5e1a10"/>
+      <circle cx="81" cy="67" r="1.3" fill="#5e1a10"/>
+      <circle cx="125" cy="56" r="12" fill="#9b2a1c"/>
+      <circle cx="125" cy="56" r="12" fill="#c0392b" opacity="0.5"/>
+      <circle cx="122" cy="54" r="1.5" fill="#5e1a10"/>
+      <circle cx="129" cy="58" r="1.4" fill="#5e1a10"/>
+      <circle cx="132" cy="100" r="11" fill="#9b2a1c"/>
+      <circle cx="132" cy="100" r="11" fill="#c0392b" opacity="0.5"/>
+      <circle cx="130" cy="98" r="1.5" fill="#5e1a10"/>
+      <circle cx="73" cy="106" r="10" fill="#9b2a1c"/>
+      <circle cx="73" cy="106" r="10" fill="#c0392b" opacity="0.5"/>
+      <circle cx="76" cy="108" r="1.3" fill="#5e1a10"/>
+      <circle cx="100" cy="118" r="9" fill="#9b2a1c"/>
+      <!-- Olive -->
+      <circle cx="105" cy="82" r="6" fill="#1a1a1a"/>
+      <circle cx="105" cy="82" r="2.5" fill="#3a3a3a"/>
+      <!-- Basil leaves -->
+      <ellipse cx="93" cy="93" rx="4" ry="7" fill="#16a34a" transform="rotate(30 93 93)"/>
+      <ellipse cx="115" cy="76" rx="3.5" ry="6" fill="#15803d" transform="rotate(-20 115 76)"/>
+      <ellipse cx="60" cy="80" rx="3.5" ry="6" fill="#16a34a" transform="rotate(60 60 80)"/>
+      <!-- Question mark badge in corner -->
+      <circle cx="186" cy="40" r="16" fill="#0d1626" stroke="#fb7185" stroke-width="2.2"/>
+      <text x="186" y="47" text-anchor="middle"
+            font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
+            font-size="22" font-weight="700" fill="#fb7185">?</text>
+    </g>
+
+    <text x="220" y="305" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="16" fill="#cbd2dc">A specific pizza —</text>
+    <text x="220" y="328" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="16" fill="#cbd2dc">the compiler knows which.</text>
+    <text x="220" y="358" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="14" fill="#9aa6b8">You just don't get to see</text>
+    <text x="220" y="378" text-anchor="middle"
+          font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+          font-size="14" fill="#9aa6b8">the concrete type.</text>
+  </g>
+</svg>
