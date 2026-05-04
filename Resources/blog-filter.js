@@ -1,6 +1,6 @@
 (() => {
-  const list = document.querySelector('[data-blog-list]');
-  const empty = document.querySelector('[data-blog-empty]');
+  const list = document.querySelector('.post-list');
+  const empty = list?.querySelector('.empty-state');
   const input = document.getElementById('topbar-search');
   const form = input?.closest('form');
   if (!list || !input) return;

@@ -61,13 +61,11 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
                             .div(.class("empty-state"), .p(.text("No posts yet — check back soon."))),
                             else: .div(
                                 .class("post-list"),
-                                .attribute(named: "data-blog-list", value: ""),
                                 .forEach(section.items) { item in
                                     .postRow(for: item)
                                 },
                                 .div(
                                     .class("empty-state hidden"),
-                                    .attribute(named: "data-blog-empty", value: ""),
                                     .p(.text("No posts match that search."))
                                 )
                             )
