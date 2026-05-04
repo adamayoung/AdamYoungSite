@@ -15,7 +15,7 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
         let site = context.site
         let info = PageInfo.forIndex(index, on: site)
         let latestPosts = Array(
-            context.allItems(sortedBy: \.date, order: .descending).prefix(2)
+            context.allItems(sortedBy: \.date, order: .descending).prefix(3)
         )
         let tags = sortedTags(in: context)
 

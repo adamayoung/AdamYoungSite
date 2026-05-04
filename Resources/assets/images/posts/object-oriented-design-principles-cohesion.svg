@@ -1,0 +1,72 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Tension diagram for the three component cohesion principles. A triangle with REP at the top, CCP at the bottom-right, and CRP at the bottom-left. Each edge labels the cost of abandoning the opposite vertex: bottom edge 'Hard to reuse' (opposite REP), left edge 'Too many components change' (opposite CCP), right edge 'Too many unneeded releases' (opposite CRP).">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1626"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="15%" cy="15%" r="55%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="85%" cy="85%" r="55%">
+      <stop offset="0%" stop-color="#d946ef" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#d946ef" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+    <linearGradient id="vertex-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+    <style>
+      .title       { font-family: -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 32px; font-weight: 700; fill: url(#title); letter-spacing: -0.5px; }
+      .subtitle    { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 500; fill: #9aa6b8; letter-spacing: 0.4px; }
+      .abbrev      { font-family: -apple-system, "SF Mono", Menlo, monospace; font-size: 28px; font-weight: 700; fill: #d946ef; letter-spacing: 3px; }
+      .full        { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 500; fill: #cbd2dc; letter-spacing: 0.4px; }
+      .edge-label  { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 600; fill: #fcd34d; font-style: italic; letter-spacing: 0.3px; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#glow1)"/>
+  <rect width="1200" height="800" fill="url(#glow2)"/>
+
+  <!-- Title -->
+  <text x="600" y="60" text-anchor="middle" class="title">Cohesion Principles — the Tension</text>
+  <text x="600" y="92" text-anchor="middle" class="subtitle">Each edge is the cost of abandoning the principle on the opposite vertex.</text>
+
+  <!-- Triangle edges (trimmed at vertex circles, r=80) -->
+  <line x1="546.6" y1="259.6" x2="313.4" y2="520.4" stroke="#9aa6b8" stroke-opacity="0.65" stroke-width="2"/>
+  <line x1="653.4" y1="259.6" x2="886.6" y2="520.4" stroke="#9aa6b8" stroke-opacity="0.65" stroke-width="2"/>
+  <line x1="340" y1="580" x2="860" y2="580" stroke="#9aa6b8" stroke-opacity="0.65" stroke-width="2"/>
+
+  <!-- Edge labels -->
+  <text x="417.3" y="378.7" text-anchor="middle"
+        transform="rotate(-48.16 417.3 378.7)"
+        class="edge-label">Too many components change</text>
+  <text x="782.7" y="378.7" text-anchor="middle"
+        transform="rotate(48.16 782.7 378.7)"
+        class="edge-label">Too many unneeded releases</text>
+  <text x="600" y="616" text-anchor="middle" class="edge-label">Hard to reuse</text>
+
+  <!-- Vertex: REP (top) -->
+  <circle cx="600" cy="200" r="80" fill="#1a0e2a" stroke="url(#vertex-stroke)" stroke-width="2.5"/>
+  <text x="600" y="195" text-anchor="middle" class="abbrev">REP</text>
+  <text x="600" y="223" text-anchor="middle" class="full">Reuse / Release Equiv.</text>
+
+  <!-- Vertex: CRP (bottom-left) -->
+  <circle cx="260" cy="580" r="80" fill="#1a0e2a" stroke="url(#vertex-stroke)" stroke-width="2.5"/>
+  <text x="260" y="575" text-anchor="middle" class="abbrev">CRP</text>
+  <text x="260" y="603" text-anchor="middle" class="full">Common Reuse</text>
+
+  <!-- Vertex: CCP (bottom-right) -->
+  <circle cx="940" cy="580" r="80" fill="#1a0e2a" stroke="url(#vertex-stroke)" stroke-width="2.5"/>
+  <text x="940" y="575" text-anchor="middle" class="abbrev">CCP</text>
+  <text x="940" y="603" text-anchor="middle" class="full">Common Closure</text>
+
+  <!-- Caption -->
+  <text x="600" y="730" text-anchor="middle" class="subtitle">Pick a position inside the triangle. You can never optimise for all three at once.</text>
+</svg>

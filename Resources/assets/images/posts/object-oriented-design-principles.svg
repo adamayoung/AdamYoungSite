@@ -1,0 +1,134 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Principles of Object-Oriented Design. SOLID spelled out as five glass cards (SRP, OCP, LSP, ISP, DIP), plus three smaller cards beneath for the component-cohesion principles (REP, CCP, CRP).">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1626"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="18%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="82%" cy="85%" r="55%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="solid-letter" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="solid-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="comp-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#d946ef" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="card-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#162133"/>
+      <stop offset="100%" stop-color="#0a1322"/>
+    </linearGradient>
+    <linearGradient id="comp-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c1430"/>
+      <stop offset="100%" stop-color="#0e0a1f"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Title -->
+  <text x="600" y="68" text-anchor="middle"
+        font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
+        font-size="44" font-weight="700" fill="url(#title-grad)" letter-spacing="-1.2">Principles of Object-Oriented Design</text>
+  <text x="600" y="106" text-anchor="middle"
+        font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="19" font-weight="500" fill="#9aa6b8" letter-spacing="0.5">SOLID, plus three for components.</text>
+
+  <!-- SOLID cards: 5 cards, 200 wide, 280 tall, gap 12 -->
+  <!-- Total width: 5*200 + 4*12 = 1048; left margin = (1200-1048)/2 = 76 -->
+  <g transform="translate(76, 142)" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif">
+    <!-- S -->
+    <g>
+      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
+      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">S</text>
+      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
+      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">SRP</text>
+      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Single</text>
+      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Responsibility</text>
+    </g>
+    <!-- O -->
+    <g transform="translate(212, 0)">
+      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
+      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">O</text>
+      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
+      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">OCP</text>
+      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Open /</text>
+      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Closed</text>
+    </g>
+    <!-- L -->
+    <g transform="translate(424, 0)">
+      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
+      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">L</text>
+      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
+      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">LSP</text>
+      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Liskov</text>
+      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Substitution</text>
+    </g>
+    <!-- I -->
+    <g transform="translate(636, 0)">
+      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
+      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">I</text>
+      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
+      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">ISP</text>
+      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Interface</text>
+      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Segregation</text>
+    </g>
+    <!-- D -->
+    <g transform="translate(848, 0)">
+      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
+      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">D</text>
+      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
+      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">DIP</text>
+      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Dependency</text>
+      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Inversion</text>
+    </g>
+  </g>
+
+  <!-- Component cards: 3 cards, 170 wide, 92 tall, gap 16 -->
+  <!-- Total width: 3*170 + 2*16 = 542; left margin = (1200-542)/2 = 329 -->
+  <g transform="translate(329, 458)" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif">
+    <!-- REP -->
+    <g>
+      <rect width="170" height="92" rx="16" fill="url(#comp-fill)" stroke="url(#comp-stroke)" stroke-width="1.6"/>
+      <text x="85" y="40" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="22" font-weight="700" fill="#d946ef" letter-spacing="3">REP</text>
+      <text x="85" y="64" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Reuse / Release</text>
+      <text x="85" y="80" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Equivalence</text>
+    </g>
+    <!-- CCP -->
+    <g transform="translate(186, 0)">
+      <rect width="170" height="92" rx="16" fill="url(#comp-fill)" stroke="url(#comp-stroke)" stroke-width="1.6"/>
+      <text x="85" y="40" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="22" font-weight="700" fill="#d946ef" letter-spacing="3">CCP</text>
+      <text x="85" y="64" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Common</text>
+      <text x="85" y="80" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Closure</text>
+    </g>
+    <!-- CRP -->
+    <g transform="translate(372, 0)">
+      <rect width="170" height="92" rx="16" fill="url(#comp-fill)" stroke="url(#comp-stroke)" stroke-width="1.6"/>
+      <text x="85" y="40" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="22" font-weight="700" fill="#d946ef" letter-spacing="3">CRP</text>
+      <text x="85" y="64" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Common</text>
+      <text x="85" y="80" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Reuse</text>
+    </g>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="600" y="595" text-anchor="middle"
+        font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="14" font-weight="500" fill="#6f7a8d" letter-spacing="2.5" font-style="italic">EIGHT PRINCIPLES · ONE QUESTION</text>
+</svg>
