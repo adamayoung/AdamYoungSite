@@ -177,6 +177,7 @@ enum Icons {
     static let rss = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a14 14 0 0 1 14 14"/><path d="M5 11a8 8 0 0 1 8 8"/><circle cx="6" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg>"#
     static let search = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>"#
     static let arrowRight = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>"#
+    static let about = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>"#
 }
 
 // MARK: - Shell
@@ -241,6 +242,7 @@ extension Node where Context == HTML.BodyContext {
                     .class("rail-nav rail-nav-primary"),
                     .attribute(named: "aria-label", value: "Primary"),
                     railLink(href: "/", icon: Icons.home, label: "Home", activePath: activePath),
+                    railLink(href: "/about/", icon: Icons.about, label: "About", activePath: activePath),
                     railLink(href: "/blog/", icon: Icons.blog, label: "Blog", activePath: activePath),
                     railLink(href: "/projects/", icon: Icons.projects, label: "Projects", activePath: activePath),
                     railLink(href: "/#contact", icon: Icons.contact, label: "Contact", activePath: activePath)

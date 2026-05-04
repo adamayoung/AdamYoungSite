@@ -112,6 +112,8 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
                     .group(allProjects.map { Node.projectFullRow(for: $0) })
                 )
             ]
+        case "about":
+            pageContent = aboutPageContent(title: page.title, subtitle: page.description)
         default:
             pageContent = [
                 .pageHeader(title: page.title, subtitle: page.description),
@@ -456,6 +458,70 @@ private func projectArt(for project: Project) -> Node<HTML.AnchorContext> {
     }
 }
 
+private func careerRow(for entry: CareerEntry) -> Node<HTML.ListContext> {
+    let totalDuration = formatDuration(from: entry.earliestStart, to: entry.latestEnd)
+    let listClass = entry.roles.count > 1 ? "sub-role-list multi" : "sub-role-list"
+    let roleNodes: [Node<HTML.ListContext>] = entry.roles.map { role in
+        .li(
+            .class("sub-role"),
+            .div(
+                .class("sub-role-body"),
+                .span(.class("primary-line"), .text(role.title)),
+                .span(.class("date-line"), .text(roleDateLine(start: role.start, end: role.end)))
+            )
+        )
+    }
+    return .li(
+        .class("career-row"),
+        companyLogo(for: entry),
+        .div(
+            .class("career-body"),
+            .h3(.class("primary-line"), .text(entry.company)),
+            .span(.class("secondary-line"), .text("\(entry.workMode) · \(totalDuration)")),
+            .span(.class("location-line"), .text(entry.location)),
+            .ul(.class(listClass), .group(roleNodes))
+        )
+    )
+}
+
+private func companyLogo(for entry: CareerEntry) -> Node<HTML.BodyContext> {
+    .div(
+        .class("company-logo"),
+        .img(
+            .src(entry.logoPath),
+            .alt("\(entry.company) logo"),
+            .attribute(named: "loading", value: "lazy")
+        )
+    )
+}
+
+private func roleDateLine(start: Date, end: Date?) -> String {
+    let endActual = end ?? Date()
+    let endLabel = end == nil ? "Present" : formatMonth(endActual)
+    let duration = formatDuration(from: start, to: endActual)
+    return "\(formatMonth(start)) - \(endLabel) · \(duration)"
+}
+
+private func educationRow(for entry: EducationEntry) -> Node<HTML.ListContext> {
+    .li(
+        .class("education-row"),
+        .div(
+            .class("company-logo"),
+            .img(
+                .src(entry.logoPath),
+                .alt("\(entry.institution) logo"),
+                .attribute(named: "loading", value: "lazy")
+            )
+        ),
+        .div(
+            .class("career-body"),
+            .h3(.class("primary-line"), .text(entry.institution)),
+            .span(.class("secondary-line"), .text(entry.qualification)),
+            .span(.class("date-line"), .text(entry.dates))
+        )
+    )
+}
+
 private func postHref(for item: Item<AdamYoungSite>) -> String {
     let raw = item.path.absoluteString
     let prefix = raw.hasPrefix("/") ? "" : "/"
@@ -500,3 +566,159 @@ let allProjects: [Project] = [
         tech: ["Swift", "TCA", "SwiftData", "CloudKit", "Apple Intelligence", "iOS", "macOS", "visionOS"]
     )
 ]
+
+// MARK: - Career data
+
+struct CareerRole {
+    let title: String
+    let start: Date
+    let end: Date?
+}
+
+struct CareerEntry {
+    let company: String
+    let logoPath: String
+    let location: String
+    let workMode: String
+    let roles: [CareerRole]
+
+    var earliestStart: Date {
+        roles.map(\.start).min() ?? Date()
+    }
+
+    var latestEnd: Date {
+        if roles.contains(where: { $0.end == nil }) { return Date() }
+        return roles.compactMap(\.end).max() ?? Date()
+    }
+}
+
+struct EducationEntry {
+    let institution: String
+    let logoPath: String
+    let qualification: String
+    let dates: String
+}
+
+private func ymd(_ year: Int, _ month: Int) -> Date {
+    var c = DateComponents()
+    c.year = year
+    c.month = month
+    c.day = 1
+    return Calendar(identifier: .gregorian).date(from: c)!
+}
+
+private let monthFormatter: DateFormatter = {
+    let f = DateFormatter()
+    f.locale = Locale(identifier: "en_GB")
+    f.dateFormat = "MMM yyyy"
+    return f
+}()
+
+private func formatMonth(_ date: Date) -> String {
+    monthFormatter.string(from: date)
+}
+
+private func formatDuration(from start: Date, to end: Date) -> String {
+    let cal = Calendar(identifier: .gregorian)
+    let comps = cal.dateComponents([.year, .month], from: start, to: end)
+    let totalMonths = (comps.year ?? 0) * 12 + (comps.month ?? 0) + 1
+    let years = totalMonths / 12
+    let months = totalMonths % 12
+    var parts: [String] = []
+    if years > 0 { parts.append("\(years) \(years == 1 ? "yr" : "yrs")") }
+    if months > 0 { parts.append("\(months) \(months == 1 ? "mo" : "mos")") }
+    if parts.isEmpty { return "1 mo" }
+    return parts.joined(separator: " ")
+}
+
+let careerHistory: [CareerEntry] = [
+    CareerEntry(
+        company: "Monzo",
+        logoPath: "/assets/images/companies/monzo.svg",
+        location: "London / Remote",
+        workMode: "Full-time",
+        roles: [
+            CareerRole(title: "Senior iOS Engineer", start: ymd(2025, 11), end: ymd(2026, 4))
+        ]
+    ),
+    CareerEntry(
+        company: "Bumble",
+        logoPath: "/assets/images/companies/bumble.svg",
+        location: "London / Hybrid",
+        workMode: "Full-time",
+        roles: [
+            CareerRole(title: "Senior iOS Engineer", start: ymd(2024, 11), end: ymd(2025, 8))
+        ]
+    ),
+    CareerEntry(
+        company: "Flutter Entertainment / PokerStars",
+        logoPath: "/assets/images/companies/flutter-entertainment.svg",
+        location: "Leeds / Remote",
+        workMode: "Full-time",
+        roles: [
+            CareerRole(title: "Principal iOS Engineer", start: ymd(2023, 1), end: ymd(2024, 10)),
+            CareerRole(title: "Lead iOS Engineer", start: ymd(2021, 10), end: ymd(2023, 1)),
+            CareerRole(title: "Senior iOS Engineer", start: ymd(2021, 2), end: ymd(2021, 9))
+        ]
+    ),
+    CareerEntry(
+        company: "MHR",
+        logoPath: "/assets/images/companies/mhr.svg",
+        location: "Nottingham",
+        workMode: "Full-time",
+        roles: [
+            CareerRole(title: "Lead Mobile Developer", start: ymd(2018, 11), end: ymd(2021, 2)),
+            CareerRole(title: "Research Engineering Manager", start: ymd(2017, 2), end: ymd(2018, 10)),
+            CareerRole(title: "Research Engineer", start: ymd(2015, 10), end: ymd(2017, 1)),
+            CareerRole(title: "Lead Web Application Developer", start: ymd(2015, 1), end: ymd(2015, 9)),
+            CareerRole(title: "Senior Web Developer", start: ymd(2014, 10), end: ymd(2014, 12)),
+            CareerRole(title: "Senior Mobile Software Engineer", start: ymd(2014, 4), end: ymd(2014, 9)),
+            CareerRole(title: "Senior Web Developer", start: ymd(2013, 10), end: ymd(2014, 3)),
+            CareerRole(title: "Software Engineer", start: ymd(2011, 11), end: ymd(2013, 10)),
+            CareerRole(title: "Web Architect", start: ymd(2003, 4), end: ymd(2011, 11))
+        ]
+    )
+]
+
+let education: [EducationEntry] = [
+    EducationEntry(
+        institution: "University of Nottingham",
+        logoPath: "/assets/images/companies/nottingham.svg",
+        qualification: "BSc (Hons) Computer Science · 2:1",
+        dates: "1999–2002"
+    )
+]
+
+// MARK: - About page rendering
+
+func aboutPageContent(title: String, subtitle: String) -> [Node<HTML.BodyContext>] {
+    [
+        .pageHeader(title: title),
+        .section(
+            .class("about-hero"),
+            .span(
+                .class("about-hero-eyebrow"),
+                .span(.class("eyebrow-dot")),
+                .text("Senior iOS Engineer · Oakham, UK")
+            ),
+            .p(.class("about-hero-lead"), .text("Hi, I'm Adam. I've been writing software for over two decades, and the last sixteen of those have been on Apple platforms.")),
+            .p(.text("Most of my career has been spent in mobile, but I'm equally at home in a server-side codebase, a CI pipeline, or a meeting room making the case for an architecture change. The bit I enjoy most is helping engineering teams ship work they're proud of, through mentoring, tech talks, and quietly rebuilding the bits of a codebase nobody else has time to."))
+        ),
+        .section(
+            .class("about-section"),
+            .h2(.text("Experience")),
+            .ol(
+                .class("career-list"),
+                .group(careerHistory.map { careerRow(for: $0) })
+            )
+        ),
+        .section(
+            .class("about-section"),
+            .h2(.text("Education")),
+            .ul(
+                .class("education-list"),
+                .group(education.map { educationRow(for: $0) })
+            )
+        )
+    ]
+}
