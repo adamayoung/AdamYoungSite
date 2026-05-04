@@ -162,6 +162,12 @@ private extension Node where Context == HTML.BodyContext {
     static func heroCard() -> Node {
         .section(
             .class("hero-card"),
+            .a(
+                .class("hero-availability"),
+                .href("mailto:me@adam-young.co.uk"),
+                .span(.class("hero-availability-dot")),
+                .text("Available for new Senior/Staff iOS roles · UK / Remote")
+            ),
             .h2(
                 .class("hero-title"),
                 .text("Hi, I'm "),
@@ -169,11 +175,11 @@ private extension Node where Context == HTML.BodyContext {
             ),
             .p(
                 .class("hero-tagline"),
-                .text("iOS engineer working in Swift — focused on architecture, technical strategy, and engineering craft.")
+                .text("16 years on Apple platforms — recently at Monzo, Bumble and PokerStars, shipping features used by tens of millions.")
             ),
             .p(
                 .class("hero-sub"),
-                .text("A fan of growing engineering culture through mentoring and tech talks.")
+                .text("Drawn to engineering craft — clean architecture, TDD, and the practices that make teams ship work they're proud of.")
             ),
             .div(
                 .class("hero-actions"),
@@ -301,13 +307,18 @@ private extension Node where Context == HTML.BodyContext {
                     .element(named: "time", nodes: [
                         .attribute(named: "datetime", value: DateRendering.iso(item.date)),
                         .text(DateRendering.display(item.date))
-                    ]),
-                    .if(!item.tags.isEmpty,
-                        .span(.class("post-card-meta-tag"), .text("· \(tagString)"))
-                    )
+                    ])
                 ),
                 .h3(.text(item.title)),
-                .p(.text(item.description))
+                .p(.text(item.description)),
+                .if(!item.tags.isEmpty,
+                    .div(
+                        .class("post-card-tags"),
+                        .forEach(item.tags) { tag in
+                            .span(.class("tag"), .text(tag.string))
+                        }
+                    )
+                )
             )
         )
     }
@@ -339,13 +350,18 @@ private extension Node where Context == HTML.BodyContext {
                     .element(named: "time", nodes: [
                         .attribute(named: "datetime", value: DateRendering.iso(item.date)),
                         .text(DateRendering.display(item.date))
-                    ]),
-                    .if(!item.tags.isEmpty,
-                        .span(.class("post-card-meta-tag"), .text("· \(tagString)"))
-                    )
+                    ])
                 ),
                 .h3(.text(item.title)),
                 .p(.text(item.description)),
+                .if(!item.tags.isEmpty,
+                    .div(
+                        .class("post-card-tags"),
+                        .forEach(item.tags) { tag in
+                            .span(.class("tag"), .text(tag.string))
+                        }
+                    )
+                ),
                 .span(.class("post-row-read"), .text("Read"), .span(.class("section-link-arrow"), .raw(Icons.arrowRight)))
             )
         )
@@ -499,7 +515,7 @@ struct Project {
 let allProjects: [Project] = [
     Project(
         name: "TMDb",
-        blurb: "Open source Swift Package for The Movie Database API. Used across iOS, macOS, watchOS, tvOS, visionOS and Linux.",
+        blurb: "Open source Swift Package for The Movie Database API.",
         url: "https://github.com/adamayoung/TMDb",
         cssClass: "tmdb",
         iconSVG: #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 20.5 7.5v9L12 21.2 3.5 16.5v-9z"/><path d="M3.5 7.5 12 12.2l8.5-4.7"/><path d="M12 12.2V21.2"/></svg>"#,
@@ -508,7 +524,7 @@ let allProjects: [Project] = [
     ),
     Project(
         name: "Popcorn",
-        blurb: "Personal iOS, macOS & visionOS app for browsing movies and TV. TCA, SwiftData + CloudKit, Apple Intelligence.",
+        blurb: "Personal iOS, macOS & visionOS app for browsing movies and TV.",
         url: "https://github.com/adamayoung/popcorn",
         cssClass: "popcorn",
         iconSVG: ##"<svg viewBox="3.5 4.5 17 17" xmlns="http://www.w3.org/2000/svg"><g fill="#FFC404"><circle cx="6.2" cy="11" r="1.6"/><circle cx="8" cy="9" r="2.1"/><circle cx="11" cy="7.4" r="2.2"/><circle cx="13.8" cy="7.6" r="2.1"/><circle cx="16.2" cy="9.2" r="2"/><circle cx="17.6" cy="11" r="1.5"/><circle cx="11.5" cy="10.4" r="2"/><circle cx="14.6" cy="10.6" r="1.9"/></g><path d="M5 12 L9.67 12 L10.33 21 L7 21 Z" fill="#E11D2C" fill-opacity="0.92"/><path d="M9.67 12 L14.33 12 L13.67 21 L10.33 21 Z" fill="#FFFFFF" fill-opacity="0.96"/><path d="M14.33 12 L19 12 L17 21 L13.67 21 Z" fill="#E11D2C" fill-opacity="0.92"/></svg>"##,
@@ -651,7 +667,6 @@ struct Book {
     let subtitle: String?
     let authors: [String]
     let coverPath: String
-    let amazonURL: String
 }
 
 struct BookGroup {
@@ -667,15 +682,13 @@ let allBookGroups: [BookGroup] = [
                 title: "AI Driven Swift Architecture",
                 subtitle: "Build modern iOS SwiftUI apps with Foundation Models, MCP agents, Clean Architecture, and TDD",
                 authors: ["Walid SASSI", "Dave Poirier"],
-                coverPath: "/assets/images/books/ai-driven-swift-architecture.png",
-                amazonURL: "https://www.amazon.com/AI-Driven-Swift-Architecture-Foundation/dp/B0GTV7PLCV"
+                coverPath: "/assets/images/books/ai-driven-swift-architecture.png"
             ),
             Book(
                 title: "Mobile System Design Interview",
                 subtitle: "An Insider's Guide",
                 authors: ["Manuel Vicente Vivo"],
-                coverPath: "/assets/images/books/mobile-system-design-interview.webp",
-                amazonURL: "https://www.amazon.co.uk/Mobile-System-Design-Interview-Insiders/dp/1736049151"
+                coverPath: "/assets/images/books/mobile-system-design-interview.webp"
             )
         ]
     ),
@@ -686,29 +699,25 @@ let allBookGroups: [BookGroup] = [
                 title: "Tidy First?",
                 subtitle: "A Personal Exercise in Empirical Software Design",
                 authors: ["Kent Beck"],
-                coverPath: "/assets/images/books/tidy-first.jpg",
-                amazonURL: "https://www.amazon.co.uk/Tidy-First-Personal-Exercise-Empirical/dp/1098151240"
+                coverPath: "/assets/images/books/tidy-first.jpg"
             ),
             Book(
                 title: "Clean Code",
                 subtitle: "A Handbook of Agile Software Craftsmanship",
                 authors: ["Robert C. Martin"],
-                coverPath: "/assets/images/books/clean-code.jpg",
-                amazonURL: "https://www.amazon.co.uk/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"
+                coverPath: "/assets/images/books/clean-code.jpg"
             ),
             Book(
                 title: "Clean Architecture",
                 subtitle: "A Craftsman's Guide to Software Structure and Design",
                 authors: ["Robert C. Martin"],
-                coverPath: "/assets/images/books/clean-architecture.jpg",
-                amazonURL: "https://www.amazon.co.uk/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164"
+                coverPath: "/assets/images/books/clean-architecture.jpg"
             ),
             Book(
                 title: "The Clean Coder",
                 subtitle: "A Code of Conduct for Professional Programmers",
                 authors: ["Robert C. Martin"],
-                coverPath: "/assets/images/books/the-clean-coder.jpg",
-                amazonURL: "https://www.amazon.co.uk/Clean-Coder-Conduct-Professional-Programmers/dp/0137081073"
+                coverPath: "/assets/images/books/the-clean-coder.jpg"
             )
         ]
     ),
@@ -719,33 +728,27 @@ let allBookGroups: [BookGroup] = [
                 title: "The Phoenix Project",
                 subtitle: "A Novel about IT, DevOps, and Helping Your Business Win",
                 authors: ["Gene Kim", "Kevin Behr", "George Spafford"],
-                coverPath: "/assets/images/books/the-phoenix-project.jpg",
-                amazonURL: "https://www.amazon.co.uk/Phoenix-Project-Devops-Helping-Business/dp/1942788290"
+                coverPath: "/assets/images/books/the-phoenix-project.jpg"
             ),
             Book(
                 title: "The DevOps Handbook",
                 subtitle: "How to Create World-Class Agility, Reliability, and Security in Technology Organizations",
                 authors: ["Gene Kim", "Jez Humble", "Patrick Debois", "John Willis"],
-                coverPath: "/assets/images/books/the-devops-handbook.jpg",
-                amazonURL: "https://www.amazon.co.uk/Devops-Handbook-World-Class-Reliability-Organizations/dp/1942788002"
+                coverPath: "/assets/images/books/the-devops-handbook.jpg"
             ),
             Book(
                 title: "The Unicorn Project",
                 subtitle: "A Novel about Developers, Digital Disruption, and Thriving in the Age of Data",
                 authors: ["Gene Kim"],
-                coverPath: "/assets/images/books/the-unicorn-project.jpg",
-                amazonURL: "https://www.amazon.co.uk/Unicorn-Project-Disruption-Redshirts-Overthrowing/dp/1942788762"
+                coverPath: "/assets/images/books/the-unicorn-project.jpg"
             )
         ]
     )
 ]
 
 private func bookCard(for book: Book) -> Node<HTML.BodyContext> {
-    .a(
+    .article(
         .class("book-card"),
-        .href(book.amazonURL),
-        .attribute(named: "rel", value: "noopener"),
-        .attribute(named: "target", value: "_blank"),
         .div(
             .class("book-cover"),
             .img(
@@ -760,12 +763,7 @@ private func bookCard(for book: Book) -> Node<HTML.BodyContext> {
             .if(book.subtitle != nil,
                 .p(.class("book-subtitle"), .text(book.subtitle ?? ""))
             ),
-            .p(.class("book-authors"), .text(book.authors.joined(separator: ", "))),
-            .span(
-                .class("book-link"),
-                .text("View on Amazon"),
-                .span(.class("section-link-arrow"), .raw(Icons.arrowRight))
-            )
+            .p(.class("book-authors"), .text(book.authors.joined(separator: ", ")))
         )
     )
 }
@@ -816,8 +814,7 @@ func aboutPageContent(title: String, subtitle: String) -> [Node<HTML.BodyContext
                 .span(.class("chip"), .text("Swift")),
                 .span(.class("chip"), .text("Architecture")),
                 .span(.class("chip"), .text("Engineering craft")),
-                .span(.class("chip"), .text("AI-assisted development")),
-                .span(.class("chip"), .text("Mentoring & tech talks"))
+                .span(.class("chip"), .text("AI-assisted development"))
             )
         ),
         .section(

@@ -1,6 +1,6 @@
 ---
 title: When AI Forgets Wonder: How We Lose Ourselves by Thinking Less
-date: 2026-04-25 12:00
+date: 2025-12-11 12:00
 description: AI is a really fast librarian, but with no imagination. Some thoughts on what we lose when we let machines do our thinking for us.
 tags: ai, thoughts
 image: /assets/images/posts/when-ai-forgets-wonder.svg
@@ -22,11 +22,11 @@ It would've predicted the future, but it never would've imagined one.
 
 And that's what worries me. Not the tool itself, but what happens if we let the tool start thinking for us.
 
-## A Librarian With No Imagination
+## A librarian with no imagination
 
 Let me say this up front: I'm not anti-AI.
 
-I use ChatGPT. I ask it to bounce around ideas. It helps me understand concepts, understand things — not just as an iOS Software Engineer, but in lots of other areas. I love how it can unlock gaps in my knowledge.
+I use ChatGPT. I ask it to bounce around ideas. It helps me understand concepts, understand things, not just as an iOS Software Engineer, but in lots of other areas. I love how it can unlock gaps in my knowledge.
 
 But I've also worked in tech for two decades. I've built apps, mentored junior devs, shipped products, rewritten codebases, and learned a lot of things the hard way.
 
@@ -57,7 +57,7 @@ But if we don't invest in those just starting out... who replaces the senior/exp
 
 A few years of cost-saving today could leave us with a future where we've optimised ourselves into a leadership vacuum, and no one remembers how the foundations were built.
 
-## History Didn't Happen by Optimisation
+## History didn't happen by optimisation
 
 The biggest leaps in human history, the moments that changed everything, didn't come from optimising the past. They came from someone saying: *"What if we did something completely different?"* Or better yet, from someone noticing something unexpected and choosing to follow it.
 
@@ -111,7 +111,7 @@ And sometimes, humans trip over something strange and decide to follow it.
 
 That's not data. That's instinct. That's curiosity. That's the unpredictable, irrational brilliance of being human.
 
-## The Cost of Replacing Human Thought
+## The cost of replacing human thought
 
 I've seen what happens when someone gets the chance to learn by doing. I've mentored people who started unsure, nervous, questioning everything, and watched them become leaders, innovators, mentors themselves.
 
@@ -125,7 +125,7 @@ If we replace it with autocomplete, and let AI take the reins, what happens when
 
 Who will be there to solve it? Who will know how to solve it?
 
-## The Glass Cockpit and the Danger of Forgotten Experience
+## The glass cockpit and the danger of forgotten experience
 
 There's a term from aviation that's stuck with me for years: **The Glass Cockpit.**
 
@@ -141,11 +141,11 @@ That's the future I worry we're building. Not just in aviation. In everything.
 
 A world where we look competent, until something unexpected happens. And then realise we've forgotten how to *fly the plane*.
 
-## We Don't Need Replacements, We Need Partners
+## We don't need replacements, we need partners
 
 If you've ever watched Iron Man, you'll remember JARVIS, Tony Stark's AI assistant.
 
-JARVIS didn't make decisions for him. It didn't invent the Iron Man suits on its own. It provided data, ran simulations, presented options — Tony decided what to do.
+JARVIS didn't make decisions for him. It didn't invent the Iron Man suits on its own. It provided data, ran simulations, presented options. Tony decided what to do.
 
 JARVIS was powerful because it *augmented* a human, not *replaced* one.
 
@@ -159,11 +159,11 @@ But never removing us from the process of choice!
 
 Tony saved the world not because of JARVIS, but because he knew what mattered. That's the model. That's the future I believe in.
 
-## Final Thought
+## Final thought
 
 Let me be clear, I believe in technology. I have loved technology from a young age. I studied Computer Science at university. I have been amazed and inspired by its advances in the last 10, 20 years. I'm a software engineer through and through.
 
-I believe technology is the only way we'll truly evolve — to cure diseases, explore our galaxy, understand the fabric of reality, and build things we've only dreamed of.
+I believe technology is the only way we'll truly evolve: to cure diseases, explore our galaxy, understand the fabric of reality, and build things we've only dreamed of.
 
 But every great leap humanity has ever made began when someone dared to question the norm, when they challenged the limits of their time, ignored the safe path, and imagined something wildly better. They didn't optimise. They didn't look at the past and use it to predict the future. They rebelled with purpose. They looked at what was and asked, *"What if there's more?"*
 
