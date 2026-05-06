@@ -17,7 +17,6 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
         let latestPosts = Array(
             context.allItems(sortedBy: \.date, order: .descending).prefix(3)
         )
-        let tags = sortedTags(in: context)
 
         return HTML(
             .attribute(named: "lang", value: "en-GB"),
@@ -25,7 +24,7 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
             .body(
                 .siteShell(
                     for: site,
-                    options: ShellOptions(activePath: "/", allTags: tags),
+                    options: ShellOptions(activePath: "/"),
                     content: [
                         .heroCard(),
                         .latestBlogSection(items: latestPosts),
@@ -39,7 +38,6 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
     func makeSectionHTML(for section: Section<Site>, context: PublishingContext<Site>) throws -> HTML {
         let site = context.site
         let info = PageInfo.forSection(section, on: site)
-        let tags = sortedTags(in: context)
 
         return HTML(
             .attribute(named: "lang", value: "en-GB"),
@@ -49,7 +47,6 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
                     for: site,
                     options: ShellOptions(
                         activePath: "/blog/",
-                        allTags: tags,
                         loadBlogFilter: section.id == .blog
                     ),
                     content: [
@@ -77,7 +74,11 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
     func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws -> HTML {
         let site = context.site
         let info = PageInfo.forItem(item, on: site)
-        let tags = sortedTags(in: context)
+
+        let allPosts = context.allItems(sortedBy: \.date, order: .descending)
+        let currentIndex = allPosts.firstIndex(where: { $0.path == item.path })
+        let newer: Item<AdamYoungSite>? = currentIndex.flatMap { i in i > 0 ? allPosts[i - 1] : nil }
+        let older: Item<AdamYoungSite>? = currentIndex.flatMap { i in i < allPosts.count - 1 ? allPosts[i + 1] : nil }
 
         return HTML(
             .attribute(named: "lang", value: "en-GB"),
@@ -85,8 +86,8 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
             .body(
                 .siteShell(
                     for: site,
-                    options: ShellOptions(activePath: "/blog/", allTags: tags),
-                    content: [.postArticle(for: item)]
+                    options: ShellOptions(activePath: "/blog/"),
+                    content: [.postArticle(for: item, previous: older, next: newer)]
                 )
             )
         )
@@ -95,7 +96,6 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
     func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HTML {
         let site = context.site
         let info = PageInfo.forPage(page, on: site)
-        let tags = sortedTags(in: context)
         let pathString = page.path.absoluteString
             .trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         let activePath = pathString.isEmpty ? "/" : "/\(pathString)/"
@@ -127,7 +127,7 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
             .body(
                 .siteShell(
                     for: site,
-                    options: ShellOptions(activePath: activePath, allTags: tags),
+                    options: ShellOptions(activePath: activePath),
                     content: pageContent
                 )
             )
@@ -143,9 +143,7 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
     }
 }
 
-private func sortedTags(in context: PublishingContext<AdamYoungSite>) -> [Tag] {
-    Array(context.allTags).sorted { $0.string.lowercased() < $1.string.lowercased() }
-}
+private enum PostNavDirection { case previous, next }
 
 // MARK: - Body sections
 
@@ -190,9 +188,10 @@ private extension Node where Context == HTML.BodyContext {
                     .span(.class("btn-arrow"), .raw(Icons.arrowRight))
                 ),
                 .a(
-                    .class("btn-secondary"),
+                    .class("btn-link"),
                     .href("/projects/"),
-                    .text("See projects")
+                    .text("See projects"),
+                    .span(.class("btn-arrow"), .raw(Icons.arrowRight))
                 )
             )
         )
@@ -239,7 +238,8 @@ private extension Node where Context == HTML.BodyContext {
     }
 
     static func projectCompactCard(for project: Project) -> Node {
-        .a(
+        let topTech = Array(project.tech.prefix(4))
+        return .a(
             .class("project-card \(project.cssClass)"),
             .href(project.url),
             .attribute(named: "rel", value: "noopener"),
@@ -248,6 +248,14 @@ private extension Node where Context == HTML.BodyContext {
                 .class("project-body"),
                 .h3(.text(project.name)),
                 .p(.text(project.blurb)),
+                .if(!topTech.isEmpty,
+                    .div(
+                        .class("project-tech"),
+                        .forEach(topTech) { tech in
+                            .span(.class("chip"), .text(tech))
+                        }
+                    )
+                ),
                 .span(.class("project-link"), .text(project.linkLabel))
             )
         )
@@ -367,7 +375,11 @@ private extension Node where Context == HTML.BodyContext {
         )
     }
 
-    static func postArticle(for item: Item<AdamYoungSite>) -> Node {
+    static func postArticle(
+        for item: Item<AdamYoungSite>,
+        previous: Item<AdamYoungSite>? = nil,
+        next: Item<AdamYoungSite>? = nil
+    ) -> Node {
         .article(
             .class("post"),
             .a(.class("back-link"), .href("/blog/"), .text("← Back to blog")),
@@ -379,6 +391,53 @@ private extension Node where Context == HTML.BodyContext {
             .div(
                 .class("post-body"),
                 .contentBody(item.body)
+            ),
+            postNavigation(previous: previous, next: next)
+        )
+    }
+
+    static func postNavigation(
+        previous: Item<AdamYoungSite>?,
+        next: Item<AdamYoungSite>?
+    ) -> Node {
+        var cards: [Node<HTML.BodyContext>] = []
+        if let prev = previous { cards.append(postNavCard(item: prev, direction: .previous)) }
+        if let nxt = next { cards.append(postNavCard(item: nxt, direction: .next)) }
+        guard !cards.isEmpty else { return .group([]) }
+        return .nav(
+            .class("post-nav"),
+            .attribute(named: "aria-label", value: "Post navigation"),
+            .group(cards)
+        )
+    }
+
+    static func postNavCard(item: Item<AdamYoungSite>, direction: PostNavDirection) -> Node {
+        let label = direction == .previous ? "← Previous post" : "Next post →"
+        let cls = direction == .previous ? "post-nav-card prev" : "post-nav-card next"
+        return .a(
+            .class(cls),
+            .href(postHref(for: item)),
+            .div(
+                .class("post-nav-media"),
+                .if(
+                    item.imagePath != nil,
+                    .img(
+                        .src(item.imagePath?.absoluteString ?? ""),
+                        .alt(""),
+                        .attribute(named: "loading", value: "lazy")
+                    ),
+                    else: .div(.class("post-card-fallback"), .text("AY"))
+                )
+            ),
+            .div(
+                .class("post-nav-body"),
+                .span(.class("post-nav-direction"), .text(label)),
+                .span(.class("post-nav-title"), .text(item.title)),
+                .element(named: "time", nodes: [
+                    .attribute(named: "class", value: "post-nav-date"),
+                    .attribute(named: "datetime", value: DateRendering.iso(item.date)),
+                    .text(DateRendering.display(item.date))
+                ])
             )
         )
     }

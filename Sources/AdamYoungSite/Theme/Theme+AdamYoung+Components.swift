@@ -175,16 +175,13 @@ enum Icons {
 
 struct ShellOptions {
     var activePath: String
-    var allTags: [Tag]
     var loadBlogFilter: Bool
 
     init(
         activePath: String,
-        allTags: [Tag] = [],
         loadBlogFilter: Bool = false
     ) {
         self.activePath = activePath
-        self.allTags = allTags
         self.loadBlogFilter = loadBlogFilter
     }
 }
@@ -199,7 +196,7 @@ extension Node where Context == HTML.BodyContext {
             .a(.class("skip-link"), .href("#main"), .text("Skip to content")),
             .div(
                 .class("shell"),
-                .sidebarRail(for: site, activePath: options.activePath, allTags: options.allTags),
+                .sidebarRail(for: site, activePath: options.activePath),
                 .div(
                     .class("main-area"),
                     .main(
@@ -216,7 +213,7 @@ extension Node where Context == HTML.BodyContext {
         )
     }
 
-    static func sidebarRail(for site: AdamYoungSite, activePath: String, allTags: [Tag]) -> Node {
+    static func sidebarRail(for site: AdamYoungSite, activePath: String) -> Node {
         .element(
             named: "aside",
             nodes: [
@@ -257,24 +254,7 @@ extension Node where Context == HTML.BodyContext {
                     railLink(href: "https://github.com/\(site.githubUsername)", icon: Icons.github, label: "GitHub", activePath: activePath, external: true),
                     railLink(href: "https://www.linkedin.com/in/\(site.linkedinUsername)", icon: Icons.linkedin, label: "LinkedIn", activePath: activePath, external: true),
                     railLink(href: "mailto:\(site.authorEmail)", icon: Icons.mail, label: "Email", activePath: activePath, external: true)
-                ),
-                .if(!allTags.isEmpty, .group([
-                    .div(.class("rail-divider"), .attribute(named: "aria-hidden", value: "true")),
-                    .div(
-                        .class("rail-topics"),
-                        .span(.class("rail-section-label"), .text("Topics")),
-                        .ul(
-                            .class("rail-tag-list"),
-                            .forEach(allTags) { tag in
-                                .li(.a(
-                                    .class("rail-tag"),
-                                    .href("/blog/?tag=\(slugify(tag.string))"),
-                                    .text(tag.string)
-                                ))
-                            }
-                        )
-                    )
-                ]))
+                )
             ]
         )
     }
@@ -326,12 +306,6 @@ private func railLink(href: String, icon: String, label: String, activePath: Str
         attrs.append(.attribute(named: "rel", value: "noopener"))
     }
     return .a(.group(attrs))
-}
-
-private func slugify(_ s: String) -> String {
-    s.lowercased()
-        .replacingOccurrences(of: " ", with: "-")
-        .filter { $0.isLetter || $0.isNumber || $0 == "-" }
 }
 
 enum DateRendering {
