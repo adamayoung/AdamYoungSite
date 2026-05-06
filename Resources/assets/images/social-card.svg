@@ -1,0 +1,53 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Adam Young — iOS Engineer">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1224"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <radialGradient id="g1" cx="10%" cy="18%" r="65%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="88%" cy="82%" r="55%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g3" cx="75%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <ellipse cx="130" cy="160" rx="520" ry="400" fill="url(#g1)"/>
+  <ellipse cx="1060" cy="470" rx="440" ry="360" fill="url(#g2)"/>
+  <ellipse cx="900" cy="120" rx="280" ry="220" fill="url(#g3)"/>
+
+  <!-- Left accent bar -->
+  <rect x="100" y="185" width="5" height="260" rx="2.5" fill="#22d3ee" opacity="0.6"/>
+
+  <!-- Name -->
+  <text x="130" y="290"
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif"
+        font-size="96" font-weight="700" letter-spacing="-2"
+        fill="white">Adam Young</text>
+
+  <!-- Title -->
+  <text x="132" y="355"
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif"
+        font-size="42" font-weight="500" letter-spacing="1"
+        fill="#22d3ee">iOS Engineer</text>
+
+  <!-- Tagline -->
+  <text x="132" y="405"
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif"
+        font-size="26" font-weight="400"
+        fill="white" opacity="0.45">16 years on Apple platforms · Oakham, UK</text>
+
+  <!-- URL -->
+  <text x="132" y="550"
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif"
+        font-size="28" font-weight="400"
+        fill="white" opacity="0.35">adam-young.co.uk</text>
+</svg>

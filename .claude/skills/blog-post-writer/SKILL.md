@@ -95,9 +95,11 @@ title: Post Title
 date: YYYY-MM-DD HH:MM
 description: One sentence shown on the blog index and as og:description.
 tags: tag1, tag2
-image: /assets/images/posts/<slug>.svg
+image: /assets/images/posts/<slug>.png
 ---
 ```
+
+The `image:` references the **`.png`** (rasterized hero) — the SVG is the source, the PNG is what gets loaded in cards and OG/Twitter share previews. See section 4 for the SVG → PNG step.
 
 Rules:
 
@@ -114,9 +116,11 @@ Rules:
 3. Add new tags only when no existing one fits. Multi-word tags are allowed (`existential types`, `opaque types`); Publish slugifies them for URLs.
 4. Two to four tags per post. Don't tag-stuff.
 
-## 4. Hero image (SVG)
+## 4. Hero image (SVG → PNG)
 
-Every post has a hero SVG at `Resources/assets/images/posts/<slug>.svg`. Open one or two existing ones (`canon-tdd.svg`, `existential-and-opaque-types.svg`) and match the visual language:
+Every post has a hero **SVG** at `Resources/assets/images/posts/<slug>.svg` and a matching **PNG** export at `Resources/assets/images/posts/<slug>.png`. The SVG is the source of truth; the PNG is what the front matter `image:` field references and what the home/blog list cards and OG/Twitter share previews load.
+
+Open one or two existing ones (`canon-tdd.svg`, `existential-and-opaque-types.svg`) and match the visual language:
 
 - ViewBox `0 0 1200 630` (Twitter / OG dimensions).
 - Dark gradient background: `linearGradient` from `#0d1626` to `#040810`.
@@ -126,7 +130,17 @@ Every post has a hero SVG at `Resources/assets/images/posts/<slug>.svg`. Open on
 - A visual element that captures the post's central metaphor in a sentence. Hand-rolled shapes, simple icons, code-style boxes, diagrams. Don't paste from elsewhere.
 - Always include `role="img"` and a meaningful `aria-label` for accessibility.
 
-If the post benefits from a second SVG inside the body (like the Canon TDD flowchart at `canon-tdd-flowchart.svg`), make it. The hero is referenced in the front matter `image:` field; body images are inline markdown (`![alt](/assets/images/posts/<slug>-thing.svg)`).
+After saving the SVG, rasterize it to a PNG (the site build does **not** do this automatically — commit both files):
+
+```bash
+rsvg-convert -w 1200 -h 630 \
+  Resources/assets/images/posts/<slug>.svg \
+  -o Resources/assets/images/posts/<slug>.png
+```
+
+If you edit the SVG later, re-run that command so the PNG doesn't drift. If `rsvg-convert` is missing, `brew install librsvg`.
+
+If the post benefits from a second SVG inside the body (like the Canon TDD flowchart at `canon-tdd-flowchart.svg`), make it. Body diagrams stay SVG-only — only the front-matter hero needs the PNG export. Body images are inline markdown (`![alt](/assets/images/posts/<slug>-thing.svg)`).
 
 ## 5. Drafting workflow
 
@@ -134,7 +148,7 @@ If the post benefits from a second SVG inside the body (like the Canon TDD flowc
 2. Pick a tone target by reading one existing post in the closest format (technical → `map-filter-reduce.md`; essay → `when-ai-forgets-wonder.md`; talk write-up → `canon-tdd.md` or `existential-and-opaque-types.md`).
 3. Decide a slug and a date.
 4. Draft the post in one pass. Use `##` and `###` for sections. Include code samples verbatim from the source where they exist. Don't pad.
-5. Generate the hero SVG. Match the style above.
+5. Generate the hero SVG, then rasterize it to a PNG with `rsvg-convert -w 1200 -h 630` (see section 4). Both files are committed.
 6. Pick the tags. Reuse before inventing.
 7. Run the self-review pass (section 6).
 8. Build to verify: `rm -rf Output && swift run AdamYoungSite`. Confirm the post appears on the home page and on `/blog/`.

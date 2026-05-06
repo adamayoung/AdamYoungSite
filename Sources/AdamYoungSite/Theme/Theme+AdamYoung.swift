@@ -166,7 +166,7 @@ private extension Node where Context == HTML.BodyContext {
                 .span(.class("hero-availability-dot")),
                 .text("Available for new Senior/Staff iOS roles · UK / Remote")
             ),
-            .h2(
+            .h1(
                 .class("hero-title"),
                 .text("Hi, I'm "),
                 .span(.class("hero-name"), .text("Adam."))

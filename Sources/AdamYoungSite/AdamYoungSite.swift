@@ -13,7 +13,7 @@ struct AdamYoungSite: Website {
     var name = "Adam Young"
     var description = "iOS Engineer based in Oakham, UK. Personal site, projects, and writing."
     var language: Language { .english }
-    var imagePath: Path? { "/assets/images/me.jpg" }
+    var imagePath: Path? { "/assets/images/social-card.png" }
 
     let tagline = "iOS Engineer"
     let location = "Oakham, UK"

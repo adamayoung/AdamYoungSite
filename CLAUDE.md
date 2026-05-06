@@ -82,7 +82,7 @@ title: Post Title
 date: 2026-04-26 12:00
 description: Short blurb shown on the blog index and as og:description.
 tags: tag1, tag2
-image: /assets/images/posts/<slug>.svg
+image: /assets/images/posts/<slug>.png
 ---
 
 Body…
@@ -94,7 +94,20 @@ Notes:
 - Don't quote the `title:` value with `"…"` — Publish's frontmatter parser is naive and the quotes would render literally.
 - A title containing a colon is fine: only the **first** colon is treated as the key/value separator.
 - The post URL is derived from the file name: `Content/blog/foo-bar.md` → `/blog/foo-bar/`.
-- Hero images live under `Resources/assets/images/posts/` and are SVG (small, on-brand). Twitter doesn't render SVG OG cards, so prefer PNG/JPG for `image:` if Twitter sharing matters; the SVG is fine for the inline hero.
+
+### Hero images: SVG is the source, PNG is what's referenced
+
+Hero images live under `Resources/assets/images/posts/`. The **`.svg`** is the source of truth (small, editable, on-brand). The **`.png`** is the rasterized export referenced from `image:` in the post front matter — both the home/blog list cards and the OG/Twitter share card load the PNG, because Twitter doesn't render SVG OG cards.
+
+Whenever you create or edit a post's hero `.svg`, regenerate its `.png` alongside it. The site build does **not** do this automatically; the rasterized PNG is committed.
+
+```bash
+rsvg-convert -w 1200 -h 630 \
+  Resources/assets/images/posts/<slug>.svg \
+  -o Resources/assets/images/posts/<slug>.png
+```
+
+If `rsvg-convert` is missing: `brew install librsvg`. Inline body diagrams (e.g. `canon-tdd-flowchart.svg`) stay as SVG-only — only the front-matter hero needs the PNG export.
 
 ## Conventions worth knowing
 

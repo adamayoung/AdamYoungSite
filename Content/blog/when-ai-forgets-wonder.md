@@ -3,7 +3,7 @@ title: When AI Forgets Wonder: How We Lose Ourselves by Thinking Less
 date: 2025-12-11 12:00
 description: AI is a really fast librarian, but with no imagination. Some thoughts on what we lose when we let machines do our thinking for us.
 tags: ai, thoughts
-image: /assets/images/posts/when-ai-forgets-wonder.svg
+image: /assets/images/posts/when-ai-forgets-wonder.png
 ---
 
 ![Stylised starfield with a graceful arc representing a human leap of imagination](/assets/images/posts/when-ai-forgets-wonder.svg)

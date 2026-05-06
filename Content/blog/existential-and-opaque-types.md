@@ -3,7 +3,7 @@ title: Existential and Opaque Types in Swift
 date: 2026-02-15 12:00
 description: any vs some: what they actually mean, why one of them is a box you have to open, and when to reach for which. With pizza.
 tags: swift, generics, existential types, opaque types
-image: /assets/images/posts/existential-and-opaque-types.svg
+image: /assets/images/posts/existential-and-opaque-types.png
 ---
 
 ![A diagram contrasting 'any' (a closed pizza box that could hold any pizza) with 'some' (a single specific pizza whose flavour is hidden from the caller but known to the compiler)](/assets/images/posts/existential-and-opaque-types.svg)

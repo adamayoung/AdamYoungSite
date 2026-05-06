@@ -3,7 +3,7 @@ title: Principles of Object-Oriented Design
 date: 2026-05-04 12:00
 description: SOLID and the three component principles, demonstrated with a car. A tour of the rules of thumb that keep classes and modules from turning to soup.
 tags: swift, architecture, design principles, solid
-image: /assets/images/posts/object-oriented-design-principles.svg
+image: /assets/images/posts/object-oriented-design-principles.png
 ---
 
 ![SOLID spelled out as five glass cards (SRP, OCP, LSP, ISP, DIP), with three smaller cards beneath for the component-cohesion principles (REP, CCP, CRP).](/assets/images/posts/object-oriented-design-principles.svg)

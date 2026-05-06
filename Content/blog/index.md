@@ -1,4 +1,4 @@
 ---
 title: Blog
-description: Notes from side projects and Swift.
+description: Notes on Swift, iOS architecture, TDD, and the engineering practices that help mobile teams ship work they're proud of.
 ---

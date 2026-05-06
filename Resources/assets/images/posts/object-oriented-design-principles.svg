@@ -1,134 +1,137 @@
 <svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Principles of Object-Oriented Design. SOLID spelled out as five glass cards (SRP, OCP, LSP, ISP, DIP), plus three smaller cards beneath for the component-cohesion principles (REP, CCP, CRP).">
+     aria-label="Principles of Object-Oriented Design — eight pill-shaped chips labelled with the principle acronyms, grouped into a SOLID row of five (SRP, OCP, LSP, ISP, DIP) above a Components row of three (REP, CCP, CRP).">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d1626"/>
+      <stop offset="0%" stop-color="#0a1224"/>
       <stop offset="100%" stop-color="#040810"/>
     </linearGradient>
-    <radialGradient id="glow1" cx="18%" cy="20%" r="55%">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.22"/>
+    <radialGradient id="aurora1" cx="12%" cy="18%" r="55%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
       <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glow2" cx="82%" cy="85%" r="55%">
-      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.20"/>
-      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    <radialGradient id="aurora2" cx="88%" cy="86%" r="60%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="title-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+    <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f1f5fb"/>
+      <stop offset="100%" stop-color="#c5cdda"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#22d3ee"/>
       <stop offset="100%" stop-color="#818cf8"/>
     </linearGradient>
-    <linearGradient id="solid-letter" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#22d3ee"/>
-      <stop offset="100%" stop-color="#818cf8"/>
+
+    <!-- Chip surface (subtle glass) -->
+    <linearGradient id="chipFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#162133" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#0b1424" stop-opacity="0.85"/>
     </linearGradient>
-    <linearGradient id="solid-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.7"/>
+
+    <!-- SOLID chip stroke (cyan→indigo) -->
+    <linearGradient id="solidStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#22d3ee" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.85"/>
     </linearGradient>
-    <linearGradient id="comp-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#d946ef" stop-opacity="0.7"/>
-    </linearGradient>
-    <linearGradient id="card-fill" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#162133"/>
-      <stop offset="100%" stop-color="#0a1322"/>
-    </linearGradient>
-    <linearGradient id="comp-fill" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1c1430"/>
-      <stop offset="100%" stop-color="#0e0a1f"/>
+
+    <!-- Components chip stroke (indigo→fuchsia) -->
+    <linearGradient id="compStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#a78bfa" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#d946ef" stop-opacity="0.85"/>
     </linearGradient>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#glow1)"/>
-  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <rect width="1200" height="630" fill="url(#aurora1)"/>
+  <rect width="1200" height="630" fill="url(#aurora2)"/>
+
+  <!-- Top accent rule -->
+  <line x1="80" y1="82" x2="142" y2="82" stroke="url(#accent)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Kicker -->
+  <text x="80" y="108" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="13" font-weight="600" fill="#22d3ee" letter-spacing="3.5">ARCHITECTURE  ·  SOLID</text>
 
   <!-- Title -->
-  <text x="600" y="68" text-anchor="middle"
-        font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
-        font-size="44" font-weight="700" fill="url(#title-grad)" letter-spacing="-1.2">Principles of Object-Oriented Design</text>
-  <text x="600" y="106" text-anchor="middle"
-        font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
-        font-size="19" font-weight="500" fill="#9aa6b8" letter-spacing="0.5">SOLID, plus three for components.</text>
+  <text x="80" y="194" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
+        font-size="60" font-weight="700" fill="url(#title)" letter-spacing="-1.6">Principles of Object-Oriented Design</text>
 
-  <!-- SOLID cards: 5 cards, 200 wide, 280 tall, gap 12 -->
-  <!-- Total width: 5*200 + 4*12 = 1048; left margin = (1200-1048)/2 = 76 -->
-  <g transform="translate(76, 142)" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif">
-    <!-- S -->
-    <g>
-      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
-      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">S</text>
-      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
-      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">SRP</text>
-      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Single</text>
-      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Responsibility</text>
+  <!-- Subtitle -->
+  <text x="80" y="234" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="22" font-weight="400" fill="#9aa6b8" letter-spacing="-0.1">SOLID, plus three for components.</text>
+
+  <!-- ============== BESPOKE MARK ============== -->
+  <!-- Mark frame is 460 wide, anchored top-right of the available area -->
+  <g transform="translate(660, 290)">
+
+    <!-- ===== SOLID group ===== -->
+    <line x1="0" y1="6" x2="14" y2="6" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"/>
+    <text x="22" y="11" font-family="ui-monospace, SF Mono, Menlo, monospace"
+          font-size="11" font-weight="700" fill="#22d3ee" letter-spacing="3">SOLID</text>
+    <line x1="76" y1="6" x2="460" y2="6" stroke="#22d3ee" stroke-opacity="0.18" stroke-width="1"/>
+
+    <!-- 5 chips in a single row, gap 12, chip 80×40, total 5*80+4*12 = 448, centred in 460 -->
+    <g font-family="ui-monospace, SF Mono, Menlo, monospace" font-weight="700"
+       letter-spacing="2.5" text-anchor="middle">
+
+      <!-- SRP -->
+      <g transform="translate(6, 32)">
+        <rect width="80" height="40" rx="20" fill="url(#chipFill)" stroke="url(#solidStroke)" stroke-width="1.4"/>
+        <text x="40" y="26" font-size="15" fill="#67e8f9">SRP</text>
+      </g>
+      <!-- OCP -->
+      <g transform="translate(98, 32)">
+        <rect width="80" height="40" rx="20" fill="url(#chipFill)" stroke="url(#solidStroke)" stroke-width="1.4"/>
+        <text x="40" y="26" font-size="15" fill="#67e8f9">OCP</text>
+      </g>
+      <!-- LSP -->
+      <g transform="translate(190, 32)">
+        <rect width="80" height="40" rx="20" fill="url(#chipFill)" stroke="url(#solidStroke)" stroke-width="1.4"/>
+        <text x="40" y="26" font-size="15" fill="#67e8f9">LSP</text>
+      </g>
+      <!-- ISP -->
+      <g transform="translate(282, 32)">
+        <rect width="80" height="40" rx="20" fill="url(#chipFill)" stroke="url(#solidStroke)" stroke-width="1.4"/>
+        <text x="40" y="26" font-size="15" fill="#67e8f9">ISP</text>
+      </g>
+      <!-- DIP -->
+      <g transform="translate(374, 32)">
+        <rect width="80" height="40" rx="20" fill="url(#chipFill)" stroke="url(#solidStroke)" stroke-width="1.4"/>
+        <text x="40" y="26" font-size="15" fill="#67e8f9">DIP</text>
+      </g>
     </g>
-    <!-- O -->
-    <g transform="translate(212, 0)">
-      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
-      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">O</text>
-      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
-      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">OCP</text>
-      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Open /</text>
-      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Closed</text>
-    </g>
-    <!-- L -->
-    <g transform="translate(424, 0)">
-      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
-      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">L</text>
-      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
-      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">LSP</text>
-      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Liskov</text>
-      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Substitution</text>
-    </g>
-    <!-- I -->
-    <g transform="translate(636, 0)">
-      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
-      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">I</text>
-      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
-      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">ISP</text>
-      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Interface</text>
-      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Segregation</text>
-    </g>
-    <!-- D -->
-    <g transform="translate(848, 0)">
-      <rect width="200" height="280" rx="20" fill="url(#card-fill)" stroke="url(#solid-stroke)" stroke-width="1.6"/>
-      <text x="100" y="148" text-anchor="middle" font-size="120" font-weight="800" fill="url(#solid-letter)" letter-spacing="-3">D</text>
-      <line x1="40" y1="178" x2="160" y2="178" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1"/>
-      <text x="100" y="208" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="15" font-weight="700" fill="#22d3ee" letter-spacing="3">DIP</text>
-      <text x="100" y="238" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Dependency</text>
-      <text x="100" y="256" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#cbd2dc">Inversion</text>
+
+    <!-- ===== Components group ===== -->
+    <line x1="0" y1="116" x2="14" y2="116" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+    <text x="22" y="121" font-family="ui-monospace, SF Mono, Menlo, monospace"
+          font-size="11" font-weight="700" fill="#a78bfa" letter-spacing="3">COMPONENTS</text>
+    <line x1="120" y1="116" x2="460" y2="116" stroke="#a78bfa" stroke-opacity="0.18" stroke-width="1"/>
+
+    <!-- 3 chips, smaller. 76×34, gap 14. Total 3*76+2*14 = 256. Centred under SOLID row → start x=(460-256)/2 = 102 -->
+    <g font-family="ui-monospace, SF Mono, Menlo, monospace" font-weight="700"
+       letter-spacing="2.5" text-anchor="middle">
+      <!-- REP -->
+      <g transform="translate(102, 142)">
+        <rect width="76" height="34" rx="17" fill="url(#chipFill)" stroke="url(#compStroke)" stroke-width="1.4"/>
+        <text x="38" y="22" font-size="14" fill="#d8b4fe">REP</text>
+      </g>
+      <!-- CCP -->
+      <g transform="translate(192, 142)">
+        <rect width="76" height="34" rx="17" fill="url(#chipFill)" stroke="url(#compStroke)" stroke-width="1.4"/>
+        <text x="38" y="22" font-size="14" fill="#d8b4fe">CCP</text>
+      </g>
+      <!-- CRP -->
+      <g transform="translate(282, 142)">
+        <rect width="76" height="34" rx="17" fill="url(#chipFill)" stroke="url(#compStroke)" stroke-width="1.4"/>
+        <text x="38" y="22" font-size="14" fill="#d8b4fe">CRP</text>
+      </g>
     </g>
   </g>
 
-  <!-- Component cards: 3 cards, 170 wide, 92 tall, gap 16 -->
-  <!-- Total width: 3*170 + 2*16 = 542; left margin = (1200-542)/2 = 329 -->
-  <g transform="translate(329, 458)" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif">
-    <!-- REP -->
-    <g>
-      <rect width="170" height="92" rx="16" fill="url(#comp-fill)" stroke="url(#comp-stroke)" stroke-width="1.6"/>
-      <text x="85" y="40" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="22" font-weight="700" fill="#d946ef" letter-spacing="3">REP</text>
-      <text x="85" y="64" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Reuse / Release</text>
-      <text x="85" y="80" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Equivalence</text>
-    </g>
-    <!-- CCP -->
-    <g transform="translate(186, 0)">
-      <rect width="170" height="92" rx="16" fill="url(#comp-fill)" stroke="url(#comp-stroke)" stroke-width="1.6"/>
-      <text x="85" y="40" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="22" font-weight="700" fill="#d946ef" letter-spacing="3">CCP</text>
-      <text x="85" y="64" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Common</text>
-      <text x="85" y="80" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Closure</text>
-    </g>
-    <!-- CRP -->
-    <g transform="translate(372, 0)">
-      <rect width="170" height="92" rx="16" fill="url(#comp-fill)" stroke="url(#comp-stroke)" stroke-width="1.6"/>
-      <text x="85" y="40" text-anchor="middle" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="22" font-weight="700" fill="#d946ef" letter-spacing="3">CRP</text>
-      <text x="85" y="64" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Common</text>
-      <text x="85" y="80" text-anchor="middle" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif" font-size="12" fill="#9aa6b8">Reuse</text>
-    </g>
-  </g>
-
-  <!-- Bottom label -->
-  <text x="600" y="595" text-anchor="middle"
-        font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
-        font-size="14" font-weight="500" fill="#6f7a8d" letter-spacing="2.5" font-style="italic">EIGHT PRINCIPLES · ONE QUESTION</text>
+  <!-- Footer -->
+  <line x1="80" y1="552" x2="1120" y2="552" stroke="#1e2638" stroke-width="1"/>
+  <text x="80" y="582" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="12" font-weight="500" fill="#525866" letter-spacing="2">ADAM YOUNG  ·  2026.05.04</text>
+  <text x="1120" y="582" text-anchor="end" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="12" font-weight="500" fill="#525866" letter-spacing="2">ADAM-YOUNG.CO.UK</text>
 </svg>

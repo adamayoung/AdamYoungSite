@@ -16,6 +16,9 @@ struct PageInfo {
     var kind: PageKind
     var imagePath: Path?
     var imageAlt: String?
+    var publishedDate: Date? = nil
+    var lastModifiedDate: Date? = nil
+    var tags: [String] = []
 }
 
 extension PageInfo {
@@ -51,7 +54,10 @@ extension PageInfo {
             path: item.path,
             kind: .article,
             imagePath: item.imagePath ?? site.imagePath,
-            imageAlt: item.title
+            imageAlt: item.title,
+            publishedDate: item.date,
+            lastModifiedDate: item.date,
+            tags: item.tags.map(\.string)
         )
     }
 
@@ -71,7 +77,28 @@ extension PageInfo {
 extension Node where Context == HTML.DocumentContext {
     static func adamYoungHead(for info: PageInfo, on site: AdamYoungSite) -> Node {
         let pageURL = site.url(for: info.path)
+        // Ensure trailing slash so canonical matches the served URL (GH Pages serves index.html at /slug/)
+        let canonicalURL: String = {
+            var s = pageURL.absoluteString
+            if !s.hasSuffix("/") { s += "/" }
+            return s
+        }()
         let imageURL = info.imagePath.map { site.url.absoluteString + $0.absoluteString }
+
+        let articleOGMeta: String = {
+            guard info.kind == .article, let pubDate = info.publishedDate else { return "" }
+            let modDate = info.lastModifiedDate ?? pubDate
+            var parts = [
+                #"<meta property="article:published_time" content="\#(DateRendering.iso(pubDate))">"#,
+                #"<meta property="article:modified_time" content="\#(DateRendering.iso(modDate))">"#,
+                #"<meta property="article:author" content="\#(site.url.absoluteString)/about/">"#,
+                #"<meta property="article:section" content="Blog">"#
+            ]
+            for tag in info.tags {
+                parts.append(#"<meta property="article:tag" content="\#(escapeHTMLAttribute(tag))">"#)
+            }
+            return parts.joined(separator: "\n        ")
+        }()
 
         return .head(
             .meta(.charset(.utf8)),
@@ -81,30 +108,41 @@ extension Node where Context == HTML.DocumentContext {
             .meta(.name("format-detection"), .content("telephone=no")),
             .title(info.fullTitle),
             .meta(.name("description"), .content(info.description)),
+            .meta(.name("author"), .content(site.name)),
+            .raw(#"<link rel="canonical" href="\#(canonicalURL)">"#),
 
             .meta(.name("apple-mobile-web-app-title"), .content(site.name)),
             .meta(.name("apple-mobile-web-app-capable"), .content("yes")),
             .meta(.name("apple-mobile-web-app-status-bar-style"), .content("black-translucent")),
 
             .link(.rel(.stylesheet), .href("/styles.css")),
+            .raw(#"<link rel="icon" href="/assets/images/favicon-32.png" type="image/png" sizes="32x32">"#),
+            .raw(#"<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">"#),
 
             // Open Graph (Plot's `.title(...)` already emits og:title and twitter:title.)
             .raw(#"<meta property="og:type" content="\#(info.kind == .article ? "article" : "website")">"#),
             .raw(#"<meta property="og:site_name" content="\#(site.name)">"#),
             .raw(#"<meta property="og:description" content="\#(escapeHTMLAttribute(info.description))">"#),
-            .raw(#"<meta property="og:url" content="\#(pageURL.absoluteString)">"#),
+            .raw(#"<meta property="og:url" content="\#(canonicalURL)">"#),
+            .raw(#"<meta property="og:locale" content="en_GB">"#),
             .if(imageURL != nil, .group([
                 .raw(#"<meta property="og:image" content="\#(imageURL ?? "")">"#),
                 .raw(#"<meta property="og:image:alt" content="\#(escapeHTMLAttribute(info.imageAlt ?? site.name))">"#)
             ])),
+
+            // Article-specific OG tags (published_time, modified_time, author, section, per-tag)
+            .raw(articleOGMeta),
 
             // Twitter
             .raw(#"<meta name="twitter:card" content="summary_large_image">"#),
             .raw(#"<meta name="twitter:site" content="@\#(site.twitterUsername)">"#),
             .raw(#"<meta name="twitter:creator" content="@\#(site.twitterUsername)">"#),
 
-            // JSON-LD Person schema
+            // JSON-LD schemas
             .raw(jsonLDPerson(for: site)),
+            .if(info.kind == .article, .raw(jsonLDBlogPosting(for: info, on: site))),
+            .if(info.kind == .article, .raw(jsonLDBreadcrumbs(for: info, on: site))),
+            .if(info.kind == .home, .raw(jsonLDWebSite(for: site))),
 
             // Google Analytics
             .if(!site.googleAnalyticsID.isEmpty, .group([
@@ -136,21 +174,106 @@ private func escapeHTMLAttribute(_ string: String) -> String {
         .replacingOccurrences(of: ">", with: "&gt;")
 }
 
+private func escapeJSONString(_ string: String) -> String {
+    var result = string
+    result = result.replacingOccurrences(of: "\\", with: "\\\\")
+    result = result.replacingOccurrences(of: "\"", with: "\\\"")
+    result = result.replacingOccurrences(of: "/", with: "\\/")  // prevents </script> injection
+    result = result.replacingOccurrences(of: "\n", with: "\\n")
+    result = result.replacingOccurrences(of: "\r", with: "\\r")
+    result = result.replacingOccurrences(of: "\t", with: "\\t")
+    return result
+}
+
 private func jsonLDPerson(for site: AdamYoungSite) -> String {
     """
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "\(site.name)",
+      "@id": "\(site.url.absoluteString)/#person",
+      "name": "\(escapeJSONString(site.name))",
       "email": "mailto:\(site.authorEmail)",
       "url": "\(site.url.absoluteString)",
-      "jobTitle": "\(site.tagline)",
-      "image": "\(site.url.absoluteString)/assets/images/me.jpg",
+      "jobTitle": "\(escapeJSONString(site.tagline))",
+      "image": "\(site.url.absoluteString)/assets/images/apple-touch-icon.png",
       "sameAs": [
         "https://github.com/\(site.githubUsername)",
         "https://www.linkedin.com/in/\(site.linkedinUsername)"
       ]
+    }
+    </script>
+    """
+}
+
+private func jsonLDBlogPosting(for info: PageInfo, on site: AdamYoungSite) -> String {
+    guard let publishedDate = info.publishedDate else { return "" }
+    var pageURL = site.url(for: info.path).absoluteString
+    if !pageURL.hasSuffix("/") { pageURL += "/" }
+    let imageURL = info.imagePath.map { site.url.absoluteString + $0.absoluteString }
+        ?? "\(site.url.absoluteString)/assets/images/me.jpg"
+    let modifiedDate = info.lastModifiedDate ?? publishedDate
+    let keywordsLine = info.tags.isEmpty ? "" : """
+    ,
+      "keywords": "\(escapeJSONString(info.tags.joined(separator: ", ")))"
+    """
+    return """
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "\(escapeJSONString(info.title))",
+      "description": "\(escapeJSONString(info.description))",
+      "datePublished": "\(DateRendering.iso(publishedDate))",
+      "dateModified": "\(DateRendering.iso(modifiedDate))",
+      "url": "\(pageURL)",
+      "image": "\(imageURL)",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "\(pageURL)"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "\(site.url.absoluteString)/#person",
+        "name": "\(escapeJSONString(site.name))",
+        "url": "\(site.url.absoluteString)/about/"
+      }\(keywordsLine)
+    }
+    </script>
+    """
+}
+
+private func jsonLDBreadcrumbs(for info: PageInfo, on site: AdamYoungSite) -> String {
+    var pageURL = site.url(for: info.path).absoluteString
+    if !pageURL.hasSuffix("/") { pageURL += "/" }
+    return """
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "\(site.url.absoluteString)/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "\(site.url.absoluteString)/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "\(escapeJSONString(info.title))", "item": "\(pageURL)"}
+      ]
+    }
+    </script>
+    """
+}
+
+private func jsonLDWebSite(for site: AdamYoungSite) -> String {
+    """
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "\(site.url.absoluteString)/",
+      "name": "\(escapeJSONString(site.name))",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "\(site.url.absoluteString)/blog/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
     """
@@ -251,9 +374,9 @@ extension Node where Context == HTML.BodyContext {
                 .nav(
                     .class("rail-nav rail-nav-secondary"),
                     .attribute(named: "aria-label", value: "Elsewhere"),
-                    railLink(href: "https://github.com/\(site.githubUsername)", icon: Icons.github, label: "GitHub", activePath: activePath, external: true),
-                    railLink(href: "https://www.linkedin.com/in/\(site.linkedinUsername)", icon: Icons.linkedin, label: "LinkedIn", activePath: activePath, external: true),
-                    railLink(href: "mailto:\(site.authorEmail)", icon: Icons.mail, label: "Email", activePath: activePath, external: true)
+                    railLink(href: "https://github.com/\(site.githubUsername)", icon: Icons.github, label: "GitHub", activePath: activePath, external: true, identity: true),
+                    railLink(href: "https://www.linkedin.com/in/\(site.linkedinUsername)", icon: Icons.linkedin, label: "LinkedIn", activePath: activePath, external: true, identity: true),
+                    railLink(href: "mailto:\(site.authorEmail)", icon: Icons.mail, label: "Email", activePath: activePath, external: true, identity: true)
                 )
             ]
         )
@@ -293,7 +416,7 @@ extension Node where Context == HTML.BodyContext {
     }
 }
 
-private func railLink(href: String, icon: String, label: String, activePath: String, external: Bool = false) -> Node<HTML.BodyContext> {
+private func railLink(href: String, icon: String, label: String, activePath: String, external: Bool = false, identity: Bool = false) -> Node<HTML.BodyContext> {
     let isActive = !external && href == activePath
     var attrs: [Node<HTML.AnchorContext>] = [
         .class(isActive ? "rail-link active" : "rail-link"),
@@ -303,7 +426,8 @@ private func railLink(href: String, icon: String, label: String, activePath: Str
     ]
     if isActive { attrs.append(.attribute(named: "aria-current", value: "page")) }
     if external {
-        attrs.append(.attribute(named: "rel", value: "noopener"))
+        let relValue = identity ? "me noopener" : "noopener"
+        attrs.append(.attribute(named: "rel", value: relValue))
     }
     return .a(.group(attrs))
 }

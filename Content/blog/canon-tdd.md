@@ -3,7 +3,7 @@ title: Canon TDD: How I Learned to Stop Worrying and Love Writing Tests
 date: 2026-01-21 12:00
 description: Red, Green, Refactor is the part of TDD everyone remembers, and the bit Kent Beck keeps having to remind us isn't the whole workflow. Notes from a recent talk.
 tags: tdd, testing
-image: /assets/images/posts/canon-tdd.svg
+image: /assets/images/posts/canon-tdd.png
 ---
 
 ![Diagram showing the Canon TDD flow: a Test List feeding into a Red, Green, Refactor cycle that loops until the list is empty](/assets/images/posts/canon-tdd.svg)

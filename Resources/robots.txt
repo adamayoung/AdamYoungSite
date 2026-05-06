@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://adam-young.co.uk/sitemap.xml
