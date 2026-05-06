@@ -160,16 +160,16 @@ private extension Node where Context == HTML.BodyContext {
     static func heroCard() -> Node {
         .section(
             .class("hero"),
+            .h1(
+                .class("hero-title"),
+                .text("Hi, I'm "),
+                .span(.class("hero-name"), .text("Adam."))
+            ),
             .a(
                 .class("hero-availability"),
                 .href("mailto:me@adam-young.co.uk"),
                 .span(.class("hero-availability-dot")),
                 .text("Available for new Senior/Staff iOS roles · UK / Remote")
-            ),
-            .h1(
-                .class("hero-title"),
-                .text("Hi, I'm "),
-                .span(.class("hero-name"), .text("Adam."))
             ),
             .p(
                 .class("hero-tagline"),

@@ -289,6 +289,8 @@ enum Icons {
     static let linkedin = #"<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.4 20.4h-3.5v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.6H9.5V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.1zM5.5 7.4c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm1.8 13H3.7V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.5C0 23.2.8 24 1.8 24h20.4c1 0 1.8-.8 1.8-1.8V1.7C24 .8 23.2 0 22.2 0z"/></svg>"#
     static let mail = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>"#
     static let search = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>"#
+    static let menu = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>"#
+    static let close = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>"#
     static let arrowRight = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>"#
     static let about = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>"#
     static let books = #"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H10v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H14v15h4.5a1.5 1.5 0 0 1 1.5 1.5"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H10"/><path d="M14 21h4.5a1.5 1.5 0 0 0 1.5-1.5"/></svg>"#
@@ -317,8 +319,42 @@ extension Node where Context == HTML.BodyContext {
     ) -> Node {
         .group(
             .a(.class("skip-link"), .href("#main"), .text("Skip to content")),
+            // Mobile sticky header — hidden on desktop via CSS
+            .element(
+                named: "header",
+                nodes: [
+                    .attribute(named: "class", value: "mobile-header"),
+                    .attribute(named: "aria-label", value: "Site header"),
+                    .a(
+                        .class("mobile-brand"),
+                        .href("/"),
+                        .img(
+                            .class("mobile-brand-avatar"),
+                            .src("/assets/images/me.jpg"),
+                            .alt("")
+                        ),
+                        .span(.class("mobile-brand-name"), .text(site.name))
+                    ),
+                    .element(
+                        named: "button",
+                        nodes: [
+                            .attribute(named: "type", value: "button"),
+                            .attribute(named: "class", value: "nav-toggle-btn"),
+                            .attribute(named: "aria-label", value: "Open navigation"),
+                            .attribute(named: "aria-expanded", value: "false"),
+                            .attribute(named: "aria-controls", value: "nav-rail"),
+                            .raw(Icons.menu)
+                        ]
+                    )
+                ]
+            ),
             .div(
                 .class("shell"),
+                // Backdrop — clicking closes the drawer
+                .div(
+                    .class("nav-overlay"),
+                    .attribute(named: "aria-hidden", value: "true")
+                ),
                 .sidebarRail(for: site, activePath: options.activePath),
                 .div(
                     .class("main-area"),
@@ -332,7 +368,24 @@ extension Node where Context == HTML.BodyContext {
             ),
             .if(options.loadBlogFilter,
                 .raw(#"<script src="/blog-filter.js" defer></script>"#)
-            )
+            ),
+            // Mobile nav: toggle open/close, aria-expanded, focus management, Escape key
+            .raw(#"""
+            <script>
+            (function(){
+              var btn=document.querySelector('.nav-toggle-btn');
+              var closeBtn=document.querySelector('.nav-close-btn');
+              var overlay=document.querySelector('.nav-overlay');
+              var html=document.documentElement;
+              function openNav(){html.setAttribute('data-nav-open','');btn.setAttribute('aria-expanded','true');if(closeBtn)closeBtn.focus();}
+              function closeNav(){html.removeAttribute('data-nav-open');btn.setAttribute('aria-expanded','false');if(btn)btn.focus();}
+              if(btn){btn.addEventListener('click',openNav);}
+              if(closeBtn){closeBtn.addEventListener('click',closeNav);}
+              if(overlay){overlay.addEventListener('click',closeNav);}
+              document.addEventListener('keydown',function(e){if(e.key==='Escape'&&html.hasAttribute('data-nav-open'))closeNav();});
+            })();
+            </script>
+            """#)
         )
     }
 
@@ -341,7 +394,21 @@ extension Node where Context == HTML.BodyContext {
             named: "aside",
             nodes: [
                 .attribute(named: "class", value: "rail"),
+                .attribute(named: "id", value: "nav-rail"),
                 .attribute(named: "aria-label", value: "Site navigation"),
+                // Mobile close button (hidden on desktop)
+                .div(
+                    .class("rail-mobile-head"),
+                    .element(
+                        named: "button",
+                        nodes: [
+                            .attribute(named: "type", value: "button"),
+                            .attribute(named: "class", value: "nav-close-btn"),
+                            .attribute(named: "aria-label", value: "Close navigation"),
+                            .raw(Icons.close)
+                        ]
+                    )
+                ),
                 .a(
                     .class("rail-brand"),
                     .href("/"),
