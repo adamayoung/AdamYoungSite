@@ -177,18 +177,15 @@ struct ShellOptions {
     var activePath: String
     var allTags: [Tag]
     var loadBlogFilter: Bool
-    var showSearch: Bool
 
     init(
         activePath: String,
         allTags: [Tag] = [],
-        loadBlogFilter: Bool = false,
-        showSearch: Bool = false
+        loadBlogFilter: Bool = false
     ) {
         self.activePath = activePath
         self.allTags = allTags
         self.loadBlogFilter = loadBlogFilter
-        self.showSearch = showSearch
     }
 }
 
@@ -205,7 +202,6 @@ extension Node where Context == HTML.BodyContext {
                 .sidebarRail(for: site, activePath: options.activePath, allTags: options.allTags),
                 .div(
                     .class("main-area"),
-                    .if(options.showSearch, .topBar()),
                     .main(
                         .id("main"),
                         .class("content"),

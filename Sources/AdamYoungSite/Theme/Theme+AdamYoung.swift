@@ -50,11 +50,11 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
                     options: ShellOptions(
                         activePath: "/blog/",
                         allTags: tags,
-                        loadBlogFilter: section.id == .blog,
-                        showSearch: section.id == .blog
+                        loadBlogFilter: section.id == .blog
                     ),
                     content: [
                         .pageHeader(title: section.title, subtitle: section.description),
+                        .if(section.id == .blog, .topBar()),
                         .if(section.items.isEmpty,
                             .div(.class("empty-state"), .p(.text("No posts yet — check back soon."))),
                             else: .div(
@@ -85,7 +85,7 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
             .body(
                 .siteShell(
                     for: site,
-                    options: ShellOptions(activePath: "/blog/", allTags: tags, showSearch: true),
+                    options: ShellOptions(activePath: "/blog/", allTags: tags),
                     content: [.postArticle(for: item)]
                 )
             )
@@ -161,7 +161,7 @@ private extension Node where Context == HTML.BodyContext {
 
     static func heroCard() -> Node {
         .section(
-            .class("hero-card"),
+            .class("hero"),
             .a(
                 .class("hero-availability"),
                 .href("mailto:me@adam-young.co.uk"),
