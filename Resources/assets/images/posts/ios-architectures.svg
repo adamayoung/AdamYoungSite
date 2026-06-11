@@ -1,0 +1,101 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="iOS Architectures, explained like a building site. A layered tower built from architecture-named floors (View, ViewModel, Domain, Use Cases, Repository, Data) with a crane lifting a block into place.">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1224"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <radialGradient id="aurora1" cx="12%" cy="18%" r="55%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="aurora2" cx="88%" cy="86%" r="60%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f1f5fb"/>
+      <stop offset="100%" stop-color="#c5cdda"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="floorFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#162133" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#0b1424" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="floorStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#22d3ee" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#aurora1)"/>
+  <rect width="1200" height="630" fill="url(#aurora2)"/>
+
+  <!-- Top accent rule -->
+  <line x1="80" y1="86" x2="142" y2="86" stroke="url(#accent)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Kicker -->
+  <text x="80" y="112" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="13" font-weight="600" fill="#22d3ee" letter-spacing="3.5">ARCHITECTURE  ·  iOS</text>
+
+  <!-- Title -->
+  <text x="80" y="226" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
+        font-size="72" font-weight="700" fill="url(#title)" letter-spacing="-2">iOS Architectures</text>
+
+  <!-- Subtitle -->
+  <text x="80" y="272" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="24" font-weight="400" fill="#9aa6b8" letter-spacing="-0.2">Explained like a building site.</text>
+
+  <!-- Strap line -->
+  <text x="80" y="360" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="18" font-weight="500" fill="#67748a" letter-spacing="0.2">MVC · MVVM · MVVM-C · VIPER · Clean</text>
+  <text x="80" y="386" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="18" font-weight="500" fill="#67748a" letter-spacing="0.2">Hexagonal · Redux · TCA · RIBs</text>
+
+  <!-- ============== Construction mark: a tower of layers + a crane ============== -->
+  <g transform="translate(742, 92)">
+
+    <!-- Crane mast -->
+    <line x1="44" y1="20" x2="44" y2="438" stroke="#818cf8" stroke-opacity="0.55" stroke-width="3"/>
+    <!-- Crane jib -->
+    <line x1="44" y1="34" x2="332" y2="34" stroke="#22d3ee" stroke-opacity="0.65" stroke-width="3"/>
+    <!-- Counter jib -->
+    <line x1="44" y1="34" x2="-8" y2="34" stroke="#22d3ee" stroke-opacity="0.5" stroke-width="3"/>
+    <!-- Hook line -->
+    <line x1="300" y1="34" x2="300" y2="96" stroke="#9aa6b8" stroke-opacity="0.5" stroke-width="1.6"/>
+    <!-- Lifted block -->
+    <rect x="262" y="96" width="86" height="40" rx="10" fill="url(#floorFill)" stroke="url(#floorStroke)" stroke-width="1.6"/>
+    <text x="305" y="121" text-anchor="middle" font-family="ui-monospace, SF Mono, Menlo, monospace"
+          font-size="14" font-weight="700" fill="#67e8f9">View</text>
+
+    <!-- Tower of floors (bottom up) -->
+    <g font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="14" font-weight="700" text-anchor="middle">
+      <!-- Data -->
+      <rect x="70" y="392" width="248" height="42" rx="10" fill="url(#floorFill)" stroke="url(#floorStroke)" stroke-width="1.5"/>
+      <text x="194" y="419" fill="#9aa6b8">Data</text>
+      <!-- Repository -->
+      <rect x="78" y="344" width="232" height="42" rx="10" fill="url(#floorFill)" stroke="url(#floorStroke)" stroke-width="1.5"/>
+      <text x="194" y="371" fill="#9aa6b8">Repository</text>
+      <!-- Use Cases -->
+      <rect x="86" y="296" width="216" height="42" rx="10" fill="url(#floorFill)" stroke="url(#floorStroke)" stroke-width="1.5"/>
+      <text x="194" y="323" fill="#a5b0c0">Use Cases</text>
+      <!-- Domain -->
+      <rect x="94" y="248" width="200" height="42" rx="10" fill="url(#floorFill)" stroke="url(#floorStroke)" stroke-width="1.5"/>
+      <text x="194" y="275" fill="#a5b0c0">Domain</text>
+      <!-- ViewModel -->
+      <rect x="102" y="200" width="184" height="42" rx="10" fill="url(#floorFill)" stroke="url(#floorStroke)" stroke-width="1.5"/>
+      <text x="194" y="227" fill="#67e8f9">ViewModel</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <line x1="80" y1="552" x2="1120" y2="552" stroke="#1e2638" stroke-width="1"/>
+  <text x="80" y="582" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="12" font-weight="500" fill="#525866" letter-spacing="2">ADAM YOUNG  ·  2026.06.12</text>
+  <text x="1120" y="582" text-anchor="end" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="12" font-weight="500" fill="#525866" letter-spacing="2">ADAM-YOUNG.CO.UK</text>
+</svg>

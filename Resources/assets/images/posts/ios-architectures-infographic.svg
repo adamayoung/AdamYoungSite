@@ -1,0 +1,272 @@
+<svg viewBox="0 0 1480 1820" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="iOS architecture patterns as a building site, one card each. MVC: one builder does the lot, easily a Massive View Controller. MVVM: a foreman preps the work, the builder just builds. MVVM-C: a site manager sequences which trade comes next. MVP: a passive builder, the Presenter decides what is built and when. VIP: a clear chain of View, Interactor, Presenter. VIPER: every trade on its own ticket, powerful but lots of boilerplate. Clean Architecture: blueprints don't depend on the brand of drill. Hexagonal: the core is sealed off behind ports and adapters. Redux: one board is the single source of truth. TCA: Redux modelled for Swift with State, Action, Reducer and Effect. RIBs: prefabricated units, each self-contained, for very large apps. Recommended stack for most apps: MVVM-C, Clean, Use Cases, Repository, Coordinator and Testing.">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1626"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="12%" cy="6%" r="45%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="88%" cy="96%" r="50%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cardFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#111c30" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#0a1220" stop-opacity="0.66"/>
+    </linearGradient>
+    <linearGradient id="nodeFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#162133" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#0b1424" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="cardStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.30"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5b6678"/>
+    </marker>
+    <marker id="arr-cy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#22d3ee"/>
+    </marker>
+    <style>
+      .card-title { font-family: -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 700; fill: #e8edf5; }
+      .cap   { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 500; fill: #aab4c4; }
+      .nt    { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; font-weight: 700; fill: #67e8f9; }
+      .nt-i  { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; font-weight: 700; fill: #c4b5fd; }
+      .nt-sm { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; font-weight: 700; fill: #9aa6b8; }
+      .card  { fill: url(#cardFill); stroke: url(#cardStroke); stroke-width: 1.4; }
+      .node  { fill: url(#nodeFill); stroke: #22d3ee; stroke-width: 1.6; }
+      .node-i{ fill: url(#nodeFill); stroke: #818cf8; stroke-width: 1.6; }
+      .conn  { stroke: #5b6678; stroke-width: 1.8; fill: none; }
+      .conn-d{ stroke: #818cf8; stroke-width: 1.6; stroke-dasharray: 5 4; fill: none; }
+      .htitle{ font-family: -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 700; fill: #e8edf5; letter-spacing: -0.6px; }
+      .hsub  { font-family: -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 500; fill: #9aa6b8; }
+      .kicker{ font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; font-weight: 600; fill: #22d3ee; letter-spacing: 3px; }
+    </style>
+  </defs>
+
+  <rect width="1480" height="1820" fill="url(#bg)"/>
+  <rect width="1480" height="1820" fill="url(#glow1)"/>
+  <rect width="1480" height="1820" fill="url(#glow2)"/>
+
+  <!-- ===== Header ===== -->
+  <line x1="60" y1="48" x2="122" y2="48" stroke="url(#accent)" stroke-width="2" stroke-linecap="round"/>
+  <text x="60" y="74" class="kicker">ARCHITECTURE  ·  WHO DOES WHAT</text>
+  <text x="60" y="120" class="htitle">iOS Architectures, built like a site</text>
+  <text x="60" y="150" class="hsub">Different patterns, one goal: a better build for your users.</text>
+
+  <!-- ================= ROW 1 ================= -->
+
+  <!-- MVC -->
+  <g transform="translate(60,176)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">MVC</text>
+    <line class="conn" x1="216" y1="98" x2="150" y2="178"/>
+    <line class="conn" x1="216" y1="98" x2="282" y2="178"/>
+    <rect class="node" x="193" y="81" width="46" height="34" rx="9"/><text class="nt" x="216" y="103" text-anchor="middle">C</text>
+    <rect class="node" x="127" y="161" width="46" height="34" rx="9"/><text class="nt" x="150" y="183" text-anchor="middle">M</text>
+    <rect class="node" x="259" y="161" width="46" height="34" rx="9"/><text class="nt" x="282" y="183" text-anchor="middle">V</text>
+    <text x="216" y="268" text-anchor="middle" class="cap">One builder does the lot.</text>
+    <text x="216" y="290" text-anchor="middle" class="cap">Easily a Massive View Controller.</text>
+  </g>
+
+  <!-- MVVM -->
+  <g transform="translate(523,176)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">MVVM</text>
+    <line class="conn" x1="216" y1="98" x2="143" y2="178"/>
+    <line class="conn" x1="216" y1="98" x2="275" y2="178"/>
+    <rect class="node" x="190" y="81" width="52" height="34" rx="9"/><text class="nt" x="216" y="103" text-anchor="middle">VM</text>
+    <rect class="node" x="120" y="161" width="46" height="34" rx="9"/><text class="nt" x="143" y="183" text-anchor="middle">V</text>
+    <rect class="node" x="252" y="161" width="46" height="34" rx="9"/><text class="nt" x="275" y="183" text-anchor="middle">M</text>
+    <text x="216" y="268" text-anchor="middle" class="cap">A foreman preps the work;</text>
+    <text x="216" y="290" text-anchor="middle" class="cap">the builder just builds.</text>
+  </g>
+
+  <!-- MVVM-C -->
+  <g transform="translate(986,176)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">MVVM-C</text>
+    <line class="conn" x1="196" y1="98" x2="127" y2="178"/>
+    <line class="conn" x1="196" y1="98" x2="213" y2="178"/>
+    <path class="conn-d" d="M196 98 C 280 110, 311 130, 311 161"/>
+    <rect class="node" x="170" y="81" width="52" height="34" rx="9"/><text class="nt" x="196" y="103" text-anchor="middle">VM</text>
+    <rect class="node" x="104" y="161" width="46" height="34" rx="9"/><text class="nt" x="127" y="183" text-anchor="middle">V</text>
+    <rect class="node" x="190" y="161" width="46" height="34" rx="9"/><text class="nt" x="213" y="183" text-anchor="middle">M</text>
+    <rect class="node-i" x="288" y="161" width="46" height="34" rx="9"/><text class="nt-i" x="311" y="183" text-anchor="middle">C</text>
+    <text x="216" y="268" text-anchor="middle" class="cap">A site manager sequences</text>
+    <text x="216" y="290" text-anchor="middle" class="cap">which trade comes next.</text>
+  </g>
+
+  <!-- ================= ROW 2 ================= -->
+
+  <!-- MVP -->
+  <g transform="translate(60,526)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">MVP</text>
+    <line class="conn" x1="216" y1="98" x2="143" y2="178"/>
+    <line class="conn" x1="216" y1="98" x2="275" y2="178"/>
+    <rect class="node" x="193" y="81" width="46" height="34" rx="9"/><text class="nt" x="216" y="103" text-anchor="middle">P</text>
+    <rect class="node" x="120" y="161" width="46" height="34" rx="9"/><text class="nt" x="143" y="183" text-anchor="middle">V</text>
+    <rect class="node" x="252" y="161" width="46" height="34" rx="9"/><text class="nt" x="275" y="183" text-anchor="middle">M</text>
+    <text x="216" y="268" text-anchor="middle" class="cap">A passive builder; the Presenter</text>
+    <text x="216" y="290" text-anchor="middle" class="cap">decides what's built, and when.</text>
+  </g>
+
+  <!-- VIP -->
+  <g transform="translate(523,526)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">VIP</text>
+    <line class="conn" x1="131" y1="120" x2="191" y2="120" marker-end="url(#arr-cy)"/>
+    <line class="conn" x1="240" y1="120" x2="300" y2="120" marker-end="url(#arr-cy)"/>
+    <path d="M325 137 C 325 188, 107 188, 107 137" class="conn" stroke="#22d3ee" stroke-opacity="0.6" marker-end="url(#arr-cy)"/>
+    <rect class="node" x="84" y="103" width="46" height="34" rx="9"/><text class="nt" x="107" y="125" text-anchor="middle">V</text>
+    <rect class="node" x="193" y="103" width="46" height="34" rx="9"/><text class="nt" x="216" y="125" text-anchor="middle">I</text>
+    <rect class="node" x="302" y="103" width="46" height="34" rx="9"/><text class="nt" x="325" y="125" text-anchor="middle">P</text>
+    <text x="216" y="268" text-anchor="middle" class="cap">A clear chain of command:</text>
+    <text x="216" y="290" text-anchor="middle" class="cap">View asks, Interactor builds.</text>
+  </g>
+
+  <!-- VIPER -->
+  <g transform="translate(986,526)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">VIPER</text>
+    <line class="conn" x1="143" y1="95" x2="275" y2="95"/>
+    <line class="conn" x1="143" y1="95" x2="143" y2="157"/>
+    <line class="conn" x1="275" y1="95" x2="275" y2="157"/>
+    <line class="conn" x1="143" y1="157" x2="275" y2="157"/>
+    <line class="conn" x1="160" y1="174" x2="200" y2="200"/>
+    <line class="conn" x1="258" y1="174" x2="232" y2="200"/>
+    <rect class="node" x="120" y="78" width="46" height="34" rx="9"/><text class="nt" x="143" y="100" text-anchor="middle">V</text>
+    <rect class="node-i" x="252" y="78" width="46" height="34" rx="9"/><text class="nt-i" x="275" y="100" text-anchor="middle">R</text>
+    <rect class="node" x="120" y="140" width="46" height="34" rx="9"/><text class="nt" x="143" y="162" text-anchor="middle">I</text>
+    <rect class="node" x="252" y="140" width="46" height="34" rx="9"/><text class="nt" x="275" y="162" text-anchor="middle">P</text>
+    <rect class="node" x="193" y="200" width="46" height="34" rx="9"/><text class="nt" x="216" y="222" text-anchor="middle">E</text>
+    <text x="216" y="270" text-anchor="middle" class="cap">Every trade on its own ticket.</text>
+    <text x="216" y="292" text-anchor="middle" class="cap">Powerful, but lots of paperwork.</text>
+  </g>
+
+  <!-- ================= ROW 3 ================= -->
+
+  <!-- Clean -->
+  <g transform="translate(60,876)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">Clean Architecture</text>
+    <circle cx="216" cy="150" r="74" fill="none" stroke="#2a3856" stroke-width="1.6"/>
+    <circle cx="216" cy="150" r="50" fill="none" stroke="#818cf8" stroke-opacity="0.6" stroke-width="1.6"/>
+    <circle cx="216" cy="150" r="28" fill="url(#nodeFill)" stroke="#22d3ee" stroke-width="1.6"/>
+    <text x="216" y="92" text-anchor="middle" class="nt-sm">Frameworks</text>
+    <text x="216" y="120" text-anchor="middle" class="nt-sm" fill="#c4b5fd">Use Cases</text>
+    <text x="216" y="155" text-anchor="middle" class="nt">Domain</text>
+    <text x="216" y="270" text-anchor="middle" class="cap">Blueprints don't depend on</text>
+    <text x="216" y="292" text-anchor="middle" class="cap">the brand of drill.</text>
+  </g>
+
+  <!-- Hexagonal -->
+  <g transform="translate(523,876)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">Hexagonal</text>
+    <line class="conn" x1="124" y1="150" x2="168" y2="150"/>
+    <line class="conn" x1="264" y1="150" x2="306" y2="150"/>
+    <polygon points="264,150 240,191.6 192,191.6 168,150 192,108.4 240,108.4" fill="url(#nodeFill)" stroke="#22d3ee" stroke-width="1.8"/>
+    <text x="216" y="155" text-anchor="middle" class="nt">Core</text>
+    <rect class="node-i" x="40" y="133" width="84" height="34" rx="9"/><text class="nt-i" x="82" y="155" text-anchor="middle">Ports</text>
+    <rect class="node-i" x="306" y="133" width="92" height="34" rx="9"/><text class="nt-i" x="352" y="155" text-anchor="middle">Adapters</text>
+    <text x="216" y="270" text-anchor="middle" class="cap">The core is sealed off behind</text>
+    <text x="216" y="292" text-anchor="middle" class="cap">ports and adapters.</text>
+  </g>
+
+  <!-- Redux -->
+  <g transform="translate(986,876)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">Redux</text>
+    <line class="conn" x1="112" y1="140" x2="188" y2="98" stroke="#22d3ee" stroke-opacity="0.6" marker-end="url(#arr-cy)"/>
+    <line class="conn" x1="252" y1="96" x2="298" y2="136" stroke="#22d3ee" stroke-opacity="0.6" marker-end="url(#arr-cy)"/>
+    <line class="conn" x1="312" y1="164" x2="254" y2="204" stroke="#22d3ee" stroke-opacity="0.6" marker-end="url(#arr-cy)"/>
+    <line class="conn" x1="182" y1="206" x2="110" y2="164" stroke="#22d3ee" stroke-opacity="0.6" marker-end="url(#arr-cy)"/>
+    <rect class="node" x="176" y="70" width="80" height="32" rx="9"/><text class="nt" x="216" y="91" text-anchor="middle">Action</text>
+    <rect class="node" x="292" y="132" width="96" height="32" rx="9"/><text class="nt" x="340" y="153" text-anchor="middle">Reducer</text>
+    <rect class="node" x="180" y="196" width="72" height="32" rx="9"/><text class="nt" x="216" y="217" text-anchor="middle">State</text>
+    <rect class="node" x="48" y="132" width="72" height="32" rx="9"/><text class="nt" x="84" y="153" text-anchor="middle">View</text>
+    <text x="216" y="270" text-anchor="middle" class="cap">One board, the single</text>
+    <text x="216" y="292" text-anchor="middle" class="cap">source of truth.</text>
+  </g>
+
+  <!-- ================= ROW 4 ================= -->
+
+  <!-- TCA -->
+  <g transform="translate(60,1226)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">TCA</text>
+    <line class="conn" x1="108" y1="140" x2="186" y2="98" stroke="#22d3ee" stroke-opacity="0.6" marker-end="url(#arr-cy)"/>
+    <line class="conn" x1="252" y1="96" x2="298" y2="136" stroke="#22d3ee" stroke-opacity="0.6" marker-end="url(#arr-cy)"/>
+    <path class="conn-d" d="M312 164 C 296 188, 256 200, 252 204" marker-end="url(#arr-cy)"/>
+    <line class="conn" x1="182" y1="206" x2="106" y2="164" stroke="#22d3ee" stroke-opacity="0.6" marker-end="url(#arr-cy)"/>
+    <rect class="node" x="176" y="70" width="80" height="32" rx="9"/><text class="nt" x="216" y="91" text-anchor="middle">Action</text>
+    <rect class="node" x="292" y="132" width="96" height="32" rx="9"/><text class="nt" x="340" y="153" text-anchor="middle">Reducer</text>
+    <rect class="node-i" x="178" y="196" width="80" height="32" rx="9"/><text class="nt-i" x="218" y="217" text-anchor="middle">Effect</text>
+    <rect class="node" x="44" y="132" width="72" height="32" rx="9"/><text class="nt" x="80" y="153" text-anchor="middle">State</text>
+    <text x="216" y="270" text-anchor="middle" class="cap">Redux, modelled for Swift:</text>
+    <text x="216" y="292" text-anchor="middle" class="cap">State, Action, Reducer, Effect.</text>
+  </g>
+
+  <!-- RIBs -->
+  <g transform="translate(523,1226)">
+    <rect class="card" width="433" height="320" rx="16"/>
+    <text x="216" y="44" text-anchor="middle" class="card-title">RIBs</text>
+    <path class="conn" d="M128 74 L120 74 L120 224 L128 224"/>
+    <rect class="node" x="141" y="74" width="150" height="34" rx="9"/><text class="nt" x="216" y="96" text-anchor="middle">Router</text>
+    <rect class="node" x="141" y="116" width="150" height="34" rx="9"/><text class="nt" x="216" y="138" text-anchor="middle">Interactor</text>
+    <rect class="node" x="141" y="158" width="150" height="34" rx="9"/><text class="nt" x="216" y="180" text-anchor="middle">Builder</text>
+    <rect class="node" x="141" y="200" width="150" height="34" rx="9"/><text class="nt" x="216" y="222" text-anchor="middle">View</text>
+    <text x="216" y="270" text-anchor="middle" class="cap">Prefabricated units, each</text>
+    <text x="216" y="292" text-anchor="middle" class="cap">self-contained. For big apps.</text>
+  </g>
+
+  <!-- Key takeaway -->
+  <g transform="translate(986,1226)">
+    <rect class="card" width="433" height="320" rx="16" stroke-opacity="1"/>
+    <rect x="36" y="36" width="22" height="22" rx="6" fill="url(#nodeFill)" stroke="#22d3ee" stroke-width="1.6"/>
+    <path d="M42 47 l4 4 l7 -9" fill="none" stroke="#67e8f9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="72" y="53" class="card-title">Key takeaway</text>
+    <line x1="36" y1="78" x2="397" y2="78" stroke="#22d3ee" stroke-opacity="0.18" stroke-width="1"/>
+    <text class="cap" fill="#cbd2dc" font-size="17">
+      <tspan x="36" y="118">A good architecture is like a</tspan>
+      <tspan x="36" y="146">well-run building site: every</tspan>
+      <tspan x="36" y="174">trade knows their role, nothing</tspan>
+      <tspan x="36" y="202">is mixed, and the client gets</tspan>
+      <tspan x="36" y="230">something solid to live in.</tspan>
+    </text>
+    <text x="36" y="288" class="nt-sm" fill="#22d3ee">MATCH THE PATTERN TO THE JOB.</text>
+  </g>
+
+  <!-- ================= Footer: recommended stack ================= -->
+  <g transform="translate(60,1576)">
+    <rect class="card" width="1360" height="200" rx="16"/>
+    <line x1="40" y1="36" x2="78" y2="36" stroke="url(#accent)" stroke-width="2" stroke-linecap="round"/>
+    <text x="92" y="42" class="kicker">RECOMMENDED STACK FOR MOST APPS</text>
+
+    <g font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="15" font-weight="700" text-anchor="middle">
+      <rect class="node" x="255" y="72" width="110" height="44" rx="22"/><text class="nt" x="310" y="100">MVVM-C</text>
+      <text x="376" y="100" class="nt-sm" font-size="18" fill="#9aa6b8">+</text>
+      <rect class="node" x="388" y="72" width="84" height="44" rx="22"/><text class="nt" x="430" y="100">Clean</text>
+      <text x="483" y="100" class="nt-sm" font-size="18" fill="#9aa6b8">+</text>
+      <rect class="node" x="495" y="72" width="118" height="44" rx="22"/><text class="nt" x="554" y="100">Use Cases</text>
+      <text x="624" y="100" class="nt-sm" font-size="18" fill="#9aa6b8">+</text>
+      <rect class="node" x="636" y="72" width="124" height="44" rx="22"/><text class="nt" x="698" y="100">Repository</text>
+      <text x="771" y="100" class="nt-sm" font-size="18" fill="#9aa6b8">+</text>
+      <rect class="node-i" x="783" y="72" width="130" height="44" rx="22"/><text class="nt-i" x="848" y="100">Coordinator</text>
+      <text x="924" y="100" class="nt-sm" font-size="18" fill="#9aa6b8">+</text>
+      <rect class="node" x="936" y="72" width="96" height="44" rx="22"/><text class="nt" x="984" y="100">Testing</text>
+    </g>
+
+    <text x="680" y="166" text-anchor="middle" class="cap" fill="#67748a">Separation of concerns, scalability and testability.</text>
+  </g>
+</svg>
