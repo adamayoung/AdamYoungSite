@@ -1,5 +1,5 @@
 ---
-title: Clean Architecture the Compiler Enforces
+title: Clean Architecture in Swift
 date: 2026-06-13 12:00
 description: A real worked example of clean architecture in a SwiftUI app. Contexts, use cases, ports and adapters, where every boundary is a Swift package, so the compiler enforces the rules instead of you.
 tags: architecture, swift, clean architecture, swiftui
