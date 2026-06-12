@@ -20,6 +20,8 @@ Clean architecture isn't a folder structure. It's a **dependency graph**: a set 
 
 Once a layer is its own package, it has an explicit list of what it's allowed to import. A view in Popcorn *physically cannot* call the TMDb SDK, because TMDb isn't in its dependency graph. It won't compile. The architecture stops being a guideline you maintain by willpower and becomes something the compiler checks for you on every build. The compiler is the architecture police, and it never gets tired or takes a shortcut on a Friday.
 
+That wall isn't unbreakable. Nothing physically stops someone adding a dependency to a package's manifest. But that's the whole point: crossing a boundary stops being a one-line `import` you type on autopilot and becomes a deliberate edit to a `Package.swift`, sitting right there in the diff for a reviewer to question. You can still do the wrong thing. You just can't do it by accident.
+
 ## Two kinds of module
 
 Popcorn is split into two kinds of *vertical* building block, and keeping them separate is the first big decision. (Two horizontal foundations sit underneath both, and I'll get to those near the end.)
@@ -86,11 +88,15 @@ final class DefaultFetchMovieDetailsUseCase: FetchMovieDetailsUseCase {
 
 It reads like a sentence. It depends only on a protocol from the domain. To test it, you hand it a fake repository and check what it does. No network, no database, no simulator. That's the payoff of pointing every dependency at an interface instead of a concrete thing.
 
+(One aside on the syntax: `throws(FetchMovieDetailsError)` is Swift 6's typed throws. The function declares exactly which error type it can throw, so a caller handles one known case instead of an opaque `Error`. Popcorn uses it throughout.)
+
 ## Ports and adapters: TMDb stays in its lane
 
 Popcorn gets its data from TMDb, which means a third-party SDK is somewhere in the mix. The discipline is making sure "somewhere" is exactly one place.
 
-The repository is the port the *domain* owns, but the repository still has to get its data from somewhere concrete. That somewhere is described by a second, lower-level port: a data-source protocol. And this one deliberately lives in the **Infrastructure** layer, not the Domain. The split into remote and local, the existence of a network or a cache, is a how-detail the domain has no business knowing about:
+A quick word on that contract from earlier, because it has a name. A **port** is just a protocol the inside owns and the outside has to implement: the inside declares what it needs, an outer layer decides how. `MovieRepository` is one.
+
+The repository is the port the *domain* owns, but the repository still has to get its data from somewhere concrete. That somewhere is described by a second, lower-level port: a data-source protocol. The quick way to keep the two straight is that the repository is what the *app* asks for ("give me a movie"), while the data source is where a single byte actually comes from (the network, the cache). And this lower-level port deliberately lives in the **Infrastructure** layer, not the Domain. The split into remote and local, the existence of a network or a cache, is a how-detail the domain has no business knowing about:
 
 ```swift
 // Defined in MoviesInfrastructure, not the Domain
@@ -218,6 +224,45 @@ public protocol MovieDetailsNavigating {
 
 The App layer owns the actual routes and routers, and provides something that implements that protocol by mutating a navigation stack. `MovieDetailsFeature` can be dropped into any tab, or into a preview, or into a test, with a different navigator behind it each time. It has no idea where "open person details" actually goes, and that's the point.
 
+## When one context needs another's data
+
+Sooner or later a context needs something another context owns. Popcorn's Intelligence context (the AI features) needs to know about a movie, and movies live in the Movies context. So how does one domain reach into another?
+
+The same way it reaches anything external: it doesn't. It declares a port and waits for someone to fill it.
+
+Here's the move that keeps it honest. The Intelligence context defines the port in its *own* domain, in its *own* vocabulary:
+
+```swift
+// In IntelligenceDomain, owned by the context that needs the data
+public protocol MovieProviding: Sendable {
+    func movie(withID id: Int) async throws(MovieProviderError) -> Movie
+}
+```
+
+That `Movie` is Intelligence's own `Movie`, not the Movies context's `Movie`. The two contexts never share a type. Intelligence has no idea the Movies context exists; it only knows it needs "something that can hand me a movie."
+
+The bridge is an adapter, in exactly the place you'd expect: Intelligence's adapters package. It implements `MovieProviding` by calling the Movies context's use case and mapping the result across the boundary:
+
+```swift
+// In PopcornIntelligenceAdapters: depends on MoviesApplication, maps across the seam
+final class MovieProviderAdapter: MovieProviding {
+    private let fetchMovieDetails: any FetchMovieDetailsUseCase
+
+    func movie(withID id: Int) async throws(MovieProviderError) -> Movie {
+        do {
+            let details = try await fetchMovieDetails.execute(id: id)
+            return MovieMapper().map(details)   // Movies' MovieDetails → Intelligence's Movie
+        } catch {
+            throw MovieProviderError(error)
+        }
+    }
+}
+```
+
+Then the composition root wires it like everything else: it hands the Movies use case into the adapter, and the adapter into the Intelligence factory.
+
+If that shape looks familiar, it should. It's the TMDb story again, beat for beat: a port the inside owns, an adapter on the outside that fulfils it, a mapper translating foreign types into local ones. "Another domain" turns out to be just another outside world, and the rule for the outside world never changes. Define a port, write an adapter, and never let the two sides learn each other's types. In domain-driven design this is called an anti-corruption layer, and it's the thing that stops a dozen contexts congealing into one big ball of mud the first time two of them need to talk.
+
 ## The two foundations: Core and Platform
 
 Everything so far has been one vertical slice: a feature on top, a context underneath, top to bottom. But a slice doesn't stand on its own. Two more module families hold the whole thing up, and they run the other way: horizontal, shared sideways across every slice.
@@ -230,7 +275,13 @@ That's the symmetry I like most about this layout. Contexts and Features are ver
 
 ## What it buys, and what it costs
 
-I won't pretend this is free. There's real scaffolding here: more packages, more protocols, more wiring than throwing a `URLSession` call into a view model and shipping it. For a weekend prototype it would be madness. (I lean on a few code-generation scripts to spit out the boilerplate when I add a context or a feature, precisely because there's a lot of it.)
+I won't pretend this is free. There's real scaffolding here: more packages, more protocols, more wiring than throwing a `URLSession` call into a view model and shipping it. (I lean on a few code-generation scripts to spit out the boilerplate when I add a context or a feature, precisely because there's a lot of it.)
+
+The cost that actually shows up day to day is build time. A dozen contexts at four targets each, twenty-odd features, the adapters, Core and Platform: that's well over a hundred Swift targets, and a cold build feels every one of them, as does Xcode's indexer. What makes it bearable is that the boundaries enforcing the architecture also scope the rebuilds. Change one feature and you recompile that package, not the world, so most of the day I'm building a single package rather than the whole app.
+
+Managing the project itself becomes its own problem at this scale, and it's one every large modular codebase runs into. A hundred-odd targets is more than anyone wants to wire up by hand, and a shared Xcode project file turns every merge into a `.pbxproj` knife fight. The usual solution is [Tuist](https://tuist.dev): you describe the project in Swift (`Project.swift`) instead of clicking through Xcode, generate the `.xcodeproj` on demand with `tuist generate`, and lean on its target caching to skip rebuilding modules that haven't changed. Configuration as code, reviewable in a diff, with the project file no longer something you merge. It isn't free either: the generated project isn't the source of truth, so `tuist generate` becomes a reflex you run after every pull, branch switch and manifest change, and the time you forget is the time Xcode hands you a stale graph and you lose ten minutes working out why. Past a certain module count it's still the better trade, but it is a trade.
+
+And you don't need any of this on day one. For a weekend prototype it would be madness. Start with one context and one feature, and only promote a boundary to its own package when the pain of not having it actually shows up. The shape in this post is where Popcorn ended up as it grew, not where it started.
 
 But for an app I want to keep working on for years, the trade pays off every single week:
 
