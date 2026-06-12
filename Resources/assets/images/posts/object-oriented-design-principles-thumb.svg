@@ -1,0 +1,62 @@
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Principles of Object-Oriented Design — five solid pillars standing side by side for SOLID, in emerald with a lime accent pillar, on warm cream paper.">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3efe6"/>
+      <stop offset="100%" stop-color="#e7ded0"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="22%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#059669" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#059669" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="82%" cy="84%" r="58%">
+      <stop offset="0%" stop-color="#ca8a04" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#ca8a04" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="pillarE" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="pillarL" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#84cc16"/>
+      <stop offset="100%" stop-color="#65a30d"/>
+    </linearGradient>
+    <linearGradient id="capE" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#glow1)"/>
+  <rect width="600" height="600" fill="url(#glow2)"/>
+
+  <!-- Five SOLID pillars. Each 64 wide, gap 24, total 5*64+4*24 = 416. Centred → start x = (600-416)/2 = 92 -->
+  <!-- Pillars rest on a common baseline at y=440, top at y=160 → height 280 -->
+  <g>
+    <!-- shared base plinth -->
+    <rect x="76" y="444" width="448" height="18" rx="6" fill="#059669" fill-opacity="0.22"/>
+
+    <!-- P1 emerald -->
+    <rect x="92"  y="160" width="64" height="280" rx="12" fill="url(#pillarE)"/>
+    <rect x="92"  y="160" width="64" height="22"  rx="11" fill="url(#capE)"/>
+    <!-- P2 emerald -->
+    <rect x="180" y="160" width="64" height="280" rx="12" fill="url(#pillarE)"/>
+    <rect x="180" y="160" width="64" height="22"  rx="11" fill="url(#capE)"/>
+    <!-- P3 lime accent (centre) -->
+    <rect x="268" y="160" width="64" height="280" rx="12" fill="url(#pillarL)"/>
+    <rect x="268" y="160" width="64" height="22"  rx="11" fill="#a3e635"/>
+    <!-- P4 emerald -->
+    <rect x="356" y="160" width="64" height="280" rx="12" fill="url(#pillarE)"/>
+    <rect x="356" y="160" width="64" height="22"  rx="11" fill="url(#capE)"/>
+    <!-- P5 emerald -->
+    <rect x="444" y="160" width="64" height="280" rx="12" fill="url(#pillarE)"/>
+    <rect x="444" y="160" width="64" height="22"  rx="11" fill="url(#capE)"/>
+  </g>
+
+  <!-- Tiny mono kicker -->
+  <text x="300" y="512" text-anchor="middle"
+        font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="34" font-weight="700" fill="#059669" letter-spacing="14">SOLID</text>
+</svg>

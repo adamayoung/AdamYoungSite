@@ -1,0 +1,66 @@
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Clean Architecture in Swift — concentric rounded-square module rings (Adapters, Infrastructure, Application, Use Cases) wrapping a glowing violet Domain core, in a saturated violet and fuchsia palette.">
+  <defs>
+    <linearGradient id="tbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#241552"/>
+      <stop offset="100%" stop-color="#0e0826"/>
+    </linearGradient>
+    <radialGradient id="tglow1" cx="22%" cy="20%" r="65%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tglow2" cx="80%" cy="84%" r="62%">
+      <stop offset="0%" stop-color="#e879f9" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#e879f9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#e879f9"/>
+    </linearGradient>
+    <linearGradient id="tRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#231640" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#150d2e" stop-opacity="0.90"/>
+    </linearGradient>
+    <radialGradient id="tCore" cx="50%" cy="42%" r="80%">
+      <stop offset="0%"   stop-color="#c4b5fd"/>
+      <stop offset="55%"  stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c5cf0"/>
+    </radialGradient>
+    <radialGradient id="tCoreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#a78bfa" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#tbg)"/>
+  <rect width="600" height="600" fill="url(#tglow1)"/>
+  <rect width="600" height="600" fill="url(#tglow2)"/>
+
+  <!-- Concentric rounded-square architecture rings, centred at (300,300) -->
+  <g>
+    <!-- Adapters (outer) -->
+    <rect x="118" y="118" width="364" height="364" rx="58" fill="url(#tRing)" stroke="url(#tAccent)" stroke-width="3" stroke-opacity="0.55"/>
+    <!-- Infrastructure -->
+    <rect x="160" y="160" width="280" height="280" rx="46" fill="url(#tRing)" stroke="url(#tAccent)" stroke-width="3" stroke-opacity="0.70"/>
+    <!-- Application -->
+    <rect x="202" y="202" width="196" height="196" rx="34" fill="url(#tRing)" stroke="url(#tAccent)" stroke-width="3.5" stroke-opacity="0.85"/>
+    <!-- Use Cases -->
+    <rect x="244" y="244" width="112" height="112" rx="24" fill="url(#tRing)" stroke="url(#tAccent)" stroke-width="4"/>
+
+    <!-- Domain core glow + dot -->
+    <circle cx="300" cy="300" r="78" fill="url(#tCoreGlow)"/>
+    <circle cx="300" cy="300" r="34" fill="url(#tCore)" stroke="#ddd6fe" stroke-width="2" stroke-opacity="0.55"/>
+
+    <!-- Inward dependency arrows on the centre axis -->
+    <g stroke="url(#tAccent)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.9">
+      <line x1="138" y1="300" x2="186" y2="300"/>
+      <path d="M176 289 L188 300 L176 311"/>
+      <line x1="462" y1="300" x2="414" y2="300"/>
+      <path d="M424 289 L412 300 L424 311"/>
+    </g>
+  </g>
+
+  <!-- Tiny mono kicker -->
+  <text x="300" y="556" text-anchor="middle" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="22" font-weight="700" fill="#a78bfa" letter-spacing="6">CLEAN ARCH</text>
+</svg>

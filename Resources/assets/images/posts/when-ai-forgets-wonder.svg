@@ -1,25 +1,34 @@
 <svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img"
      aria-label="When AI Forgets Wonder — a free-flowing constellation of stars connected by thin lines, like a map of thoughts cast across the night sky. The connections suggest thinking; the stars suggest wonder.">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a1224"/>
-      <stop offset="100%" stop-color="#040810"/>
+    <!-- Vertical sunset sky: deep plum → warm rose → amber horizon glow -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#1a1033"/>
+      <stop offset="38%"  stop-color="#3a1840"/>
+      <stop offset="72%"  stop-color="#6b2438"/>
+      <stop offset="100%" stop-color="#8a3a2c"/>
     </linearGradient>
-    <radialGradient id="aurora1" cx="12%" cy="18%" r="55%">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    <!-- Low-sun amber horizon glow near the bottom -->
+    <radialGradient id="horizon" cx="50%" cy="100%" r="80%">
+      <stop offset="0%"   stop-color="#fbbf24" stop-opacity="0.45"/>
+      <stop offset="45%"  stop-color="#f59e42" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="aurora2" cx="88%" cy="86%" r="60%">
-      <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#a5b4fc" stop-opacity="0"/>
+    <radialGradient id="aurora1" cx="20%" cy="78%" r="58%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="aurora2" cx="82%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#f472b6" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#f472b6" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#f1f5fb"/>
       <stop offset="100%" stop-color="#c5cdda"/>
     </linearGradient>
     <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#22d3ee"/>
-      <stop offset="100%" stop-color="#a5b4fc"/>
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f472b6"/>
     </linearGradient>
 
     <radialGradient id="focalHalo" cx="50%" cy="50%" r="50%">
@@ -28,12 +37,13 @@
       <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="nodeHalo" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#a5b4fc" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#a5b4fc" stop-opacity="0"/>
+      <stop offset="0%"   stop-color="#f472b6" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#f472b6" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#horizon)"/>
   <rect width="1200" height="630" fill="url(#aurora1)"/>
   <rect width="1200" height="630" fill="url(#aurora2)"/>
 
@@ -42,7 +52,7 @@
 
   <!-- Kicker -->
   <text x="80" y="108" font-family="ui-monospace, SF Mono, Menlo, monospace"
-        font-size="13" font-weight="600" fill="#22d3ee" letter-spacing="3.5">ON ARTIFICIAL INTELLIGENCE</text>
+        font-size="13" font-weight="600" fill="#fbbf24" letter-spacing="3.5">ON ARTIFICIAL INTELLIGENCE</text>
 
   <!-- Title -->
   <text x="80" y="194" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
@@ -50,7 +60,7 @@
 
   <!-- Subtitle -->
   <text x="80" y="234" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
-        font-size="22" font-weight="400" fill="#9aa6b8" letter-spacing="-0.1">How we lose ourselves by thinking less.</text>
+        font-size="22" font-weight="400" fill="#e7c9c2" letter-spacing="-0.1">How we lose ourselves by thinking less.</text>
 
   <!-- ============== BESPOKE MARK ============== -->
   <!-- Mark frame: 460×290, translate(660, 250) -->
@@ -79,7 +89,7 @@
     </g>
 
     <!-- Constellation lines (the threads of thought) -->
-    <g stroke="#a5b4fc" stroke-opacity="0.42" stroke-width="0.9" fill="none" stroke-linecap="round">
+    <g stroke="#f472b6" stroke-opacity="0.42" stroke-width="0.9" fill="none" stroke-linecap="round">
       <!-- Web around the focal node -->
       <line x1="220" y1="135" x2="100"  y2="80"/>   <!-- focal → A -->
       <line x1="220" y1="135" x2="180"  y2="60"/>   <!-- focal → B -->
@@ -102,25 +112,25 @@
     <g>
       <!-- A: top-left -->
       <circle cx="100" cy="80"  r="14" fill="url(#nodeHalo)"/>
-      <circle cx="100" cy="80"  r="2.4" fill="#c7d2fe"/>
+      <circle cx="100" cy="80"  r="2.4" fill="#fcd9a8"/>
       <!-- B: top-centre -->
       <circle cx="180" cy="60"  r="14" fill="url(#nodeHalo)"/>
-      <circle cx="180" cy="60"  r="2.2" fill="#c7d2fe"/>
+      <circle cx="180" cy="60"  r="2.2" fill="#fcd9a8"/>
       <!-- C: top-right -->
       <circle cx="320" cy="70"  r="14" fill="url(#nodeHalo)"/>
-      <circle cx="320" cy="70"  r="2.6" fill="#c7d2fe"/>
+      <circle cx="320" cy="70"  r="2.6" fill="#fcd9a8"/>
       <!-- D: right -->
       <circle cx="380" cy="170" r="14" fill="url(#nodeHalo)"/>
-      <circle cx="380" cy="170" r="2.4" fill="#c7d2fe"/>
+      <circle cx="380" cy="170" r="2.4" fill="#fcd9a8"/>
       <!-- E: bottom-right -->
       <circle cx="280" cy="220" r="14" fill="url(#nodeHalo)"/>
-      <circle cx="280" cy="220" r="2.2" fill="#c7d2fe"/>
+      <circle cx="280" cy="220" r="2.2" fill="#fcd9a8"/>
       <!-- F: bottom-left -->
       <circle cx="120" cy="210" r="14" fill="url(#nodeHalo)"/>
-      <circle cx="120" cy="210" r="2.4" fill="#c7d2fe"/>
+      <circle cx="120" cy="210" r="2.4" fill="#fcd9a8"/>
       <!-- G: left -->
       <circle cx="80"  cy="150" r="14" fill="url(#nodeHalo)"/>
-      <circle cx="80"  cy="150" r="2.2" fill="#c7d2fe"/>
+      <circle cx="80"  cy="150" r="2.2" fill="#fcd9a8"/>
     </g>
 
     <!-- The focal star — warm, slightly off-centre, the "spark" of wonder/thought -->
@@ -133,13 +143,13 @@
     <!-- Caption -->
     <text x="230" y="282" text-anchor="middle"
           font-family="ui-monospace, SF Mono, Menlo, monospace"
-          font-size="11" font-weight="600" fill="#7a8aa0" letter-spacing="3.5" font-style="italic">WHAT IF THERE'S MORE?</text>
+          font-size="11" font-weight="600" fill="#a08398" letter-spacing="3.5" font-style="italic">WHAT IF THERE'S MORE?</text>
   </g>
 
   <!-- Footer -->
-  <line x1="80" y1="552" x2="1120" y2="552" stroke="#1e2638" stroke-width="1"/>
+  <line x1="80" y1="552" x2="1120" y2="552" stroke="#4a2a32" stroke-width="1"/>
   <text x="80" y="582" font-family="ui-monospace, SF Mono, Menlo, monospace"
-        font-size="12" font-weight="500" fill="#525866" letter-spacing="2">ADAM YOUNG  ·  2025.12.11</text>
+        font-size="12" font-weight="500" fill="#a8857e" letter-spacing="2">ADAM YOUNG  ·  2025.12.11</text>
   <text x="1120" y="582" text-anchor="end" font-family="ui-monospace, SF Mono, Menlo, monospace"
-        font-size="12" font-weight="500" fill="#525866" letter-spacing="2">ADAM-YOUNG.CO.UK</text>
+        font-size="12" font-weight="500" fill="#a8857e" letter-spacing="2">ADAM-YOUNG.CO.UK</text>
 </svg>

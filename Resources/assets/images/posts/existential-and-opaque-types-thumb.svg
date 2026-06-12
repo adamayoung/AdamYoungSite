@@ -1,0 +1,46 @@
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Existential and Opaque Types in Swift — a solid magenta box with a question mark inside (any), shadowed by a lighter outline box (some).">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a0f33"/>
+      <stop offset="100%" stop-color="#120618"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="26%" cy="22%" r="62%">
+      <stop offset="0%" stop-color="#e879f9" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#e879f9" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="80%" cy="84%" r="60%">
+      <stop offset="0%" stop-color="#fb7185" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#fb7185" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="box" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e879f9"/>
+      <stop offset="100%" stop-color="#fb7185"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#glow1)"/>
+  <rect width="600" height="600" fill="url(#glow2)"/>
+
+  <!-- 'some' counterpart: light outline box, offset behind -->
+  <rect x="232" y="138" width="232" height="232" rx="36"
+        fill="none" stroke="#fb7185" stroke-width="5" stroke-opacity="0.45"/>
+
+  <!-- 'any' box: solid magenta→rose, the box you must open -->
+  <rect x="136" y="230" width="232" height="232" rx="36"
+        fill="url(#box)"/>
+  <!-- inner border highlight -->
+  <rect x="150" y="244" width="204" height="204" rx="28"
+        fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.22"/>
+
+  <!-- ? glyph inside the solid box -->
+  <text x="252" y="396" text-anchor="middle"
+        font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
+        font-size="158" font-weight="800" fill="#120618">?</text>
+
+  <!-- tiny mono kicker -->
+  <text x="300" y="556" text-anchor="middle"
+        font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="30" font-weight="700" fill="#e879f9" letter-spacing="6">any · some</text>
+</svg>

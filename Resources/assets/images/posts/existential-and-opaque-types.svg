@@ -2,15 +2,15 @@
      aria-label="Existential and Opaque Types in Swift — two contrasting glyphs: a hollow box labelled 'any' and a frame containing a single filled disc labelled 'some'.">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a1224"/>
-      <stop offset="100%" stop-color="#040810"/>
+      <stop offset="0%" stop-color="#2a0f33"/>
+      <stop offset="100%" stop-color="#120618"/>
     </linearGradient>
     <radialGradient id="aurora1" cx="12%" cy="18%" r="55%">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#e879f9" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#e879f9" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="aurora2" cx="88%" cy="86%" r="60%">
-      <stop offset="0%" stop-color="#fb7185" stop-opacity="0.16"/>
+      <stop offset="0%" stop-color="#fb7185" stop-opacity="0.20"/>
       <stop offset="100%" stop-color="#fb7185" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -18,8 +18,8 @@
       <stop offset="100%" stop-color="#c5cdda"/>
     </linearGradient>
     <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#22d3ee"/>
-      <stop offset="100%" stop-color="#818cf8"/>
+      <stop offset="0%" stop-color="#e879f9"/>
+      <stop offset="100%" stop-color="#fb7185"/>
     </linearGradient>
     <linearGradient id="some-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#fb7185"/>
@@ -36,7 +36,7 @@
 
   <!-- Kicker -->
   <text x="80" y="108" font-family="ui-monospace, SF Mono, Menlo, monospace"
-        font-size="13" font-weight="600" fill="#22d3ee" letter-spacing="3.5">SWIFT  ·  GENERICS</text>
+        font-size="13" font-weight="600" fill="#e879f9" letter-spacing="3.5">SWIFT  ·  GENERICS</text>
 
   <!-- Title -->
   <text x="80" y="194" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
@@ -44,7 +44,7 @@
 
   <!-- Subtitle -->
   <text x="80" y="234" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
-        font-size="22" font-weight="400" fill="#9aa6b8" letter-spacing="-0.1"><tspan font-family="ui-monospace, SF Mono, Menlo, monospace" fill="#22d3ee">any</tspan> vs <tspan font-family="ui-monospace, SF Mono, Menlo, monospace" fill="#fb7185">some</tspan> — what the compiler does with each.</text>
+        font-size="22" font-weight="400" fill="#9aa6b8" letter-spacing="-0.1"><tspan font-family="ui-monospace, SF Mono, Menlo, monospace" fill="#e879f9">any</tspan> vs <tspan font-family="ui-monospace, SF Mono, Menlo, monospace" fill="#fb7185">some</tspan> — what the compiler does with each.</text>
 
   <!-- ============== BESPOKE MARK ============== -->
   <g transform="translate(700, 305)" fill="none">
@@ -52,33 +52,33 @@
     <!-- ANY: hollow box (existential container) -->
     <g>
       <rect x="0" y="0" width="180" height="180" rx="20"
-            fill="#0e1726" stroke="url(#accent)" stroke-width="2"/>
+            fill="#2a1233" stroke="url(#accent)" stroke-width="2"/>
       <!-- nested ghost frames suggesting indeterminate contents -->
       <rect x="22" y="22" width="136" height="136" rx="14"
-            fill="none" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.35"/>
+            fill="none" stroke="#e879f9" stroke-width="1.2" stroke-opacity="0.35"/>
       <rect x="44" y="44" width="92" height="92" rx="9"
-            fill="none" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.22"/>
+            fill="none" stroke="#e879f9" stroke-width="1.2" stroke-opacity="0.22"/>
       <!-- centred ? glyph -->
       <text x="90" y="116" text-anchor="middle"
             font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
-            font-size="74" font-weight="700" fill="#22d3ee" fill-opacity="0.55">?</text>
+            font-size="74" font-weight="700" fill="#e879f9" fill-opacity="0.55">?</text>
       <!-- corner tag -->
-      <rect x="14" y="14" width="44" height="20" rx="6" fill="#22d3ee" fill-opacity="0.12"/>
+      <rect x="14" y="14" width="44" height="20" rx="6" fill="#e879f9" fill-opacity="0.12"/>
       <text x="36" y="29" text-anchor="middle"
             font-family="ui-monospace, SF Mono, Menlo, monospace"
-            font-size="10" font-weight="700" fill="#22d3ee" letter-spacing="2">BOX</text>
+            font-size="10" font-weight="700" fill="#e879f9" letter-spacing="2">BOX</text>
     </g>
     <text x="90" y="218" text-anchor="middle"
           font-family="ui-monospace, SF Mono, Menlo, monospace"
-          font-size="28" font-weight="700" fill="#22d3ee" letter-spacing="0">any</text>
+          font-size="28" font-weight="700" fill="#e879f9" letter-spacing="0">any</text>
 
     <!-- Centre divider -->
-    <line x1="220" y1="20" x2="220" y2="200" stroke="#2a3550" stroke-width="1" stroke-dasharray="3 6"/>
+    <line x1="220" y1="20" x2="220" y2="200" stroke="#5a3566" stroke-width="1" stroke-dasharray="3 6"/>
 
     <!-- SOME: frame with one concrete disc inside -->
     <g transform="translate(260, 0)">
       <rect x="0" y="0" width="180" height="180" rx="20"
-            fill="#0e1726" stroke="url(#some-grad)" stroke-width="2"/>
+            fill="#2a1233" stroke="url(#some-grad)" stroke-width="2"/>
       <!-- one concrete object -->
       <circle cx="90" cy="90" r="44" fill="url(#some-grad)" fill-opacity="0.85"/>
       <!-- subtle highlight -->
@@ -95,7 +95,7 @@
   </g>
 
   <!-- Footer -->
-  <line x1="80" y1="552" x2="1120" y2="552" stroke="#1e2638" stroke-width="1"/>
+  <line x1="80" y1="552" x2="1120" y2="552" stroke="#43264f" stroke-width="1"/>
   <text x="80" y="582" font-family="ui-monospace, SF Mono, Menlo, monospace"
         font-size="12" font-weight="500" fill="#525866" letter-spacing="2">ADAM YOUNG  ·  2026.02.15</text>
   <text x="1120" y="582" text-anchor="end" font-family="ui-monospace, SF Mono, Menlo, monospace"

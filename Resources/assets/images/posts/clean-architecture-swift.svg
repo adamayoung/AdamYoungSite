@@ -2,36 +2,36 @@
      aria-label="Clean Architecture, enforced by the compiler. Concentric module layers — Adapters wrapping Infrastructure wrapping Application wrapping a Domain core — with arrows pointing inward to show that dependencies point toward the domain.">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a1224"/>
-      <stop offset="100%" stop-color="#040810"/>
+      <stop offset="0%" stop-color="#241552"/>
+      <stop offset="100%" stop-color="#0e0826"/>
     </linearGradient>
     <radialGradient id="aurora1" cx="12%" cy="18%" r="55%">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="aurora2" cx="88%" cy="86%" r="60%">
-      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#e879f9" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#e879f9" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#f1f5fb"/>
       <stop offset="100%" stop-color="#c5cdda"/>
     </linearGradient>
     <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#22d3ee"/>
-      <stop offset="100%" stop-color="#818cf8"/>
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#e879f9"/>
     </linearGradient>
     <linearGradient id="layerFill" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#162133" stop-opacity="0.94"/>
-      <stop offset="100%" stop-color="#0b1424" stop-opacity="0.88"/>
+      <stop offset="0%"   stop-color="#231640" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#150d2e" stop-opacity="0.88"/>
     </linearGradient>
     <linearGradient id="layerStroke" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#22d3ee" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.85"/>
+      <stop offset="0%"   stop-color="#a78bfa" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#e879f9" stop-opacity="0.85"/>
     </linearGradient>
     <radialGradient id="coreFill" cx="50%" cy="42%" r="75%">
-      <stop offset="0%"   stop-color="#0e2a3a" stop-opacity="0.96"/>
-      <stop offset="100%" stop-color="#0b1c2c" stop-opacity="0.92"/>
+      <stop offset="0%"   stop-color="#34215c" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#221643" stop-opacity="0.92"/>
     </radialGradient>
   </defs>
 
@@ -44,7 +44,7 @@
 
   <!-- Kicker -->
   <text x="80" y="112" font-family="ui-monospace, SF Mono, Menlo, monospace"
-        font-size="13" font-weight="600" fill="#22d3ee" letter-spacing="3.5">ARCHITECTURE  ·  SWIFT</text>
+        font-size="13" font-weight="600" fill="#a78bfa" letter-spacing="3.5">ARCHITECTURE  ·  SWIFT</text>
 
   <!-- Title -->
   <text x="80" y="222" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
@@ -62,7 +62,7 @@
 
   <!-- Mono note: one boundary per package -->
   <text x="80" y="446" font-family="ui-monospace, SF Mono, Menlo, monospace"
-        font-size="13" font-weight="600" fill="#4d8fb0" letter-spacing="0.5">// every boundary is a Swift package</text>
+        font-size="13" font-weight="600" fill="#b794f6" letter-spacing="0.5">// every boundary is a Swift package</text>
 
   <!-- ============== Mark: concentric module layers, dependencies pointing inward ============== -->
   <g>
@@ -80,7 +80,7 @@
       <text x="928" y="187" font-size="14" fill="#9aa6b8">Adapters</text>
       <text x="928" y="219" font-size="14" fill="#9aa6b8">Infrastructure</text>
       <text x="928" y="251" font-size="14" fill="#a5b0c0">Application</text>
-      <text x="928" y="319" font-size="16" fill="#67e8f9">Domain</text>
+      <text x="928" y="319" font-size="16" fill="#c4b5fd">Domain</text>
     </g>
 
     <!-- Inward dependency arrows (left and right, at vertical centre) -->

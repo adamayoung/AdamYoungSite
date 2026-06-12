@@ -97,17 +97,21 @@ Notes:
 
 ### Hero images: SVG is the source, PNG is what's referenced
 
-Hero images live under `Resources/assets/images/posts/`. The **`.svg`** is the source of truth (small, editable, on-brand). The **`.png`** is the rasterized export referenced from `image:` in the post front matter — both the home/blog list cards and the OG/Twitter share card load the PNG, because Twitter doesn't render SVG OG cards.
+Hero images live under `Resources/assets/images/posts/`. The **`.svg`** is the source of truth (small, editable, on-brand). The **`.png`** is the rasterized export referenced from `image:` in the post front matter — both the home/blog feature cards and the OG/Twitter share card load the PNG, because Twitter doesn't render SVG OG cards.
 
-Whenever you create or edit a post's hero `.svg`, regenerate its `.png` alongside it. The site build does **not** do this automatically; the rasterized PNG is committed.
+Each post has **two** image pairs:
+
+- **Wide hero** — `<slug>.svg` → `<slug>.png` at **1200×630**. Referenced by `image:` front matter; used by feature cards, the post header, and OG/Twitter.
+- **Square thumbnail** — `<slug>-thumb.svg` → `<slug>-thumb.png` at **600×600**. Used by the compact blog-list tiles. There's no front-matter field: the theme (`postThumbnailPath` in `Theme+AdamYoung.swift`) looks for `<slug>-thumb.png` next to the hero and falls back to a centre-crop of the wide hero if it's absent.
+
+Whenever you create or edit a post's `.svg`, regenerate its `.png` alongside it. The site build does **not** do this automatically; the rasterized PNGs are committed.
 
 ```bash
-rsvg-convert -w 1200 -h 630 \
-  Resources/assets/images/posts/<slug>.svg \
-  -o Resources/assets/images/posts/<slug>.png
+rsvg-convert -w 1200 -h 630 Resources/assets/images/posts/<slug>.svg       -o Resources/assets/images/posts/<slug>.png
+rsvg-convert -w 600  -h 600 Resources/assets/images/posts/<slug>-thumb.svg  -o Resources/assets/images/posts/<slug>-thumb.png
 ```
 
-If `rsvg-convert` is missing: `brew install librsvg`. Inline body diagrams (e.g. `canon-tdd-flowchart.svg`) stay as SVG-only — only the front-matter hero needs the PNG export.
+If `rsvg-convert` is missing: `brew install librsvg`. Inline body diagrams (e.g. `canon-tdd-flowchart.svg`) stay as SVG-only — only the front-matter hero and its thumbnail need PNG exports. Give each post its own palette/motif rather than the shared navy + cyan/indigo look (see the blog-post-writer skill, section 4).
 
 ## Conventions worth knowing
 

@@ -1,0 +1,55 @@
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="iOS Architectures thumbnail: a stack of layered horizontal bars rising like a building on a site — View, ViewModel, Domain, Use Cases, Repository, Data — in blueprint navy on pale paper with an amber accent layer.">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eef3f8"/>
+      <stop offset="100%" stop-color="#dce6f0"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="20%" cy="14%" r="60%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="84%" cy="90%" r="60%">
+      <stop offset="0%" stop-color="#d97706" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="barFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="100%" stop-color="#f4f8fc" stop-opacity="0.94"/>
+    </linearGradient>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0 L0 0 L0 50" fill="none" stroke="#1e3a5f" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#grid)"/>
+  <rect width="600" height="600" fill="url(#glow1)"/>
+  <rect width="600" height="600" fill="url(#glow2)"/>
+
+  <!-- Kicker -->
+  <text x="300" y="86" text-anchor="middle" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="22" font-weight="700" fill="#2563eb" letter-spacing="6">iOS</text>
+
+  <!-- Layered tower: bars rising like a building, narrowing upward.
+       Centred horizontally on x=300. Bottom (Data) widest, View narrowest.
+       Amber accent on the ViewModel layer. -->
+  <g>
+    <!-- Data -->
+    <rect x="120" y="448" width="360" height="56" rx="14" fill="url(#barFill)" stroke="#1e3a5f" stroke-width="4"/>
+    <!-- Repository -->
+    <rect x="138" y="382" width="324" height="56" rx="14" fill="url(#barFill)" stroke="#1e3a5f" stroke-width="4"/>
+    <!-- Use Cases -->
+    <rect x="156" y="316" width="288" height="56" rx="14" fill="url(#barFill)" stroke="#2563eb" stroke-width="4"/>
+    <!-- Domain -->
+    <rect x="174" y="250" width="252" height="56" rx="14" fill="url(#barFill)" stroke="#2563eb" stroke-width="4"/>
+    <!-- ViewModel (amber accent layer) -->
+    <rect x="192" y="184" width="216" height="56" rx="14" fill="url(#barFill)" stroke="#d97706" stroke-width="5"/>
+    <!-- View (top, accent gradient) -->
+    <rect x="210" y="118" width="180" height="56" rx="14" fill="url(#barFill)" stroke="url(#accent)" stroke-width="4"/>
+  </g>
+</svg>

@@ -1,0 +1,92 @@
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="When AI Forgets Wonder — a single large glowing amber-to-pink star of wonder amid smaller twinkles on a warm twilight sky.">
+  <defs>
+    <!-- Vertical sunset sky: deep plum → warm rose → amber horizon glow -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#1a1033"/>
+      <stop offset="38%"  stop-color="#3a1840"/>
+      <stop offset="72%"  stop-color="#6b2438"/>
+      <stop offset="100%" stop-color="#8a3a2c"/>
+    </linearGradient>
+    <radialGradient id="horizon" cx="50%" cy="100%" r="80%">
+      <stop offset="0%"   stop-color="#fbbf24" stop-opacity="0.45"/>
+      <stop offset="45%"  stop-color="#f59e42" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow1" cx="22%" cy="74%" r="62%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="80%" cy="34%" r="64%">
+      <stop offset="0%" stop-color="#f472b6" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#f472b6" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="focalHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#fef3c7" stop-opacity="0.95"/>
+      <stop offset="38%"  stop-color="#fbbf24" stop-opacity="0.45"/>
+      <stop offset="72%"  stop-color="#f472b6" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#f472b6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="twinkleHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#f472b6" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#f472b6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="star" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="55%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#horizon)"/>
+  <rect width="600" height="600" fill="url(#glow1)"/>
+  <rect width="600" height="600" fill="url(#glow2)"/>
+
+  <!-- Ambient twinkles -->
+  <g fill="#fcd9a8">
+    <circle cx="92"  cy="120" r="2.2" opacity="0.55"/>
+    <circle cx="500" cy="96"  r="1.8" opacity="0.50"/>
+    <circle cx="118" cy="470" r="1.8" opacity="0.50"/>
+    <circle cx="512" cy="486" r="2.2" opacity="0.55"/>
+    <circle cx="300" cy="70"  r="1.6" opacity="0.45"/>
+    <circle cx="64"  cy="300" r="1.6" opacity="0.45"/>
+    <circle cx="540" cy="300" r="1.6" opacity="0.45"/>
+    <circle cx="300" cy="534" r="1.6" opacity="0.45"/>
+  </g>
+
+  <!-- Smaller glowing twinkle stars (pink) -->
+  <g>
+    <circle cx="170" cy="190" r="34" fill="url(#twinkleHalo)"/>
+    <g transform="translate(170,190)" fill="#fbbf24">
+      <path d="M 0 -16 L 4.5 -4.5 L 16 0 L 4.5 4.5 L 0 16 L -4.5 4.5 L -16 0 L -4.5 -4.5 Z"/>
+    </g>
+
+    <circle cx="438" cy="412" r="38" fill="url(#twinkleHalo)"/>
+    <g transform="translate(438,412)" fill="#f9a8d4">
+      <path d="M 0 -19 L 5.5 -5.5 L 19 0 L 5.5 5.5 L 0 19 L -5.5 5.5 L -19 0 L -5.5 -5.5 Z"/>
+    </g>
+
+    <circle cx="448" cy="168" r="24" fill="url(#twinkleHalo)"/>
+    <g transform="translate(448,168)" fill="#fbbf24">
+      <path d="M 0 -11 L 3.2 -3.2 L 11 0 L 3.2 3.2 L 0 11 L -3.2 3.2 L -11 0 L -3.2 -3.2 Z"/>
+    </g>
+  </g>
+
+  <!-- Central focal star of wonder -->
+  <circle cx="300" cy="300" r="170" fill="url(#focalHalo)"/>
+  <g transform="translate(300,300)">
+    <!-- long four-point sparkle -->
+    <path d="M 0 -150 L 30 -30 L 150 0 L 30 30 L 0 150 L -30 30 L -150 0 L -30 -30 Z" fill="url(#star)"/>
+    <!-- secondary diagonal sparkle for sparkle/cross feel -->
+    <path d="M 0 -78 L 13 -13 L 78 0 L 13 13 L 0 78 L -13 13 L -78 0 L -13 -13 Z"
+          fill="#fef3c7" opacity="0.9" transform="rotate(45)"/>
+    <circle r="9" fill="#ffffff"/>
+  </g>
+
+  <!-- Tiny mono kicker -->
+  <text x="300" y="566" text-anchor="middle"
+        font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="20" font-weight="700" fill="#fbbf24" letter-spacing="6">WONDER</text>
+</svg>

@@ -1,11 +1,11 @@
 (() => {
-  const list = document.querySelector('.post-list');
+  const list = document.querySelector('.blog-mosaic');
   const empty = list?.querySelector('.empty-state');
   const input = document.getElementById('topbar-search');
   const form = input?.closest('form');
   if (!list || !input) return;
 
-  const rows = Array.from(list.querySelectorAll('.post-row'));
+  const rows = Array.from(list.querySelectorAll('.blog-card'));
 
   const apply = (raw) => {
     const q = (raw || '').trim().toLowerCase();

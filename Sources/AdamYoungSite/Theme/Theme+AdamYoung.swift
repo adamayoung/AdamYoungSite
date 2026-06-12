@@ -54,16 +54,7 @@ private struct AdamYoungHTMLFactory: HTMLFactory {
                         .if(section.id == .blog, .topBar()),
                         .if(section.items.isEmpty,
                             .div(.class("empty-state"), .p(.text("No posts yet — check back soon."))),
-                            else: .div(
-                                .class("post-list"),
-                                .forEach(section.items) { item in
-                                    .postRow(for: item)
-                                },
-                                .div(
-                                    .class("empty-state hidden"),
-                                    .p(.text("No posts match that search."))
-                                )
-                            )
+                            else: .blogMosaic(items: section.items.sorted { $0.date > $1.date })
                         )
                     ]
                 )
@@ -331,17 +322,43 @@ private extension Node where Context == HTML.BodyContext {
         )
     }
 
-    static func postRow(for item: Item<AdamYoungSite>) -> Node {
+    /// Blog listing laid out Apple News–style: the two newest posts as large
+    /// feature cards, the remainder as compact text-left / thumbnail-right tiles.
+    static func blogMosaic(items: [Item<AdamYoungSite>]) -> Node {
+        let lead = Array(items.prefix(2))
+        let rest = Array(items.dropFirst(2))
+        return .div(
+            .class("blog-mosaic"),
+            .if(!lead.isEmpty,
+                .div(
+                    .class("blog-lead"),
+                    .forEach(lead) { item in .blogFeatureCard(for: item) }
+                )
+            ),
+            .if(!rest.isEmpty,
+                .div(
+                    .class("blog-tiles"),
+                    .forEach(rest) { item in .blogTileCard(for: item) }
+                )
+            ),
+            .div(
+                .class("empty-state hidden"),
+                .p(.text("No posts match that search."))
+            )
+        )
+    }
+
+    static func blogFeatureCard(for item: Item<AdamYoungSite>) -> Node {
         let href = postHref(for: item)
         let tagString = item.tags.map(\.string).joined(separator: ", ")
         return .a(
-            .class("post-row"),
+            .class("blog-card blog-feature"),
             .href(href),
             .attribute(named: "data-title", value: item.title.lowercased()),
             .attribute(named: "data-description", value: item.description.lowercased()),
             .attribute(named: "data-tags", value: tagString.lowercased()),
             .div(
-                .class("post-row-media"),
+                .class("blog-feature-media"),
                 .if(item.imagePath != nil,
                     .img(
                         .src(item.imagePath!.absoluteString),
@@ -352,7 +369,7 @@ private extension Node where Context == HTML.BodyContext {
                 )
             ),
             .div(
-                .class("post-row-body"),
+                .class("blog-feature-body"),
                 .div(
                     .class("post-card-meta"),
                     .element(named: "time", nodes: [
@@ -369,8 +386,43 @@ private extension Node where Context == HTML.BodyContext {
                             .span(.class("tag"), .text(tag.string))
                         }
                     )
+                )
+            )
+        )
+    }
+
+    static func blogTileCard(for item: Item<AdamYoungSite>) -> Node {
+        let href = postHref(for: item)
+        let tagString = item.tags.map(\.string).joined(separator: ", ")
+        let thumb = postThumbnailPath(for: item)
+        return .a(
+            .class("blog-card blog-tile"),
+            .href(href),
+            .attribute(named: "data-title", value: item.title.lowercased()),
+            .attribute(named: "data-description", value: item.description.lowercased()),
+            .attribute(named: "data-tags", value: tagString.lowercased()),
+            .div(
+                .class("blog-tile-text"),
+                .div(
+                    .class("post-card-meta"),
+                    .element(named: "time", nodes: [
+                        .attribute(named: "datetime", value: DateRendering.iso(item.date)),
+                        .text(DateRendering.display(item.date))
+                    ])
                 ),
-                .span(.class("post-row-read"), .text("Read"), .span(.class("section-link-arrow"), .raw(Icons.arrowRight)))
+                .h3(.text(item.title)),
+                .p(.text(item.description))
+            ),
+            .div(
+                .class("blog-tile-media"),
+                .if(thumb != nil,
+                    .img(
+                        .src(thumb ?? ""),
+                        .alt(""),
+                        .attribute(named: "loading", value: "lazy")
+                    ),
+                    else: .div(.class("post-card-fallback"), .text("AY"))
+                )
             )
         )
     }
@@ -552,6 +604,19 @@ private func postHref(for item: Item<AdamYoungSite>) -> String {
     let prefix = raw.hasPrefix("/") ? "" : "/"
     let suffix = raw.hasSuffix("/") ? "" : "/"
     return "\(prefix)\(raw)\(suffix)"
+}
+
+/// Square thumbnail used by the compact blog tiles. Prefers a dedicated
+/// `<name>-thumb.<ext>` (designed for a 1:1 crop) and falls back to the wide
+/// hero image when no thumbnail has been generated for the post.
+private func postThumbnailPath(for item: Item<AdamYoungSite>) -> String? {
+    guard let hero = item.imagePath?.absoluteString else { return nil }
+    guard let dot = hero.lastIndex(of: ".") else { return hero }
+    let thumb = hero[..<dot] + "-thumb" + hero[dot...]
+    if FileManager.default.fileExists(atPath: "Resources" + thumb) {
+        return String(thumb)
+    }
+    return hero
 }
 
 // MARK: - Projects data
