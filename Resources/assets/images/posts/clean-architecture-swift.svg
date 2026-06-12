@@ -1,0 +1,107 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Clean Architecture, enforced by the compiler. Concentric module layers — Adapters wrapping Infrastructure wrapping Application wrapping a Domain core — with arrows pointing inward to show that dependencies point toward the domain.">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1224"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <radialGradient id="aurora1" cx="12%" cy="18%" r="55%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="aurora2" cx="88%" cy="86%" r="60%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f1f5fb"/>
+      <stop offset="100%" stop-color="#c5cdda"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="layerFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#162133" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#0b1424" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="layerStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#22d3ee" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.85"/>
+    </linearGradient>
+    <radialGradient id="coreFill" cx="50%" cy="42%" r="75%">
+      <stop offset="0%"   stop-color="#0e2a3a" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#0b1c2c" stop-opacity="0.92"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#aurora1)"/>
+  <rect width="1200" height="630" fill="url(#aurora2)"/>
+
+  <!-- Top accent rule -->
+  <line x1="80" y1="86" x2="142" y2="86" stroke="url(#accent)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Kicker -->
+  <text x="80" y="112" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="13" font-weight="600" fill="#22d3ee" letter-spacing="3.5">ARCHITECTURE  ·  SWIFT</text>
+
+  <!-- Title -->
+  <text x="80" y="222" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif"
+        font-size="66" font-weight="700" fill="url(#title)" letter-spacing="-2">Clean Architecture</text>
+
+  <!-- Subtitle -->
+  <text x="80" y="268" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="24" font-weight="400" fill="#9aa6b8" letter-spacing="-0.2">Enforced by the compiler, not by discipline.</text>
+
+  <!-- Strap line -->
+  <text x="80" y="356" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="18" font-weight="500" fill="#67748a" letter-spacing="0.2">Contexts · Use Cases · Ports &amp; Adapters</text>
+  <text x="80" y="382" font-family="-apple-system, SF Pro Text, Helvetica, Arial, sans-serif"
+        font-size="18" font-weight="500" fill="#67748a" letter-spacing="0.2">Repository · Composition Root · MVVM</text>
+
+  <!-- Mono note: one boundary per package -->
+  <text x="80" y="446" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="13" font-weight="600" fill="#4d8fb0" letter-spacing="0.5">// every boundary is a Swift package</text>
+
+  <!-- ============== Mark: concentric module layers, dependencies pointing inward ============== -->
+  <g>
+    <!-- Adapters (outer) -->
+    <rect x="742" y="164" width="372" height="300" rx="22" fill="url(#layerFill)" stroke="url(#layerStroke)" stroke-width="1.5"/>
+    <!-- Infrastructure -->
+    <rect x="782" y="196" width="292" height="236" rx="18" fill="url(#layerFill)" stroke="url(#layerStroke)" stroke-width="1.5"/>
+    <!-- Application -->
+    <rect x="822" y="228" width="212" height="172" rx="15" fill="url(#layerFill)" stroke="url(#layerStroke)" stroke-width="1.5"/>
+    <!-- Domain (core) -->
+    <rect x="862" y="260" width="132" height="108" rx="12" fill="url(#coreFill)" stroke="url(#accent)" stroke-width="2"/>
+
+    <!-- Layer labels -->
+    <g font-family="ui-monospace, SF Mono, Menlo, monospace" font-weight="700" text-anchor="middle">
+      <text x="928" y="187" font-size="14" fill="#9aa6b8">Adapters</text>
+      <text x="928" y="219" font-size="14" fill="#9aa6b8">Infrastructure</text>
+      <text x="928" y="251" font-size="14" fill="#a5b0c0">Application</text>
+      <text x="928" y="319" font-size="16" fill="#67e8f9">Domain</text>
+    </g>
+
+    <!-- Inward dependency arrows (left and right, at vertical centre) -->
+    <g stroke="url(#accent)" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.9">
+      <!-- left, pointing right toward core -->
+      <line x1="752" y1="314" x2="788" y2="314"/>
+      <path d="M781 307 L789 314 L781 321"/>
+      <!-- right, pointing left toward core -->
+      <line x1="1104" y1="314" x2="1068" y2="314"/>
+      <path d="M1075 307 L1067 314 L1075 321"/>
+    </g>
+
+    <!-- Caption under the mark -->
+    <text x="928" y="498" text-anchor="middle" font-family="ui-monospace, SF Mono, Menlo, monospace"
+          font-size="12.5" font-weight="600" fill="#525e72" letter-spacing="1">dependencies point inward →</text>
+  </g>
+
+  <!-- Footer -->
+  <line x1="80" y1="552" x2="1120" y2="552" stroke="#1e2638" stroke-width="1"/>
+  <text x="80" y="582" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="12" font-weight="500" fill="#525866" letter-spacing="2">ADAM YOUNG  ·  2026.06.13</text>
+  <text x="1120" y="582" text-anchor="end" font-family="ui-monospace, SF Mono, Menlo, monospace"
+        font-size="12" font-weight="500" fill="#525866" letter-spacing="2">ADAM-YOUNG.CO.UK</text>
+</svg>
