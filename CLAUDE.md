@@ -21,6 +21,8 @@ There are no tests, linters, or formatters configured.
 
 Pushing to `main` triggers `.github/workflows/pages.yml`, which runs on `macos-latest`, builds via `swift run -c release AdamYoungSite`, and deploys `Output/` via `actions/deploy-pages@v5`. The repo's GitHub Pages source must be set to **"GitHub Actions"** (not "Deploy from a branch") for the workflow to deploy.
 
+The push trigger has `paths-ignore: ['.claude/**', 'CLAUDE.md']`, so a push that touches **only** those paths (skills, agents, settings, and this file) is skipped and does **not** redeploy — none of them affect the built site. A push touching anything outside those paths still builds and deploys. Because `paths-ignore` is all-or-nothing per push, commit `.claude/`/`CLAUDE.md` changes separately from content/code changes if you want the skip to apply. `workflow_dispatch` still runs regardless, for manual deploys.
+
 `Package.resolved` is checked in to pin the dependency tree for CI reproducibility.
 
 ## Architecture
@@ -111,7 +113,21 @@ rsvg-convert -w 1200 -h 630 Resources/assets/images/posts/<slug>.svg       -o Re
 rsvg-convert -w 600  -h 600 Resources/assets/images/posts/<slug>-thumb.svg  -o Resources/assets/images/posts/<slug>-thumb.png
 ```
 
-If `rsvg-convert` is missing: `brew install librsvg`. Inline body diagrams (e.g. `canon-tdd-flowchart.svg`) stay as SVG-only — only the front-matter hero and its thumbnail need PNG exports. Give each post its own palette/motif rather than the shared navy + cyan/indigo look (see the blog-post-writer skill, section 4).
+If `rsvg-convert` is missing: `brew install librsvg`. Inline body diagrams (e.g. `canon-tdd-flowchart.svg`) stay as SVG-only — only the front-matter hero and its thumbnail need PNG exports. Give each post its own palette/motif rather than the shared navy + cyan/indigo look. The operational guide for generating all of this (palette variety, the bespoke mark, rasterizing) lives in the **`blog-post-images`** skill.
+
+## Skills and agents
+
+Project-specific helpers live under `.claude/`. They compose rather than overlap:
+
+- **`blog-post-writer`** skill — the spine for turning a PDF/talk/notes into a finished post: structure, front matter, tags, drafting workflow. It delegates voice to `adam-voice` and all imagery to `blog-post-images`; it does **not** carry those rulesets itself.
+- **`adam-voice`** skill — the canonical voice guide and de-AI lint (British spelling, no em-dashes, the AI-tell word list, the `grep` checks). Reusable on any prose, not just blog posts.
+- **`blog-post-images`** skill — generates the hero, square thumbnail, and any body diagram (SVG sources + committed PNG exports) and rasterizes them. Works delegated by the writer or standalone ("redo the art for `<slug>`"). This is the operational source for the "Hero images" guidance above.
+- **`review-blog-post`** skill — reviews a draft from two independent angles and merges the result. It spawns two read-only agents in parallel:
+  - **`staff-ios-reviewer`** agent — senior-credibility lens (claim defensibility, earned opinions, glossed edge cases, code correctness).
+  - **`midlevel-ios-reviewer`** agent — does-this-teach lens (assumed prerequisites, unexplained jargon, followable examples).
+  Both judge substance/audience, not prose voice (that's `adam-voice`), and neither edits.
+
+These files are not deployed (see the `.claude/` `paths-ignore` in Deployment). Editing them does not trigger a site rebuild.
 
 ## Conventions worth knowing
 
