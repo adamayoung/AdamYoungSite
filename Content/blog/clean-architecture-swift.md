@@ -102,7 +102,7 @@ public protocol MovieRemoteDataSource: Sendable {
 The TMDb SDK is then only ever touched in a completely separate **Adapters** package, which implements that port and maps the SDK's types into domain types:
 
 ```swift
-// In the PopcornMoviesAdapters package: the ONLY place that imports TMDb
+// In PopcornMoviesAdapters: the only place the movie code touches TMDb
 final class TMDbMovieRemoteDataSource: MovieRemoteDataSource {
     private let movieService: any TMDb.MovieService
 
@@ -117,7 +117,9 @@ final class TMDbMovieRemoteDataSource: MovieRemoteDataSource {
 }
 ```
 
-The adapter depends on that Infrastructure port (an outer ring depending on an inner one, so the arrow still points the right way), and TMDb is now sealed in one box with a thick wall around it. The domain, the use cases, the view models: none of them have ever heard of it. If TMDb shut down tomorrow, or I wanted to switch to a different movie database, I'd write one new adapter that satisfies the same port and change one line of wiring. Nothing inside the core would so much as flinch. That's the whole promise of ports and adapters, and the only way to guarantee it is to make the SDK a dependency of *one* package and no others.
+The adapter depends on that Infrastructure port (an outer ring depending on an inner one, so the arrow still points the right way), and TMDb is now sealed in the adapter ring with a thick wall around it. The domain, the use cases, the view models: none of them have ever heard of it.
+
+If TMDb shut down tomorrow, I'd swap it out by writing new adapters that satisfy the same ports and rewiring the bits that hand them in. For the movie data, that's one adapter and one line. For the *whole* of TMDb it's one adapter per port it fills, because a movie database that also serves TV, people and search is really several ports wearing one brand. That sounds like a lot, and it isn't free, but notice where the work lands: every one of those edits is a leaf adapter doing the same mechanical job, and I can migrate one context at a time. Nothing inside the core changes, because nothing inside the core ever named TMDb. That's the real promise of ports and adapters. Not that swapping a vendor is free, but that the cost is bounded to the adapter ring and never leaks inward. The only way to guarantee that is to keep the SDK a dependency of the adapter packages and nothing else.
 
 ## Repository: caching the view model never sees
 
