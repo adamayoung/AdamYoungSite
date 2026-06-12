@@ -325,16 +325,6 @@ extension Node where Context == HTML.BodyContext {
                 nodes: [
                     .attribute(named: "class", value: "mobile-header"),
                     .attribute(named: "aria-label", value: "Site header"),
-                    .a(
-                        .class("mobile-brand"),
-                        .href("/"),
-                        .img(
-                            .class("mobile-brand-avatar"),
-                            .src("/assets/images/me.jpg"),
-                            .alt("")
-                        ),
-                        .span(.class("mobile-brand-name"), .text(site.name))
-                    ),
                     .element(
                         named: "button",
                         nodes: [
@@ -345,6 +335,16 @@ extension Node where Context == HTML.BodyContext {
                             .attribute(named: "aria-controls", value: "nav-rail"),
                             .raw(Icons.menu)
                         ]
+                    ),
+                    .a(
+                        .class("mobile-brand"),
+                        .href("/"),
+                        .img(
+                            .class("mobile-brand-avatar"),
+                            .src("/assets/images/me.jpg"),
+                            .alt("")
+                        ),
+                        .span(.class("mobile-brand-name"), .text(site.name))
                     )
                 ]
             ),
