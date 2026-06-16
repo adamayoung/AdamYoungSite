@@ -21,7 +21,7 @@ There are no tests, linters, or formatters configured.
 
 Pushing to `main` triggers `.github/workflows/pages.yml`, which runs on `macos-latest`, builds via `swift run -c release AdamYoungSite`, and deploys the generated `Output/` to **Cloudflare Pages** with `cloudflare/wrangler-action` (`pages deploy Output --project-name=adam-young-site`). GitHub Actions only builds; Cloudflare only hosts (Direct Upload — Cloudflare's own build image has no Swift, so its git-connected build mode can't be used).
 
-The deploy step is gated `if: env.CLOUDFLARE_API_TOKEN != ''`, so until the **`CLOUDFLARE_API_TOKEN`** and **`CLOUDFLARE_ACCOUNT_ID`** repo secrets are set (and a Cloudflare Pages project named `adam-young-site` exists), the build still runs green and the deploy is skipped. The custom domain is configured in the Cloudflare dashboard, not via the repo; `Resources/CNAME` is a leftover from GitHub Pages and is ignored by Cloudflare.
+The **`CLOUDFLARE_API_TOKEN`** (Pages: Edit) and **`CLOUDFLARE_ACCOUNT_ID`** repo secrets are set, and a Cloudflare Pages project named `adam-young-site` exists, so CI deploys on every push. The deploy step is still gated `if: env.CLOUDFLARE_API_TOKEN != ''` as a safety net: if the token is ever removed, the build stays green and the deploy is skipped rather than failing. The custom domain `adam-young.co.uk` is attached to the Pages project in the Cloudflare dashboard, not via the repo (there is no `CNAME` file — that was GitHub Pages only).
 
 Response headers come from `Resources/_headers`, copied to `Output/_headers` by `.copyResources()` — security headers and cache-control that GitHub Pages could not provide. Add a Content-Security-Policy there deliberately (the site loads GA + inline styles, so a careless CSP breaks it).
 
@@ -43,7 +43,7 @@ The push trigger has `paths-ignore: ['.claude/**', 'CLAUDE.md']`, so a push that
   - `index.md` — title + description for home (body unused; the home layout is hardcoded in `makeIndexHTML`).
   - `blog/index.md` — Publish auto-treats this as the blog `Section` (title "Blog", description shown in the blog header).
   - `blog/<slug>.md` — individual posts.
-- `Resources/` — copied verbatim into the output by `.copyResources()`. Contains `styles.css`, `404.html` (raw HTML, served by GH Pages on 404), `CNAME`, and `assets/`.
+- `Resources/` — copied verbatim into the output by `.copyResources()`. Contains `styles.css`, `404.html` (raw HTML, served by Cloudflare Pages on 404), `_headers` (Cloudflare Pages response headers), and `assets/`.
 - `Output/` — generated; gitignored.
 
 ### Routing
