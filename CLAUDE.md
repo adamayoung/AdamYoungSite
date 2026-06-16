@@ -19,7 +19,11 @@ There are no tests, linters, or formatters configured.
 
 ## Deployment
 
-Pushing to `main` triggers `.github/workflows/pages.yml`, which runs on `macos-latest`, builds via `swift run -c release AdamYoungSite`, and deploys `Output/` via `actions/deploy-pages@v5`. The repo's GitHub Pages source must be set to **"GitHub Actions"** (not "Deploy from a branch") for the workflow to deploy.
+Pushing to `main` triggers `.github/workflows/pages.yml`, which runs on `macos-latest`, builds via `swift run -c release AdamYoungSite`, and deploys the generated `Output/` to **Cloudflare Pages** with `cloudflare/wrangler-action` (`pages deploy Output --project-name=adam-young-site`). GitHub Actions only builds; Cloudflare only hosts (Direct Upload — Cloudflare's own build image has no Swift, so its git-connected build mode can't be used).
+
+The deploy step is gated `if: env.CLOUDFLARE_API_TOKEN != ''`, so until the **`CLOUDFLARE_API_TOKEN`** and **`CLOUDFLARE_ACCOUNT_ID`** repo secrets are set (and a Cloudflare Pages project named `adam-young-site` exists), the build still runs green and the deploy is skipped. The custom domain is configured in the Cloudflare dashboard, not via the repo; `Resources/CNAME` is a leftover from GitHub Pages and is ignored by Cloudflare.
+
+Response headers come from `Resources/_headers`, copied to `Output/_headers` by `.copyResources()` — security headers and cache-control that GitHub Pages could not provide. Add a Content-Security-Policy there deliberately (the site loads GA + inline styles, so a careless CSP breaks it).
 
 The push trigger has `paths-ignore: ['.claude/**', 'CLAUDE.md']`, so a push that touches **only** those paths (skills, agents, settings, and this file) is skipped and does **not** redeploy — none of them affect the built site. A push touching anything outside those paths still builds and deploys. Because `paths-ignore` is all-or-nothing per push, commit `.claude/`/`CLAUDE.md` changes separately from content/code changes if you want the skip to apply. `workflow_dispatch` still runs regardless, for manual deploys.
 
