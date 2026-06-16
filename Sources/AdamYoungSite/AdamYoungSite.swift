@@ -21,5 +21,4 @@ struct AdamYoungSite: Website {
     let githubUsername = "adamayoung"
     let linkedinUsername = "adamayoung"
     let twitterUsername = "adamayoung"
-    let googleAnalyticsID = "G-ETGHS44KVE"
 }

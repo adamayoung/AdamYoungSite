@@ -142,26 +142,7 @@ extension Node where Context == HTML.DocumentContext {
             .raw(jsonLDPerson(for: site)),
             .if(info.kind == .article, .raw(jsonLDBlogPosting(for: info, on: site))),
             .if(info.kind == .article, .raw(jsonLDBreadcrumbs(for: info, on: site))),
-            .if(info.kind == .home, .raw(jsonLDWebSite(for: site))),
-
-            // Google Analytics
-            .if(!site.googleAnalyticsID.isEmpty, .group([
-                .link(
-                    .rel(.preconnect),
-                    .href("https://www.googletagmanager.com"),
-                    .attribute(named: "crossorigin", value: nil)
-                ),
-                .raw(#"<link rel="dns-prefetch" href="https://www.google-analytics.com">"#),
-                .raw(#"<script async src="https://www.googletagmanager.com/gtag/js?id=\#(site.googleAnalyticsID)"></script>"#),
-                .raw("""
-                <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '\(site.googleAnalyticsID)');
-                </script>
-                """)
-            ]))
+            .if(info.kind == .home, .raw(jsonLDWebSite(for: site)))
         )
     }
 }

@@ -23,7 +23,7 @@ Pushing to `main` triggers `.github/workflows/pages.yml`, which runs on `macos-l
 
 The **`CLOUDFLARE_API_TOKEN`** (Pages: Edit) and **`CLOUDFLARE_ACCOUNT_ID`** repo secrets are set, and a Cloudflare Pages project named `adam-young-site` exists, so CI deploys on every push. The deploy step is still gated `if: env.CLOUDFLARE_API_TOKEN != ''` as a safety net: if the token is ever removed, the build stays green and the deploy is skipped rather than failing. The custom domain `adam-young.co.uk` is attached to the Pages project in the Cloudflare dashboard, not via the repo (there is no `CNAME` file — that was GitHub Pages only).
 
-Response headers come from `Resources/_headers`, copied to `Output/_headers` by `.copyResources()` — security headers and cache-control that GitHub Pages could not provide. Add a Content-Security-Policy there deliberately (the site loads GA + inline styles, so a careless CSP breaks it).
+Response headers come from `Resources/_headers`, copied to `Output/_headers` by `.copyResources()` — security headers and cache-control that GitHub Pages could not provide. Add a Content-Security-Policy there deliberately (the site emits inline JSON-LD and the edge-injected Cloudflare Web Analytics beacon, so a careless CSP breaks it).
 
 The push trigger has `paths-ignore: ['.claude/**', 'CLAUDE.md']`, so a push that touches **only** those paths (skills, agents, settings, and this file) is skipped and does **not** redeploy — none of them affect the built site. A push touching anything outside those paths still builds and deploys. Because `paths-ignore` is all-or-nothing per push, commit `.claude/`/`CLAUDE.md` changes separately from content/code changes if you want the skip to apply. `workflow_dispatch` still runs regardless, for manual deploys.
 
@@ -36,7 +36,7 @@ The push trigger has `paths-ignore: ['.claude/**', 'CLAUDE.md']`, so a push that
 - `Package.swift` — Swift package manifest. Depends on `Publish` and `SplashPublishPlugin`.
 - `Sources/AdamYoungSite/`
   - `main.swift` — publishing pipeline (Splash plugin + copy resources + add markdown + generate HTML/RSS/sitemap).
-  - `AdamYoungSite.swift` — `Website` conformance: defines `SectionID` (just `.blog`), site URL/name/description, and site-level constants used by the theme (Twitter handle, GA ID, etc.).
+  - `AdamYoungSite.swift` — `Website` conformance: defines `SectionID` (just `.blog`), site URL/name/description, and site-level constants used by the theme (Twitter handle, social usernames, etc.).
   - `Theme/Theme+AdamYoung.swift` — custom `Theme` and `HTMLFactory`. Implements `makeIndexHTML`, `makeSectionHTML`, `makeItemHTML`, `makePageHTML`. Tag pages return `nil` (not generated).
   - `Theme/Theme+AdamYoung+Components.swift` — shared Plot `Node` builders for the `<head>` (incl. SEO/OG/JSON-LD), ambient blob layer, top nav, site footer, post-meta paragraph, post-link card. Date formatting helpers live here too.
 - `Content/`
