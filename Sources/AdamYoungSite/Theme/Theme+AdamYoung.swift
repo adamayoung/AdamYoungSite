@@ -649,7 +649,7 @@ let allProjects: [Project] = [
     Project(
         name: "Popcorn",
         blurb: "Personal iOS, macOS & visionOS app for browsing movies and TV.",
-        url: "https://github.com/adamayoung/popcorn",
+        url: "https://popcorn.adam-young.co.uk",
         cssClass: "popcorn",
         iconSVG: ##"<svg viewBox="3.5 4.5 17 17" xmlns="http://www.w3.org/2000/svg"><g fill="#FFC404"><circle cx="6.2" cy="11" r="1.6"/><circle cx="8" cy="9" r="2.1"/><circle cx="11" cy="7.4" r="2.2"/><circle cx="13.8" cy="7.6" r="2.1"/><circle cx="16.2" cy="9.2" r="2"/><circle cx="17.6" cy="11" r="1.5"/><circle cx="11.5" cy="10.4" r="2"/><circle cx="14.6" cy="10.6" r="1.9"/></g><path d="M5 12 L9.67 12 L10.33 21 L7 21 Z" fill="#E11D2C" fill-opacity="0.92"/><path d="M9.67 12 L14.33 12 L13.67 21 L10.33 21 Z" fill="#FFFFFF" fill-opacity="0.96"/><path d="M14.33 12 L19 12 L17 21 L13.67 21 Z" fill="#E11D2C" fill-opacity="0.92"/></svg>"##,
         imagePath: "/assets/images/projects/popcorn.png",
