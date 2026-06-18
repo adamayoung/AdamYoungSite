@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="From Plan to PR: a pipeline track running through automated stages to a single highlighted human gate">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b3a44"/>
+      <stop offset="0.55" stop-color="#082a33"/>
+      <stop offset="1" stop-color="#04141a"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f1f7f8"/>
+      <stop offset="1" stop-color="#bcd0d4"/>
+    </linearGradient>
+    <linearGradient id="track" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="0.7" stop-color="#22b8c9"/>
+      <stop offset="1" stop-color="#f5b53e"/>
+    </linearGradient>
+    <radialGradient id="glowTeal" cx="0.25" cy="0.32" r="0.5">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowAmber" cx="0.82" cy="0.72" r="0.42">
+      <stop offset="0" stop-color="#f5b53e" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#f5b53e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glowTeal)"/>
+  <rect width="1200" height="630" fill="url(#glowAmber)"/>
+
+  <!-- top accent rule + kicker -->
+  <rect x="72" y="72" width="120" height="4" rx="2" fill="url(#track)"/>
+  <text x="72" y="116" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="22" letter-spacing="3" fill="#7fd8d2">/DELIVER</text>
+
+  <!-- title + subtitle -->
+  <text x="72" y="214" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="url(#title)">From Plan to PR</text>
+  <text x="74" y="262" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif" font-size="29" font-weight="400" fill="#9fc0c4">A delivery pipeline built from Claude Code skills. One command, one human gate.</text>
+
+  <!-- bespoke mark: a pipeline track through automated stages to a single human gate -->
+  <g transform="translate(0,432)">
+    <!-- track line -->
+    <line x1="120" y1="0" x2="1000" y2="0" stroke="url(#track)" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- automated stage nodes -->
+    <g fill="#04141a" stroke="#2dd4bf" stroke-width="4">
+      <circle cx="120" cy="0" r="17"/>
+      <circle cx="296" cy="0" r="17"/>
+      <circle cx="472" cy="0" r="17"/>
+      <circle cx="648" cy="0" r="17"/>
+      <circle cx="824" cy="0" r="17"/>
+    </g>
+    <!-- inner dots -->
+    <g fill="#2dd4bf">
+      <circle cx="120" cy="0" r="5"/>
+      <circle cx="296" cy="0" r="5"/>
+      <circle cx="472" cy="0" r="5"/>
+      <circle cx="648" cy="0" r="5"/>
+      <circle cx="824" cy="0" r="5"/>
+    </g>
+
+    <!-- stage labels -->
+    <g font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="16" fill="#6fb6b6" text-anchor="middle">
+      <text x="120" y="40">plan</text>
+      <text x="296" y="40">review</text>
+      <text x="472" y="40">build</text>
+      <text x="648" y="40">verify</text>
+      <text x="824" y="40">PR</text>
+    </g>
+
+    <!-- the single human gate -->
+    <g transform="translate(1000,0)">
+      <circle cx="0" cy="0" r="30" fill="#1a1208" stroke="#f5b53e" stroke-width="5"/>
+      <path d="M -12 1 L -4 10 L 13 -10" fill="none" stroke="#f5b53e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="0" y="62" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="16" fill="#f5b53e" text-anchor="middle" font-weight="600">merge</text>
+    </g>
+  </g>
+
+  <!-- footer rule -->
+  <rect x="72" y="556" width="1056" height="2" fill="#1d4a52"/>
+  <text x="72" y="592" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="19" letter-spacing="1.5" fill="#84b0b4">ADAM YOUNG · 2026</text>
+  <text x="1128" y="592" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="19" letter-spacing="1.5" fill="#84b0b4" text-anchor="end">ADAM-YOUNG.CO.UK</text>
+</svg>

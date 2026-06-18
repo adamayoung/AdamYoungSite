@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Pipeline stages flowing into a single highlighted human gate">
+  <defs>
+    <linearGradient id="tbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b3a44"/>
+      <stop offset="0.55" stop-color="#082a33"/>
+      <stop offset="1" stop-color="#04141a"/>
+    </linearGradient>
+    <linearGradient id="ttrack" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="0.7" stop-color="#22b8c9"/>
+      <stop offset="1" stop-color="#f5b53e"/>
+    </linearGradient>
+    <radialGradient id="tglowTeal" cx="0.3" cy="0.28" r="0.55">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tglowAmber" cx="0.72" cy="0.78" r="0.5">
+      <stop offset="0" stop-color="#f5b53e" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#f5b53e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#tbg)"/>
+  <rect width="600" height="600" fill="url(#tglowTeal)"/>
+  <rect width="600" height="600" fill="url(#tglowAmber)"/>
+
+  <!-- diagonal track through stages to the gate -->
+  <line x1="150" y1="150" x2="430" y2="430" stroke="url(#ttrack)" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- automated stage nodes -->
+  <g fill="#04141a" stroke="#2dd4bf" stroke-width="7">
+    <circle cx="150" cy="150" r="26"/>
+    <circle cx="244" cy="244" r="26"/>
+    <circle cx="338" cy="338" r="26"/>
+  </g>
+  <g fill="#2dd4bf">
+    <circle cx="150" cy="150" r="9"/>
+    <circle cx="244" cy="244" r="9"/>
+    <circle cx="338" cy="338" r="9"/>
+  </g>
+
+  <!-- the single human gate -->
+  <circle cx="438" cy="438" r="58" fill="#1a1208" stroke="#f5b53e" stroke-width="10"/>
+  <path d="M 412 440 L 428 458 L 466 416" fill="none" stroke="#f5b53e" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="300" y="556" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="26" letter-spacing="3" fill="#7fd8d2" text-anchor="middle">/DELIVER</text>
+</svg>
