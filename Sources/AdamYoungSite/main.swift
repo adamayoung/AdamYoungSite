@@ -10,6 +10,9 @@ try AdamYoungSite().publish(using: [
     .generateHTML(withTheme: .adamYoung),
     .generateRSSFeed(including: [.blog]),
     .generateSiteMap(),
+    .generateMarkdownTwins(),
+    .generateLLMsText(),
+    .generateLLMsFullText(),
     .step(named: "Canonicalize sitemap URLs with trailing slash") { context in
         // GitHub Pages serves /foo/index.html as canonical /foo/ and 301-redirects /foo.
         // Publish's default sitemap emits the bare /foo, which Google flags as

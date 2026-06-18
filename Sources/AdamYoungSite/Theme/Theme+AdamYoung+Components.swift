@@ -85,6 +85,14 @@ extension Node where Context == HTML.DocumentContext {
         }()
         let imageURL = info.imagePath.map { site.url.absoluteString + $0.absoluteString }
 
+        // Markdown twin for AI agents: present for blog posts and the content
+        // pages that AIFriendly.generateMarkdownTwins() emits a .md for.
+        let markdownTwinURL: String? = {
+            let hasTwin = info.kind == .article
+                || PublishingStep<AdamYoungSite>.twinnablePages.contains(info.path.string)
+            return hasTwin ? "\(site.url.absoluteString)/\(info.path.string).md" : nil
+        }()
+
         let articleOGMeta: String = {
             guard info.kind == .article, let pubDate = info.publishedDate else { return "" }
             let modDate = info.lastModifiedDate ?? pubDate
@@ -113,6 +121,10 @@ extension Node where Context == HTML.DocumentContext {
 
             // RSS auto-discovery — lets feed readers and tools find the feed.
             .raw(#"<link rel="alternate" type="application/rss+xml" title="\#(escapeHTMLAttribute(site.name)) — Blog" href="\#(site.url.absoluteString)/feed.rss">"#),
+
+            // Markdown twin auto-discovery — lets AI agents fetch clean Markdown instead of scraping HTML.
+            .if(markdownTwinURL != nil,
+                .raw(#"<link rel="alternate" type="text/markdown" title="Markdown source" href="\#(markdownTwinURL ?? "")">"#)),
 
             .meta(.name("apple-mobile-web-app-title"), .content(site.name)),
             .meta(.name("apple-mobile-web-app-capable"), .content("yes")),

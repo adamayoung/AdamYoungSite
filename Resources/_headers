@@ -20,3 +20,17 @@
 # styles.css changes with design tweaks; keep it short and revalidating.
 /styles.css
   Cache-Control: public, max-age=3600, must-revalidate
+
+# Markdown twins for AI agents (/blog/<slug>.md, /about.md, …). Serve as
+# Markdown so agents get the right content type; short cache like the HTML.
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# llms.txt / llms-full.txt — the llmstxt.org index and full-text dump.
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600, must-revalidate
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600, must-revalidate

@@ -1,3 +1,35 @@
+# adam-young.co.uk. All crawlers welcome, including AI assistants.
+# A Markdown index for LLMs is at /llms.txt (and /llms-full.txt for full text).
+
 User-agent: *
+Allow: /
+
+# Named AI crawlers, listed explicitly as a welcome signal.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
 
 Sitemap: https://adam-young.co.uk/sitemap.xml
