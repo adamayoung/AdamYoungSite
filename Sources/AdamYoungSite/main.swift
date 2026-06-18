@@ -8,6 +8,7 @@ try AdamYoungSite().publish(using: [
     .addMarkdownFiles(at: "Content"),
     .sortItems(by: \.date, order: .descending),
     .generateHTML(withTheme: .adamYoung),
+    .generateRSSFeed(including: [.blog]),
     .generateSiteMap(),
     .step(named: "Canonicalize sitemap URLs with trailing slash") { context in
         // GitHub Pages serves /foo/index.html as canonical /foo/ and 301-redirects /foo.

@@ -111,6 +111,9 @@ extension Node where Context == HTML.DocumentContext {
             .meta(.name("author"), .content(site.name)),
             .raw(#"<link rel="canonical" href="\#(canonicalURL)">"#),
 
+            // RSS auto-discovery — lets feed readers and tools find the feed.
+            .raw(#"<link rel="alternate" type="application/rss+xml" title="\#(escapeHTMLAttribute(site.name)) — Blog" href="\#(site.url.absoluteString)/feed.rss">"#),
+
             .meta(.name("apple-mobile-web-app-title"), .content(site.name)),
             .meta(.name("apple-mobile-web-app-capable"), .content("yes")),
             .meta(.name("apple-mobile-web-app-status-bar-style"), .content("black-translucent")),
