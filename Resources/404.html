@@ -15,77 +15,105 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    .notfound { min-height: 62vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1rem; padding: 2rem 1rem; }
+    .notfound-art { width: min(440px, 92%); height: auto; margin-bottom: 0.5rem; }
+    .notfound-code { font-size: clamp(3.5rem, 14vw, 6rem); line-height: 0.9; margin: 0; font-weight: 800; letter-spacing: -0.04em; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .notfound-msg { font-size: 1.2rem; color: var(--muted-strong); margin: 0; }
+    .notfound-actions { display: flex; gap: 0.5rem 1rem; flex-wrap: wrap; align-items: center; justify-content: center; margin-top: 1rem; }
+    @keyframes blink404 { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    .notfound-cursor { animation: blink404 1.1s steps(1, end) infinite; }
+    @media (prefers-reduced-motion: reduce) { .notfound-cursor { animation: none; } }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <header class="mobile-header" aria-label="Site header">
+    <button type="button" class="nav-toggle-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-rail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
+    <a class="mobile-brand" href="/"><img class="mobile-brand-avatar" src="/assets/images/me.jpg" alt=""><span class="mobile-brand-name">Adam Young</span></a>
+  </header>
   <div class="shell">
-    <aside class="rail" aria-label="Site navigation">
-      <a class="rail-brand" href="/">
-        <div class="monogram">AY</div>
-        <div class="brand-text">
-          <span class="brand-name">Adam Young</span>
-          <span class="brand-pill">iOS Engineer</span>
-        </div>
-      </a>
+    <div class="nav-overlay" aria-hidden="true"></div>
+    <aside class="rail" id="nav-rail" aria-label="Site navigation">
+      <div class="rail-mobile-head">
+        <button type="button" class="nav-close-btn" aria-label="Close navigation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      </div>
+      <a class="rail-brand" href="/"><img class="rail-brand-avatar" src="/assets/images/me.jpg" alt=""><div class="brand-text"><span class="brand-name">Adam Young</span><span class="brand-pill">iOS Engineer</span></div></a>
       <nav class="rail-nav rail-nav-primary" aria-label="Primary">
-        <a class="rail-link" href="/">
-          <span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9.5"/></svg></span>
-          <span class="rail-link-label">Home</span>
-        </a>
-        <a class="rail-link" href="/about/">
-          <span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
-          <span class="rail-link-label">About</span>
-        </a>
-        <a class="rail-link" href="/blog/">
-          <span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v5a1 1 0 0 0 1 1h5"/><path d="M8 13h8"/><path d="M8 17h6"/></svg></span>
-          <span class="rail-link-label">Blog</span>
-        </a>
-        <a class="rail-link" href="/#projects">
-          <span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
-          <span class="rail-link-label">Projects</span>
-        </a>
-        <a class="rail-link" href="/#contact">
-          <span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-          <span class="rail-link-label">Contact</span>
-        </a>
+        <a class="rail-link" href="/"><span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9.5"/></svg></span><span class="rail-link-label">Home</span></a>
+        <a class="rail-link" href="/about/"><span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span class="rail-link-label">About</span></a>
+        <a class="rail-link" href="/blog/"><span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v5a1 1 0 0 0 1 1h5"/><path d="M8 13h8"/><path d="M8 17h6"/></svg></span><span class="rail-link-label">Blog</span></a>
+        <a class="rail-link" href="/projects/"><span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span class="rail-link-label">Projects</span></a>
+      </nav>
+      <div class="rail-divider" aria-hidden="true"></div>
+      <nav class="rail-nav rail-nav-tertiary" aria-label="Reading">
+        <a class="rail-link" href="/books/"><span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H10v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H14v15h4.5a1.5 1.5 0 0 1 1.5 1.5"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H10"/><path d="M14 21h4.5a1.5 1.5 0 0 0 1.5-1.5"/></svg></span><span class="rail-link-label">Books</span></a>
       </nav>
       <div class="rail-divider" aria-hidden="true"></div>
       <nav class="rail-nav rail-nav-secondary" aria-label="Elsewhere">
-        <a class="rail-link" href="https://github.com/adamayoung" rel="noopener">
-          <span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.5-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></span>
-          <span class="rail-link-label">GitHub</span>
-        </a>
-        <a class="rail-link" href="https://www.linkedin.com/in/adamayoung" rel="noopener">
-          <span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.4 20.4h-3.5v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.6H9.5V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.1zM5.5 7.4c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm1.8 13H3.7V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.5C0 23.2.8 24 1.8 24h20.4c1 0 1.8-.8 1.8-1.8V1.7C24 .8 23.2 0 22.2 0z"/></svg></span>
-          <span class="rail-link-label">LinkedIn</span>
-        </a>
-        <a class="rail-link" href="mailto:me@adam-young.co.uk" rel="noopener">
-          <span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-          <span class="rail-link-label">Email</span>
-        </a>
+        <a class="rail-link" href="https://github.com/adamayoung" rel="me noopener"><span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.5-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></span><span class="rail-link-label">GitHub</span></a>
+        <a class="rail-link" href="https://www.linkedin.com/in/adamayoung" rel="me noopener"><span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.4 20.4h-3.5v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.6H9.5V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.1zM5.5 7.4c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm1.8 13H3.7V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.5C0 23.2.8 24 1.8 24h20.4c1 0 1.8-.8 1.8-1.8V1.7C24 .8 23.2 0 22.2 0z"/></svg></span><span class="rail-link-label">LinkedIn</span></a>
+        <a class="rail-link" href="mailto:me@adam-young.co.uk" rel="me noopener"><span class="rail-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span class="rail-link-label">Email</span></a>
       </nav>
     </aside>
     <div class="main-area">
-      <header class="topbar">
-        <form class="search" action="/blog/" method="get" role="search">
-          <label class="visually-hidden" for="topbar-search">Search posts</label>
-          <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-          <input id="topbar-search" name="q" type="search" autocomplete="off" placeholder="Search posts, topics…">
-        </form>
-        <a class="me-avatar" href="/" aria-label="Adam Young, home"><img src="/assets/images/me.jpg" alt=""></a>
-      </header>
       <main id="main" class="content">
-        <header class="page-header">
-          <h1>404 — Page not found</h1>
-          <p class="page-subtitle">That page can't be found. Try heading <a href="/">home</a> or to the <a href="/blog/">blog</a>.</p>
-        </header>
+        <section class="notfound">
+          <h1 class="notfound-code">404</h1>
+          <p class="notfound-msg">Sorry, we can't find that page!</p>
+          <svg class="notfound-art" viewBox="0 0 440 250" role="img" aria-label="A terminal window reporting the page as not found">
+            <defs>
+              <linearGradient id="nf-accent" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#0a84ff"/><stop offset="1" stop-color="#5e5ce6"/>
+              </linearGradient>
+              <linearGradient id="nf-swift" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ff2d55"/>
+              </linearGradient>
+              <filter id="nf-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="24"/></filter>
+              <filter id="nf-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#0f172a" flood-opacity="0.10"/>
+              </filter>
+            </defs>
+            <ellipse cx="150" cy="115" rx="150" ry="100" fill="url(#nf-accent)" opacity="0.16" filter="url(#nf-soft)"/>
+            <ellipse cx="315" cy="180" rx="125" ry="85" fill="url(#nf-swift)" opacity="0.13" filter="url(#nf-soft)"/>
+            <g filter="url(#nf-shadow)">
+              <rect x="62" y="64" width="316" height="148" rx="20" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+              <circle cx="88" cy="88" r="6" fill="#ff5f57"/>
+              <circle cx="108" cy="88" r="6" fill="#febc2e"/>
+              <circle cx="128" cy="88" r="6" fill="#28c840"/>
+              <line x1="62" y1="108" x2="378" y2="108" stroke="var(--border)" stroke-width="1.5"/>
+              <g font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="15">
+                <text x="86" y="146"><tspan fill="var(--accent)">$</tspan><tspan fill="var(--muted)"> swift run find-page</tspan></text>
+                <text x="86" y="174" fill="#ff2d55">✗ 404: page not found</text>
+                <text x="86" y="202" fill="var(--accent)">$</text>
+                <rect class="notfound-cursor" x="104" y="190" width="9" height="15" fill="var(--accent)"/>
+              </g>
+            </g>
+          </svg>
+          <div class="notfound-actions">
+            <a class="btn-primary" href="/">Take me home</a>
+            <a class="btn-link" href="/blog/">Read the blog
+              <span class="btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+            </a>
+          </div>
+        </section>
       </main>
-      <footer class="site-footer">
-        <span>© 2026 Adam Young</span>
-        <span class="dot-sep" aria-hidden="true">·</span>
-        <a href="mailto:me@adam-young.co.uk">me@adam-young.co.uk</a>
-      </footer>
+      <footer class="site-footer"><span>© 2026 Adam Young</span></footer>
     </div>
   </div>
+  <script>
+    (function(){
+      var btn=document.querySelector('.nav-toggle-btn');
+      var closeBtn=document.querySelector('.nav-close-btn');
+      var overlay=document.querySelector('.nav-overlay');
+      var html=document.documentElement;
+      function openNav(){html.setAttribute('data-nav-open','');btn.setAttribute('aria-expanded','true');if(closeBtn)closeBtn.focus();}
+      function closeNav(){html.removeAttribute('data-nav-open');btn.setAttribute('aria-expanded','false');if(btn)btn.focus();}
+      if(btn){btn.addEventListener('click',openNav);}
+      if(closeBtn){closeBtn.addEventListener('click',closeNav);}
+      if(overlay){overlay.addEventListener('click',closeNav);}
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&html.hasAttribute('data-nav-open'))closeNav();});
+    })();
+  </script>
 </body>
 </html>
