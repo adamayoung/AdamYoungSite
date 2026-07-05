@@ -156,12 +156,6 @@ private extension Node where Context == HTML.BodyContext {
                 .text("Hi, I'm "),
                 .span(.class("hero-name"), .text("Adam."))
             ),
-            .a(
-                .class("hero-availability"),
-                .href("mailto:me@adam-young.co.uk"),
-                .span(.class("hero-availability-dot")),
-                .text("Available for new Senior/Staff iOS roles · UK / Remote")
-            ),
             .p(
                 .class("hero-tagline"),
                 .text("16 years on Apple platforms — recently at Monzo, Bumble and PokerStars, shipping features used by tens of millions.")
