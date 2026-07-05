@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    runs-on: macos-latest
+    runs-on: macos-26
     env:
       # Mapped to env at job level so the deploy step's `if` can read it.
       # Until the secret is set, the deploy step is skipped and the build
