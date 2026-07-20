@@ -6,6 +6,13 @@ on:
     paths-ignore:
       - '.claude/**'
       - 'CLAUDE.md'
+  # Role durations on the About page ("Jul 2026 - Present · 3 mos") are computed
+  # from Date() at build time, so a static build freezes them. Rebuild on the
+  # 1st of each month to keep the current role's duration honest.
+  # NOTE: GitHub disables scheduled workflows after 60 days without repo
+  # activity (it emails first). If the dates go stale, check this is enabled.
+  schedule:
+    - cron: '0 6 1 * *'
   workflow_dispatch:
 
 permissions:

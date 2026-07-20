@@ -158,7 +158,7 @@ private extension Node where Context == HTML.BodyContext {
             ),
             .p(
                 .class("hero-tagline"),
-                .text("16 years on Apple platforms — recently at Monzo, Bumble and PokerStars, shipping features used by tens of millions.")
+                .text("16 years on Apple platforms — now at The Athletic, after Monzo, Bumble and PokerStars, shipping features used by tens of millions.")
             ),
             .p(
                 .class("hero-sub"),
@@ -717,6 +717,16 @@ private func formatDuration(from start: Date, to end: Date) -> String {
 }
 
 let careerHistory: [CareerEntry] = [
+    CareerEntry(
+        company: "The Athletic",
+        companyDescription: "The New York Times' sports newsroom, covering most major sports across the UK, Europe and North America.",
+        logoPath: "/assets/images/companies/the-athletic.svg",
+        location: "London / Remote",
+        workMode: "Full-time",
+        roles: [
+            CareerRole(title: "Senior iOS Engineer", start: ymd(2026, 7), end: nil)
+        ]
+    ),
     CareerEntry(
         company: "Monzo Bank",
         companyDescription: "UK digital bank built mobile-first, with over 12 million customers.",

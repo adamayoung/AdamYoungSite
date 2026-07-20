@@ -27,6 +27,8 @@ Response headers come from `Resources/_headers`, copied to `Output/_headers` by 
 
 The push trigger has `paths-ignore: ['.claude/**', 'CLAUDE.md']`, so a push that touches **only** those paths (skills, agents, settings, and this file) is skipped and does **not** redeploy — none of them affect the built site. A push touching anything outside those paths still builds and deploys. Because `paths-ignore` is all-or-nothing per push, commit `.claude/`/`CLAUDE.md` changes separately from content/code changes if you want the skip to apply. `workflow_dispatch` still runs regardless, for manual deploys.
 
+There is also a `schedule:` trigger (`0 6 1 * *`, 06:00 UTC on the 1st of each month). It exists because the About page's role durations are computed from `Date()` **at build time** (`roleDateLine` / `latestEnd` in `Theme+AdamYoung.swift`), so a static build freezes them: without a periodic rebuild, a current role would keep claiming whatever duration was true on the last push. The monthly run recomputes and redeploys. Caveat: GitHub disables scheduled workflows after 60 days of repo inactivity, so if the dates ever look stale, check the schedule is still enabled in the Actions tab.
+
 `Package.resolved` is checked in to pin the dependency tree for CI reproducibility.
 
 ## Architecture
